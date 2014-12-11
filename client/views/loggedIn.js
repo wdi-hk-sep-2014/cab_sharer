@@ -65,7 +65,17 @@ Template.loggedIn.rendered = function(){
       }]
 
       var map = function(lat, lng) {
-        var marker;
+        var myMarker;
+        var onlineUserArray = Meteor.users.find().fetch(); // gather online user object information
+        var i = 1;
+        var otherUserMarkers = [];
+        while (i < onlineUserArray.length) { // put other online users locations into an array
+          var otherUserlat = onlineUserArray[i].profile.location.lat,
+              otherUserlng = onlineUserArray[i].profile.location.lng;
+              otherUserMarkers.push([otherUserlat, otherUserlng]);
+              i++;
+        };
+        // console.log(otherUserMarkers);
         var gpsIcon = '/images/gpsicon.png';
 
         GoogleMaps.init({
@@ -89,38 +99,46 @@ Template.loggedIn.rendered = function(){
             map.mapTypes.set('map_style', styledMap);
             map.setMapTypeId('map_style');
             map.setCenter(new google.maps.LatLng(lat, lng));
-            marker = new google.maps.Marker({
+            myMarker = new google.maps.Marker({
               position: new google.maps.LatLng(lat, lng),
               map: map,
               animation: google.maps.Animation.DROP,
               icon: gpsIcon
 
             })
+            for (index in otherUserMarkers) {
+              otherUserMarker = new google.maps.Marker({
+                position: new google.maps.LatLng(otherUserMarkers[index][0], otherUserMarkers[index][1]),
+                map: map
+              });
+              google.maps.event.addListener(marker, 'click', (function(otherUserMarker, i) {
+                return function() {
+                  infowindow.setContent(locations[i][0]);
+                  infowindow.open(map, marker);
+                }
+              })(marker, i));
+            };
           }
         );
       }
 
       var error = function(position) {
         var lat = 22.284584,
-          lng = 114.158212;
+            lng = 114.158212;
         map(lat, lng); // create an alert or something better here to tell the user that the position was not able to be found
       }
 
 
       var afterPositionInfo = function(position) {
         var lat = position.coords.latitude,
-          lng = position.coords.longitude;
+            lng = position.coords.longitude;
         map(lat, lng);
         var locationHash = {
           lat: lat,
           lng: lng
         };
-        console.log(locationHash);
+        Meteor.users.update({_id:Meteor.userId()}, {$set:{"profile.location" : locationHash}});
         
-        Meteor.call('addPositionToLoggedInUser', locationHash, Meteor.userId(), function(){ 
-          console.log("success");
-        });
-
       }
 
       var getPositionByBrowser = function() {
@@ -129,6 +147,7 @@ Template.loggedIn.rendered = function(){
       }
 
       getPositionByBrowser();
+
 
     }
   };

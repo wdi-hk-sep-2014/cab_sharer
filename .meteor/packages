@@ -4,8 +4,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
-insecure
 html5cat:bootstrap-material-design
 mizzao:bootstrap-3
 aldeed:geocoder
@@ -16,4 +14,4 @@ ian:accounts-ui-bootstrap-3
 iron:router
 jquery
 mizzao:user-status
-
+sacha:spin

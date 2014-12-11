@@ -92,6 +92,15 @@ Template.loggedIn.rendered = function(){
               zoomControl: false,
               mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
             };
+            var locations = [];
+            var i = 1;
+            while (i < onlineUserArray.length) {
+              locations.push(onlineUserArray[i].profile.name);
+              i++;
+            }
+            console.log(locations);
+            var infowindow = new google.maps.InfoWindow();
+
             var styledMap = new google.maps.StyledMapType(styles, {
               name: "Styled Map"
             });
@@ -111,12 +120,12 @@ Template.loggedIn.rendered = function(){
                 position: new google.maps.LatLng(otherUserMarkers[index][0], otherUserMarkers[index][1]),
                 map: map
               });
-              google.maps.event.addListener(marker, 'click', (function(otherUserMarker, i) {
+              google.maps.event.addListener(otherUserMarker, 'click', (function(otherUserMarker, i) {
                 return function() {
-                  infowindow.setContent(locations[i][0]);
-                  infowindow.open(map, marker);
+                  infowindow.setContent(locations[index]);
+                  infowindow.open(map, otherUserMarker);
                 }
-              })(marker, i));
+              })(otherUserMarker, i));
             };
           }
         );

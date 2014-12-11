@@ -8,6 +8,12 @@ autopublish
 insecure
 html5cat:bootstrap-material-design
 mizzao:bootstrap-3
-googlemaps
 aldeed:geocoder
+mdg:geolocation
+googlemaps
+accounts-password
+ian:accounts-ui-bootstrap-3
+iron:router
+jquery
+mizzao:user-status
 

@@ -76,7 +76,7 @@ Template.loggedIn.rendered = function(){
               i++;
         };
         // console.log(otherUserMarkers);
-        var gpsIcon = '/images/gpsicon.png';
+
 
         GoogleMaps.init({
             'sensor': true, //optional
@@ -104,6 +104,13 @@ Template.loggedIn.rendered = function(){
             var styledMap = new google.maps.StyledMapType(styles, {
               name: "Styled Map"
             });
+            var gpsIcon = new google.maps.MarkerImage(
+              '/images/bluedot_retina.png',
+              null, // size
+              null, // origin
+              new google.maps.Point( 8, 8 ),
+              new google.maps.Size( 17, 17 )
+            );            
             map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
             map.mapTypes.set('map_style', styledMap);
             map.setMapTypeId('map_style');
@@ -112,13 +119,18 @@ Template.loggedIn.rendered = function(){
               position: new google.maps.LatLng(lat, lng),
               map: map,
               animation: google.maps.Animation.DROP,
-              icon: gpsIcon
+              icon: gpsIcon,
+              title: 'My location',
+              visible: true
 
             })
             for (index in otherUserMarkers) {
               otherUserMarker = new google.maps.Marker({
                 position: new google.maps.LatLng(otherUserMarkers[index][0], otherUserMarkers[index][1]),
-                map: map
+                map: map,
+                animation: google.maps.Animation.DROP,
+                icon: gpsIcon,
+                visible: true
               });
               google.maps.event.addListener(otherUserMarker, 'click', (function(otherUserMarker, i) {
                 return function() {

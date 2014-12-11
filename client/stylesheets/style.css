@@ -126,3 +126,79 @@
     width:100%;
     height:1000px;
 }
+
+/*Spinner*/
+
+.spinner {
+    margin-left:auto;
+    margin-right:auto;
+    padding-top:50%;
+}
+
+#spinnerdiv {
+    padding-top:20%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/*MARKER STUFF*/
+
+@-moz-keyframes pulsate {
+    from {
+        -moz-transform: scale(0.25);
+        opacity: 1.0;
+    }
+    95% {
+    -moz-transform: scale(1.3);
+    opacity: 0;
+    }
+    to {
+        -moz-transform: scale(0.3);
+        opacity: 0;
+    }
+}
+@-webkit-keyframes pulsate {
+    from {
+        -webkit-transform: scale(0.25);
+        opacity: 1.0;
+    }
+    95% {
+        -webkit-transform: scale(1.3);
+        opacity: 0;
+    }
+    to {
+        -webkit-transform: scale(0.3);
+        opacity: 0;
+    }
+}
+
+#map-canvas div.gmnoprint[title="My location"] {
+    -moz-animation: pulsate 1.5s ease-in-out infinite;
+    -webkit-animation: pulsate 1.5s ease-in-out infinite;
+    border:1pt solid #fff;
+    -moz-border-radius:51px;
+    -webkit-border-radius:51px;
+    border-radius:51px;
+    -moz-box-shadow:inset 0 0 5px #06f, inset 0 0 5px #06f, inset 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f;
+    -webkit-box-shadow:inset 0 0 5px #06f, inset 0 0 5px #06f, inset 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f;
+    box-shadow:inset 0 0 5px #06f, inset 0 0 5px #06f, inset 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f;
+    height:51px!important;
+    margin:-18px 0 0 -18px;
+    width:51px!important;
+}
+
+/* hide the superfluous marker image since it would expand and shrink with its containing element */
+/*  #map_canvas div[style*="987654"][title] img {*/
+#map-canvas div.gmnoprint[title="My location"] img {
+    display:none;
+}
+/* compensate for iPhone and Android devices with high DPI, add iPad media query */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (device-width: 768px) {
+    #map-canvas div.gmnoprint[title="My location"] {
+        margin:-10px 0 0 -10px;
+    }
+}
+/*
+#map-canvas div img {
+    display:none;
+}*/

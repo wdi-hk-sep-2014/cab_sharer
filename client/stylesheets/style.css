@@ -12,50 +12,46 @@ html, body {
     height:100%;
 }
 
-#sidebar {
-    position:absolute;
-    /*left:-15%;*/
-    top:0%;
-    background-color:#FFD600;
-    width:20%;
-    height:100%;
-    border: 0px;
-    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
 
-}
-
-#sidebar > .user-panel {
-    margin-top:15%;
-    max-width:80%;
-    margin-right:auto;
-    margin-left:auto;
-}
-
-#sidebar > .user-panel > img {
-    max-height:50%;
-    max-width:50%;
-    margin-left:auto;
-    margin-right:auto;
-    display:block;
-}
-#sidebar > .user-panel > h1 {
-
-    font-family: baron-neue;
-    margin-left:auto;
-    margin-right:auto;
+.row-fluid > div {
     text-align:center;
-    color:white;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-.icon {
-    padding-top:10%;
-    display:block;
-    max-height:50%;
-    max-width:50%;
-    margin-left:auto;
-    margin-right:auto;
+@media screen and (orientation:portrait) {
+    .footer-icon {
+        font-size:1.7em;
+        color:white;
+        line-height:2.5;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+    .footer-container {
+
+        position: absolute;
+        top: 90%;
+        height: 10%;
+        background-color: #706F77;
+        width: 100%;
+    }
 }
+
+@media screen and (orientation:landscape) {
+    .footer-icon {
+        font-size:1.7em;
+        color:white;
+        line-height:2.5;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+    .footer-container {
+
+        position: absolute;
+        top: 85%;
+        height: 17%;
+        background-color: #706F77;
+        width: 100%;
+    }
+}
+
+
 /*Spinner*/
 
 .spinner {

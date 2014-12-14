@@ -1,10 +1,16 @@
 <template name="loggedIn">
 <div id="map-canvas"></div>
-<div id="sidebar">
-  <div class="user-panel">
-    <img src="/images/tuba.png" />
-    <h1>TuBA</h1>
-    {{>loginButtons}}
-  </div>
-</div>
+    <div class="footer-container">
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="row-fluid">
+            <div class="col-xs-3"><i class="fa fa-user footer-icon"></i></div>
+            <div class="col-xs-3"><i class="fa fa-car footer-icon"></i></div>
+            <div class="col-xs-3"><i class="fa fa-users footer-icon"></i></div>
+            <div class="col-xs-3"><i class="fa fa-star-half-o footer-icon"></i></div>
+            {{> loginButtons}}
+          </div>
+        </div>
+      </footer>
+    </div>
 </template>

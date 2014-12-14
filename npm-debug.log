@@ -1,0 +1,150 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'weinre',
+1 verbose cli   '-g' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose cache add [ 'weinre', null ]
+5 verbose cache add name=undefined spec="weinre" args=["weinre",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'weinre',
+6 verbose parsed url   path: 'weinre',
+6 verbose parsed url   href: 'weinre' }
+7 silly lockFile 752ed9cc-weinre weinre
+8 verbose lock weinre /home/stephen/.npm/752ed9cc-weinre.lock
+9 silly lockFile 752ed9cc-weinre weinre
+10 silly lockFile 752ed9cc-weinre weinre
+11 verbose addNamed [ 'weinre', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile c2e6926c-weinre weinre@
+14 verbose lock weinre@ /home/stephen/.npm/c2e6926c-weinre.lock
+15 silly addNameRange { name: 'weinre', range: '*', hasData: false }
+16 verbose request where is /weinre
+17 verbose request registry https://registry.npmjs.org/
+18 verbose request id 45a9679e4c1e4306
+19 verbose url raw /weinre
+20 verbose url resolving [ 'https://registry.npmjs.org/', './weinre' ]
+21 verbose url resolved https://registry.npmjs.org/weinre
+22 verbose request where is https://registry.npmjs.org/weinre
+23 info trying registry request attempt 1 at 15:24:09
+24 verbose etag "9BAIAYMRYQJ9M6LHPMXZBKVBU"
+25 http GET https://registry.npmjs.org/weinre
+26 http 304 https://registry.npmjs.org/weinre
+27 silly registry.get cb [ 304,
+27 silly registry.get   { date: 'Sun, 14 Dec 2014 07:24:10 GMT',
+27 silly registry.get     server: 'Apache',
+27 silly registry.get     via: '1.1 varnish',
+27 silly registry.get     'last-modified': 'Sun, 14 Dec 2014 07:24:10 GMT',
+27 silly registry.get     'cache-control': 'max-age=60',
+27 silly registry.get     etag: '"9BAIAYMRYQJ9M6LHPMXZBKVBU"',
+27 silly registry.get     age: '0',
+27 silly registry.get     'x-served-by': 'cache-hk90-HKG',
+27 silly registry.get     'x-cache': 'MISS',
+27 silly registry.get     'x-cache-hits': '0',
+27 silly registry.get     'x-timer': 'S1418541850.109379,VS0,VE227',
+27 silly registry.get     vary: 'Accept',
+27 silly registry.get     'content-length': '0',
+27 silly registry.get     'keep-alive': 'timeout=10, max=50',
+27 silly registry.get     connection: 'Keep-Alive' } ]
+28 verbose etag https://registry.npmjs.org/weinre from cache
+29 silly addNameRange number 2 { name: 'weinre', range: '*', hasData: true }
+30 silly addNameRange versions [ 'weinre',
+30 silly addNameRange   [ '2.0.0-pre-H0WTHDO5-incubating',
+30 silly addNameRange     '2.0.0-pre-H1GCS73N-incubating',
+30 silly addNameRange     '2.0.0-pre-H3FWTQKQ-incubating',
+30 silly addNameRange     '2.0.0-pre-H41DGW8S-incubating',
+30 silly addNameRange     '2.0.0-pre-H8EOSCLN-incubating',
+30 silly addNameRange     '2.0.0-pre-H9PU2WST-incubating',
+30 silly addNameRange     '2.0.0-pre-HA5N9T49',
+30 silly addNameRange     '2.0.0-pre-HG9PLCRF',
+30 silly addNameRange     '2.0.0-pre-HH0SN197',
+30 silly addNameRange     '2.0.0-pre-HYFXM3QM',
+30 silly addNameRange     '2.0.0-pre-HZ79PDUK',
+30 silly addNameRange     '2.0.0-pre-HZO3BMNG',
+30 silly addNameRange     '2.0.0-pre-I0Z7U9OV' ] ]
+31 verbose addNamed [ 'weinre', '2.0.0-pre-I0Z7U9OV' ]
+32 verbose addNamed [ '2.0.0-pre-I0Z7U9OV', '2.0.0-pre-I0Z7U9OV' ]
+33 silly lockFile faca16ef-weinre-2-0-0-pre-I0Z7U9OV weinre@2.0.0-pre-I0Z7U9OV
+34 verbose lock weinre@2.0.0-pre-I0Z7U9OV /home/stephen/.npm/faca16ef-weinre-2-0-0-pre-I0Z7U9OV.lock
+35 silly lockFile faca16ef-weinre-2-0-0-pre-I0Z7U9OV weinre@2.0.0-pre-I0Z7U9OV
+36 silly lockFile faca16ef-weinre-2-0-0-pre-I0Z7U9OV weinre@2.0.0-pre-I0Z7U9OV
+37 silly lockFile c2e6926c-weinre weinre@
+38 silly lockFile c2e6926c-weinre weinre@
+39 silly resolved [ { name: 'weinre',
+39 silly resolved     description: 'WEb INspector REmote',
+39 silly resolved     author: { name: 'apache.org' },
+39 silly resolved     version: '2.0.0-pre-I0Z7U9OV',
+39 silly resolved     tags: [ 'debug' ],
+39 silly resolved     licenses: [ [Object] ],
+39 silly resolved     engines: { node: '>=0.6.0' },
+39 silly resolved     directories: { lib: './lib' },
+39 silly resolved     dependencies: { express: '2.5.x', nopt: '3.0.x', underscore: '1.7.x' },
+39 silly resolved     devDependencies: { 'coffee-script': '1.8.x' },
+39 silly resolved     main: './lib/weinre',
+39 silly resolved     bin: { weinre: './weinre' },
+39 silly resolved     homepage: 'http://people.apache.org/~pmuellr/weinre/',
+39 silly resolved     bugs: { url: 'https://issues.apache.org/jira/secure/IssueNavigator!executeAdvanced.jspa?jqlQuery=project%3DCB+and+component%3Dweinre&runQuery=true&clear=true' },
+39 silly resolved     repository:
+39 silly resolved      { type: 'git',
+39 silly resolved        url: 'https://git-wip-us.apache.org/repos/asf/cordova-weinre.git' },
+39 silly resolved     _id: 'weinre@2.0.0-pre-I0Z7U9OV',
+39 silly resolved     scripts: {},
+39 silly resolved     _shasum: 'fef8aa223921f7b40bbbbd4c3ed4302f6fd0a813',
+39 silly resolved     _from: 'weinre@',
+39 silly resolved     _npmVersion: '2.1.2',
+39 silly resolved     _nodeVersion: '0.10.31',
+39 silly resolved     _npmUser: { name: 'pmuellr', email: 'pmuellr@apache.org' },
+39 silly resolved     maintainers: [ [Object] ],
+39 silly resolved     dist:
+39 silly resolved      { shasum: 'fef8aa223921f7b40bbbbd4c3ed4302f6fd0a813',
+39 silly resolved        tarball: 'http://registry.npmjs.org/weinre/-/weinre-2.0.0-pre-I0Z7U9OV.tgz' },
+39 silly resolved     _resolved: 'https://registry.npmjs.org/weinre/-/weinre-2.0.0-pre-I0Z7U9OV.tgz',
+39 silly resolved     readme: 'ERROR: No README data found!' } ]
+40 info install weinre@2.0.0-pre-I0Z7U9OV into /usr/local/lib
+41 info installOne weinre@2.0.0-pre-I0Z7U9OV
+42 verbose lib/node_modules/weinre unbuild
+43 verbose tar unpack /home/stephen/.npm/weinre/2.0.0-pre-I0Z7U9OV/package.tgz
+44 silly lockFile 2bb53c29-sr-local-lib-node-modules-weinre tar:///usr/local/lib/node_modules/weinre
+45 verbose lock tar:///usr/local/lib/node_modules/weinre /home/stephen/.npm/2bb53c29-sr-local-lib-node-modules-weinre.lock
+46 silly lockFile 65a4ca5e-e-2-0-0-pre-I0Z7U9OV-package-tgz tar:///home/stephen/.npm/weinre/2.0.0-pre-I0Z7U9OV/package.tgz
+47 verbose lock tar:///home/stephen/.npm/weinre/2.0.0-pre-I0Z7U9OV/package.tgz /home/stephen/.npm/65a4ca5e-e-2-0-0-pre-I0Z7U9OV-package-tgz.lock
+48 silly gunzTarPerm modes [ '775', '664' ]
+49 error Error: EACCES, mkdir '/usr/local/lib/node_modules/weinre'
+49 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/weinre']
+49 error   errno: 3,
+49 error   code: 'EACCES',
+49 error   path: '/usr/local/lib/node_modules/weinre',
+49 error   fstream_type: 'Directory',
+49 error   fstream_path: '/usr/local/lib/node_modules/weinre',
+49 error   fstream_class: 'DirWriter',
+49 error   fstream_stack:
+49 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+49 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
+49 error      'Object.oncomplete (fs.js:107:15)' ] }
+50 error Please try running this command again as root/Administrator.
+51 error System Linux 3.13.0-40-generic
+52 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install" "weinre" "-g"
+53 error cwd /home/stephen/workspace/cab_sharer-1
+54 error node -v v0.10.33
+55 error npm -v 1.4.28
+56 error path /usr/local/lib/node_modules/weinre
+57 error fstream_path /usr/local/lib/node_modules/weinre
+58 error fstream_type Directory
+59 error fstream_class DirWriter
+60 error code EACCES
+61 error errno 3
+62 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/weinre'
+63 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+63 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
+63 error fstream_stack Object.oncomplete (fs.js:107:15)
+64 verbose exit [ 3, true ]

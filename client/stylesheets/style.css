@@ -16,17 +16,36 @@ html, body {
     position:absolute;
     /*left:-15%;*/
     top:0%;
-    background-color:#03a9f4;
+    background-color:#FFD600;
     width:20%;
     height:100%;
+    border: 0px;
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+
 }
 
-#sidebar > h1 {
+#sidebar > .user-panel {
+    margin-top:15%;
+    max-width:80%;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+#sidebar > .user-panel > img {
+    max-height:50%;
+    max-width:50%;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+}
+#sidebar > .user-panel > h1 {
 
     font-family: baron-neue;
     margin-left:auto;
     margin-right:auto;
     text-align:center;
+    color:white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .icon {

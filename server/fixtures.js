@@ -1,27 +1,27 @@
 if ( Meteor.users.find().count() === 0 ) {
   Accounts.createUser({
-    email: 'email@email.ema',
+    email: 'fakeuser1@abc.com',
     password: '12345678',
-    profile: {location: {}, name: "mr email"}
+    profile: {location: {lat: 22.280796, lng: 114.131592, updatedAt: Date.now()}, name: "fakeuser1"}
   });
   Accounts.createUser({
-    email: 'barry@scott.com',
+    email: 'fakeuser2@abc.com',
     password: '12345678',
-    profile: {location: {}, name: "barry scott"}
+    profile: {location: {lat: 22.269518, lng: 114.130562, updatedAt: Date.now()}, name: "fakeuser2"}
   });
   Accounts.createUser({
-    email: 'tom@tit.com',
+    email: 'fakeuser3@abc.com',
     password: '12345678',
-    profile: {location: {lat: 22.466429, lng: 114.004909}, name: "tom tit"}
+    profile: {location: {lat: 22.285839, lng: 114.145325, updatedAt: Date.now()}, name: "fakeuser3"}
   });
   Accounts.createUser({
-    email: 'alvin@stardust.com',
+    email: 'fakeuser4@abc.com',
     password: '12345678',
-    profile: {location: {lat: 22.371352, lng: 114.074305}, name: "alvin stardust"}
+    profile: {location: {lat: 22.281114, lng: 114.147771, updatedAt: Date.now()}, name: "fakeuser4"}
   });
   Accounts.createUser({
-    email: 'babassad@sdsddssd.com',
+    email: 'fakeuser5@abc.com',
     password: '12345678',
-    profile: {location: {}, name: "babaaasaad"}
+    profile: {location: {lat: 22.261575, lng: 114.129661, updatedAt: Date.now()}, name: "fakeuser5"}
   });
 };

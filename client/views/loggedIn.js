@@ -3,6 +3,7 @@ Template.loggedIn.rendered = function(){
   if (Meteor.isClient) {
     if (Meteor.userId(this)) {
 
+      // snazzymap style
       var styles = [{
         "featureType": "water",
         "stylers": [{
@@ -89,25 +90,19 @@ Template.loggedIn.rendered = function(){
         }]
       }]
 
+
+      // call map with long and lat
       var map = function(lat, lng) {
         var myMarker;
-        // var onlineUserArray = Meteor.users.find().fetch(); // gather online user object information
         var onlineUsersExceptMe = Meteor.users.find({_id: {$ne: Meteor.userId()}}).fetch();
-        // console.log(onlineUsersExceptMe); // gather online user object information
-        // var i = 1;
         var otherUserMarkers = [];
+        // put other users locations into array
         for (user in onlineUsersExceptMe) {
           var otherUserLat = onlineUsersExceptMe[user].profile.location.lat,
               otherUserLng = onlineUsersExceptMe[user].profile.location.lng;
               otherUserMarkers.push([otherUserLat, otherUserLng]);
         };
-        // while (i < onlineUserArray.length) { // put other online users locations into an array
-        //   var otherUserlat = onlineUserArray[i].profile.location.lat,
-        //       otherUserlng = onlineUserArray[i].profile.location.lng;
-        //       otherUserMarkers.push([otherUserlat, otherUserlng]);
-        //       i++;
-        // };
-        // console.log(otherUserMarkers);
+
 
 
         GoogleMaps.init({
@@ -124,12 +119,14 @@ Template.loggedIn.rendered = function(){
               zoomControl: false,
               mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
             };
-            var locations = [];
+
+            //put other users names into array
+            var otherUserInformation = [];
             var i = 0;
             while (i < onlineUsersExceptMe.length) {
-              locations.push(onlineUsersExceptMe[i].profile.name);
+              otherUserInformation.push(onlineUsersExceptMe[i].profile.name);
               i++;
-              console.log(locations);
+
             }
 
             var infowindow = new google.maps.InfoWindow();
@@ -147,7 +144,9 @@ Template.loggedIn.rendered = function(){
             map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
             map.mapTypes.set('map_style', styledMap);
             map.setMapTypeId('map_style');
+            //centre map on latlng in current user profile
             map.setCenter(new google.maps.LatLng(lat, lng));
+            //drop my marker onto the map
             myMarker = new google.maps.Marker({
               position: new google.maps.LatLng(lat, lng),
               map: map,
@@ -156,17 +155,48 @@ Template.loggedIn.rendered = function(){
               title: 'My location',
               visible: true
 
-            })
+            });
+            //drop pin if new user logs in
+            var dropSinglePin = function(user){
+              
+              // adds a single marker for a new user
+              var additionalUserMarker = new google.maps.Marker({
+                position: new google.maps.LatLng(user.profile.location.lat, user.profile.location.lng),
+                map: map,
+                animation: google.maps.Animation.DROP,                
+                icon: gpsIcon,
+                visible: true
+              });
+
+              // attaches click listener and event handler to the marker
+              google.maps.event.addListener(additionalUserMarker, 'click', function() {
+                infowindow.setContent(user.profile.name);
+                infowindow.open(map, additionalUserMarker);
+              });
+
+            };
+            //checks for changes in count of users currently online
+            Meteor.users.find().observeChanges({
+              'added': function(id, addedUser){
+                dropSinglePin(addedUser);
+              }
+            });            
+
+
+
+            //draw other users markers on the map
             for (index in otherUserMarkers) {
               otherUserMarker = new google.maps.Marker({
                 position: new google.maps.LatLng(otherUserMarkers[index][0], otherUserMarkers[index][1]),
                 map: map,
+                animation: google.maps.Animation.DROP,                
                 icon: gpsIcon,
                 visible: true
               });
+            //populate other users markers with infowindows containing their names
               google.maps.event.addListener(otherUserMarker, 'click', (function(otherUserMarker, i) {
                 return function() {
-                  infowindow.setContent(locations[i]);
+                  infowindow.setContent(otherUserInformation[i]);
                   infowindow.open(map, otherUserMarker);
                 }
               })(otherUserMarker, index));
@@ -175,13 +205,16 @@ Template.loggedIn.rendered = function(){
         );
       }
 
+      
+      //executes if geolocation not found
       var error = function(position) {
         var lat = 22.284584,
             lng = 114.158212;
-        map(lat, lng); // create an alert or something better here to tell the user that the position was not able to be found
+        map(lat, lng);
+        alert("position not found, setting default"); // create an alert or something better here to tell the user that the position was not able to be found
       }
 
-
+      //render map, add location data & time updated to users profile 
       var afterPositionInfo = function(position) {
         var lat = position.coords.latitude,
             lng = position.coords.longitude;
@@ -194,25 +227,26 @@ Template.loggedIn.rendered = function(){
         Meteor.users.update({_id:Meteor.userId()}, {$set:{"profile.location" : locationHash}});
         
       }
-
+      // draw map after getting users position data
       var getPositionByBrowser = function() {
         navigator.geolocation.getCurrentPosition(afterPositionInfo, error); //afterPositionInfo for callback function, error if geolocation unsuccessful
         
         return false;
       }
-
+      //draw map without getting geolocation data
       var mapWithExistingPosition = function() {
         var lat = Meteor.user().profile.location.lat,
             lng = Meteor.user().profile.location.lng
         map(lat, lng);
-        console.log("users position is less than 5 minutes old");
       }
 
-      // console.log (Meteor.user().profile.location.);  
+      // check to see if location data is x minutes old, update if it is
       var time = Date.now();
-      if (time >= Meteor.user().profile.location.updatedAt + 1000 * 60 * 5) {
-        console.log("locationHash older than 5 minutes");
+      if (Meteor.user().profile.location === undefined) {
+        Meteor.users.update({_id:Meteor.userId()}, {$set:{"profile.location" : {lat: 22.284584, lng: 114.158212, updatedAt: time}}});
         getPositionByBrowser();      
+      } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 60 * 60) {
+        getPositionByBrowser();
       } else {
         mapWithExistingPosition();
       }

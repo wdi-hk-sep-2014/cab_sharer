@@ -1,6 +1,6 @@
 @font-face {
     font-family: baron-neue;
-    src: url("typography/baron-baron-neue.otf") format("opentype");
+    src: url("/typography/baron/baron-neue.otf") format("opentype");
 }
 
 html, body {
@@ -14,7 +14,7 @@ html, body {
 
 #sidebar {
     position:absolute;
-    /*left:-10%;*/
+    /*left:-15%;*/
     top:0%;
     background-color:#03a9f4;
     width:20%;

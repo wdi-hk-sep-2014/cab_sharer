@@ -1,0 +1,20 @@
+<template name="destinationPage">
+  <div id="destination-wrapper" class="container-fluid">
+    <div class="row-fluid">
+      <div class="col-md-12">
+        <h1>
+          Where do you want to go, {{displayUser}}?
+        </h1>
+        
+      </div>
+    </div>
+    <div id="hk-island-destinations" class="row-fluid">
+      <div class="col-md-12">
+        {{>hkIslandDestinations}}
+        <div id="destination-map">
+        </div>
+        <button class="btn btn-raised btn-primary" id="destination-submit">Submit</button>
+      </div>
+    </div>
+  </div>
+</template>

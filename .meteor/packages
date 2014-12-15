@@ -4,8 +4,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-html5cat:bootstrap-material-design
-mizzao:bootstrap-3
 aldeed:geocoder
 mdg:geolocation
 accounts-password
@@ -16,4 +14,4 @@ mizzao:user-status
 sacha:spin
 mrt:googlemaps
 linto:fontawesome
-
+material-design

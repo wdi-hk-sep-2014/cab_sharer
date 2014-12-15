@@ -1,43 +1,16 @@
 <template name="loggedIn">
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="{{pathFor 'loggedIn'}}">
-                        Tuba
-                    </a>
-                </li>
-                <li>
-                    <a href="#">{{> loginButtons}}</a>
-                </li>
-            </ul>
+<div id="map-canvas"></div>
+    <div class="footer-container">
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="row-fluid">
+            <div class="col-xs-3"><i class="fa fa-user footer-icon"></i></div>
+            <div class="col-xs-3"><i class="fa fa-car footer-icon"></i></div>
+            <div class="col-xs-3"><i class="fa fa-users footer-icon"></i></div>
+            <div class="col-xs-3"><i class="fa fa-star-half-o footer-icon"></i></div>
+            {{> loginButtons}}
+          </div>
         </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12" id="map-canvas-container">
-                        <div id="map-canvas">
-                        </div>
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /#page-content-wrapper -->
-
+      </footer>
     </div>
-    <!-- /#wrapper -->
-
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
 </template>

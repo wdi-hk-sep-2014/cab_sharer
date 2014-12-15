@@ -109,6 +109,7 @@ Template.loggedIn.rendered = function() {
             var styledMap = new google.maps.StyledMapType(styles, {
               name: "Styled Map"
             });
+
             var gpsIcon = new google.maps.MarkerImage(
               '/images/bluedot_retina.png',
               null, // size
@@ -116,13 +117,23 @@ Template.loggedIn.rendered = function() {
               new google.maps.Point(8, 8),
               new google.maps.Size(17, 17)
             );
+
             map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
             map.mapTypes.set('map_style', styledMap);
             map.setMapTypeId('map_style');
             //centre map on latlng in current user profile
             map.setCenter(new google.maps.LatLng(lat, lng));
 
+            //initializes a variable to cache all visible markers on the page
+            //used for deleting markers (hopefully)
+            markers = {};
+
+            //initialize an empty info window
+            var infowindow = new google.maps.InfoWindow();
+
             //drop a single pin and attach info window
+            //adds the userID to the pin itself
+
             var dropSinglePin = function(user) {
 
               var marker = new google.maps.Marker({
@@ -134,26 +145,45 @@ Template.loggedIn.rendered = function() {
                 animation: google.maps.Animation.DROP,
                 icon: gpsIcon,
                 visible: true,
-                title: user.profile.name
+                title: user.profile.name,
+                userId: user._id
               });
 
+              //pushes the marker into the markers object
+              markers[user._id] = marker;
+
               // populate other users markers with infowindows containing their names
-              google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                // debugger
-                var infowindow = new google.maps.InfoWindow({});
-                return function() {
-                  infowindow.setContent('<h1>'+ user.profile.name + '</h1>');
-                  infowindow.open(map, marker);
-                }
-              })(marker, index));
+              // info window is generated on the fly on each click
+              google.maps.event.addListener(marker, 'click', function(){
+                var markerUser = Meteor.users.findOne({_id: this.userId});
+                infowindow.setContent('\
+                  <div class="map-info-window">\
+                  <h1>' + markerUser.profile.name + '</h1>\
+                  <p>Destination: ' + markerUser.profile.destination + '</p>\
+                  </div>');
+                infowindow.open(map,marker);
+              });
 
             };
 
+
+            // not working
+            // removeSinglePin = function(markers, markerId) {
+            //   marker = markers[markerId];
+            //   marker.setMap(null);
+            //   marker = null;
+            //   debugger
+            //   delete markers[markerId];
+            // };
+
             //checks for changes in count of users currently online
             Meteor.users.find().observeChanges({
-              'added': function(id, addedUser) {
+              'added': function(userId, addedUser) {
                 dropSinglePin(addedUser);
-              }
+              },
+              // 'removed': function(userId){
+              //   removeSinglePin(markers, userId);
+              // }
             });
 
             var onlineUsers = Meteor.users.find({}).fetch();
@@ -163,6 +193,7 @@ Template.loggedIn.rendered = function() {
                 //do some custom code for yourself
               };
               dropSinglePin(onlineUsers[index]);
+              debugger
             };
 
           }

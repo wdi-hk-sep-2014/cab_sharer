@@ -5,7 +5,7 @@ Template.loggedIn.rendered = function() {
   if (Meteor.isClient) {
 
     if (Meteor.userId()) {
-
+      
       // snazzymap style
       var styles = [{
         "featureType": "landscape",
@@ -124,6 +124,8 @@ Template.loggedIn.rendered = function() {
             //centre map on latlng in current user profile
             map.setCenter(new google.maps.LatLng(lat, lng));
 
+
+
             //initializes a variable to cache all visible markers on the page
             //used for deleting markers (hopefully)
             markers = {};
@@ -193,7 +195,7 @@ Template.loggedIn.rendered = function() {
                 //do some custom code for yourself
               };
               dropSinglePin(onlineUsers[index]);
-              debugger
+              // debugger
             };
 
           }
@@ -247,7 +249,7 @@ Template.loggedIn.rendered = function() {
           }
         });
         getPositionByBrowser();
-      } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 60 * 60) {
+      } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 60 * 120) {
         getPositionByBrowser();
       } else {
         mapWithExistingPosition();
@@ -261,10 +263,18 @@ Template.loggedIn.rendered = function() {
 
 Template.loggedIn.events({
 
-  'click p': function(){
-    alert('paragraph clicked');
+  'click #user-icon': function(){
+    $('#map-canvas').slideToggle("slow");
   },
-
-
+  'click #trips-icon': function(){
+    $('#map-canvas').slideToggle('slow');
+    $('.form-control').prop('onchange=myFunction()');
+  },  
+  'click #friends-icon': function(){
+    alert('icon clicked');
+  },
+  'click #feedback-icon': function(){
+    alert('icon clicked');
+  }
 
 });

@@ -1,0 +1,27 @@
+<template name="matchedUsers">
+  <div id="matched-users-wrapper" class="container-fluid">
+    <div class="row-fluid">
+      <div class="col-md-12">
+        <h1>
+          These users also want to go to {{displayLocation}}
+        </h1>
+        
+      </div>
+    </div>
+    <div id="list-of-matching-users" class="row-fluid">
+      <div class="col-md-12">
+        <ul>
+          {{#each matchingUsers}}
+            {{>matchingUser}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="matchingUser">
+  <li>
+    {{name}}
+  </li>
+</template>

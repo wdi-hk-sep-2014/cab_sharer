@@ -54,6 +54,15 @@ html, body {
 
 
 /*USER TEMPLATE*/
+
+#user-wrapper {
+    height:100%;
+    top:83%;
+    width:100%;
+    display:none;
+    background-color:#9E9E9E;
+}
+
 @media screen and (orientation:landscape) {
     #user-wrapper {
         height:100%;
@@ -81,7 +90,7 @@ html, body {
         height:100%;
         top:83%;
         width:100%;
-/*        display:none;*/
+        display:none;
         background-color:#9E9E9E;
     }
 }
@@ -91,9 +100,16 @@ html, body {
         height:100%;
         top:83%;
         width:100%;
-/*        display:none;*/
+        display:none;
         background-color:#9E9E9E;
     }
+}
+#destination-wrapper {
+    height:100%;
+    top:83%;
+    width:100%;
+    display:none;
+    background-color:#9E9E9E;
 }
 
 /*Spinner*/

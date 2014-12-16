@@ -136,7 +136,7 @@ Template.loggedIn.rendered = function() {
             //drop a single pin and attach info window
             //adds the userID to the pin itself
 
-            var dropSinglePin = function(user) {
+            var dropSinglePin = function(userId, user) {
 
               var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(
@@ -148,11 +148,11 @@ Template.loggedIn.rendered = function() {
                 icon: gpsIcon,
                 visible: true,
                 title: user.profile.name,
-                userId: user._id
+                userId: userId
               });
 
               //pushes the marker into the markers object
-              markers[user._id] = marker;
+              markers[userId] = marker;
 
               // populate other users markers with infowindows containing their names
               // info window is generated on the fly on each click
@@ -181,7 +181,8 @@ Template.loggedIn.rendered = function() {
             //checks for changes in count of users currently online
             Meteor.users.find().observeChanges({
               'added': function(userId, addedUser) {
-                dropSinglePin(addedUser);
+                
+                dropSinglePin(userId, addedUser);
               },
               // 'removed': function(userId){
               //   removeSinglePin(markers, userId);
@@ -191,11 +192,12 @@ Template.loggedIn.rendered = function() {
             var onlineUsers = Meteor.users.find({}).fetch();
             //draw other users markers on the map
             for ( index in onlineUsers ) {
+              // debugger
               if ( onlineUsers[index]._id === Meteor.userId() ){
                 //do some custom code for yourself
               };
-              dropSinglePin(onlineUsers[index]);
-              // debugger
+              dropSinglePin(onlineUsers[index]._id, onlineUsers[index]);
+               
             };
 
           }
@@ -249,7 +251,7 @@ Template.loggedIn.rendered = function() {
           }
         });
         getPositionByBrowser();
-      } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 60 * 120) {
+      } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 60 * 1200) {
         getPositionByBrowser();
       } else {
         mapWithExistingPosition();
@@ -261,20 +263,3 @@ Template.loggedIn.rendered = function() {
 
 };
 
-Template.loggedIn.events({
-
-  'click #user-icon': function(){
-    $('#map-canvas').slideToggle("slow");
-  },
-  'click #trips-icon': function(){
-    $('#map-canvas').slideToggle('slow');
-    $('.form-control').prop('onchange=myFunction()');
-  },  
-  'click #friends-icon': function(){
-    alert('icon clicked');
-  },
-  'click #feedback-icon': function(){
-    alert('icon clicked');
-  }
-
-});

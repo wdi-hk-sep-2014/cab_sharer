@@ -18,7 +18,6 @@ Template.matchedUsers.helpers({
 
 Template.matchingUser.helpers({
   name: function() {
-    // console.log(this.toString());
     return this.toString();
   }
 });

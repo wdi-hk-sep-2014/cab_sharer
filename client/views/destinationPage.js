@@ -121,13 +121,4 @@ Template.hkIslandDestinations.events({
 
     Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.destination": pickedDestination}});
   }
-  // 'change': function(event, template){
-  //   Meteor.call('geocode', 'Croydon, Surrey', function(error, response){
-  //     if (error){
-  //       console.log("dfv", error);
-  //     } else {
-  //       console.log("this was the response", response[0].latitude)
-  //     }
-  //   })    
-  // }
 });

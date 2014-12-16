@@ -1,8 +1,11 @@
+<head>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
 <template name="matchedUsers">
   <div id="matched-users-wrapper" class="container-fluid">
     <div class="row-fluid">
       <div class="col-md-12">
-        <h1>
+        <h1 class="user-list">
           These users also want to go to {{displayLocation}}
         </h1>
         
@@ -18,6 +21,7 @@
       </div>
     </div>
   </div>
+  {{>layout}}
 </template>
 
 <template name="matchingUser">
@@ -25,3 +29,4 @@
     {{name}}
   </li>
 </template>
+

@@ -1,277 +1,283 @@
 /*LOGGED IN PAGE*/
 
 html, body {
-    width:100%;
-    height:100%;
-    background-color:#706F77;
+	width:100%;
+	height:100%;
+	background-color:#9E9E9E;
+	font-family: 'Roboto', sans-serif;
+	font-weight:300;
 }
 #map-canvas {
-    width:100%;
-    height:100%;
+	width:100%;
+	height:100%;
 }
 
 
 .row-fluid > div {
-    text-align:center;
+	text-align:center;
 }
 
 @media screen and (orientation:portrait) {
-    .footer-icon {
-        font-size:1.7em;
-        color:white;
-        line-height:2.5;
-        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    }
-    .footer-container {
+	.footer-icon {
+		font-size:1.7em;
+		color:white;
+		line-height:2.5;
+		text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	}
+	.footer-container {
 
-        position: fixed;
-        top: 90%;
-        line-height:6;
-        height: 10%;
-        background-color: #706F77;
-        width: 100%;
-    }
+		position: fixed;
+		top: 90%;
+		line-height:6;
+		height: 10%;
+		background-color: #706F77;
+		width: 100%;
+	}
 }
 
 @media screen and (orientation:landscape) {
-    .footer-icon {
-        font-size:1.7em;
-        color:white;
-        line-height:2.6;
-        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    }
-    .footer-container {
+	.footer-icon {
+		font-size:1.7em;
+		color:white;
+		line-height:2.6;
+		text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	}
+	.footer-container {
 
-        position: fixed;
-        top: 83%;
-        height: 17%;
-        line-height:6;
-        background-color: #706F77;
-        width: 100%;
-        overflow:hidden;
-    }
+		position: fixed;
+		top: 83%;
+		height: 17%;
+		line-height:6;
+		background-color: #706F77;
+		width: 100%;
+		overflow:hidden;
+	}
 }
 
 
 /*USER TEMPLATE*/
 
 #user-wrapper {
-    height:100%;
-    top:83%;
-    width:100%;
-    display:none;
-    background-color:#9E9E9E;
+	height:100%;
+	top:83%;
+	width:100%;
+	display:none;
+	background-color:#9E9E9E;
 }
 
 @media screen and (orientation:landscape) {
-    #user-wrapper {
-        height:100%;
-        top:83%;
-        width:100%;
-        display:none;
-        background-color:#9E9E9E;
-    }
+	#user-wrapper {
+		height:100%;
+		top:83%;
+		width:100%;
+		display:none;
+		background-color:#9E9E9E;
+	}
 }
 
 @media screen and (orientation:portrait) {
-    #user-wrapper {
-        height:100%;
-        top:83%;
-        width:100%;
-        display:none;
-        background-color:#9E9E9E;
-    }
+	#user-wrapper {
+		height:100%;
+		top:83%;
+		width:100%;
+		display:none;
+		background-color:#9E9E9E;
+	}
 }
 
 /*DESTINATION PAGE*/
 
 @media screen and (orientation:landscape) {
-    #destination-wrapper {
-        height:100%;
-        top:83%;
-        width:100%;
-        display:none;
-        background-color:#9E9E9E;
-    }
+	#destination-wrapper {
+		height:100%;
+		top:83%;
+		width:100%;
+		display:none;
+		background-color:#9E9E9E;
+	}
 }
 
 @media screen and (orientation:portrait) {
-    #destination-wrapper {
-        height:100%;
-        top:83%;
-        width:100%;
-        display:none;
-        background-color:#9E9E9E;
-    }
+	#destination-wrapper {
+		height:100%;
+		top:83%;
+		width:100%;
+		display:none;
+		background-color:#9E9E9E;
+	}
 }
 #destination-wrapper {
-    height:100%;
-    top:83%;
-    width:100%;
-    display:none;
-    background-color:#9E9E9E;
+	height:100%;
+	top:83%;
+	width:100%;
+	display:none;
+	background-color:#9E9E9E;
 }
 
 /*Spinner*/
 
 .spinner {
-    margin-left:auto;
-    margin-right:auto;
-    padding-top:50%;
+	margin-left:auto;
+	margin-right:auto;
+	padding-top:50%;
 }
 
 
 /*MARKER STUFF*/
 
 @-moz-keyframes pulsate {
-    from {
-        -moz-transform: scale(0.25);
-        opacity: 1.0;
-    }
-    95% {
-    -moz-transform: scale(1.3);
-    opacity: 0;
-    }
-    to {
-        -moz-transform: scale(0.3);
-        opacity: 0;
-    }
+	from {
+		-moz-transform: scale(0.25);
+		opacity: 1.0;
+	}
+	95% {
+	-moz-transform: scale(1.3);
+	opacity: 0;
+	}
+	to {
+		-moz-transform: scale(0.3);
+		opacity: 0;
+	}
 }
 @-webkit-keyframes pulsate {
-    from {
-        -webkit-transform: scale(0.25);
-        opacity: 1.0;
-    }
-    95% {
-        -webkit-transform: scale(1.3);
-        opacity: 0;
-    }
-    to {
-        -webkit-transform: scale(0.3);
-        opacity: 0;
-    }
+	from {
+		-webkit-transform: scale(0.25);
+		opacity: 1.0;
+	}
+	95% {
+		-webkit-transform: scale(1.3);
+		opacity: 0;
+	}
+	to {
+		-webkit-transform: scale(0.3);
+		opacity: 0;
+	}
 }
 
 #map-canvas div.gmnoprint[title="My location"] {
-    -moz-animation: pulsate 1.5s ease-in-out infinite;
-    -webkit-animation: pulsate 1.5s ease-in-out infinite;
-    border:1pt solid #fff;
-    -moz-border-radius:51px;
-    -webkit-border-radius:51px;
-    border-radius:51px;
-    -moz-box-shadow:inset 0 0 5px #06f, inset 0 0 5px #06f, inset 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f;
-    -webkit-box-shadow:inset 0 0 5px #06f, inset 0 0 5px #06f, inset 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f;
-    box-shadow:inset 0 0 5px #06f, inset 0 0 5px #06f, inset 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f;
-    height:51px!important;
-    margin:-18px 0 0 -18px;
-    width:51px!important;
+	-moz-animation: pulsate 1.5s ease-in-out infinite;
+	-webkit-animation: pulsate 1.5s ease-in-out infinite;
+	border:1pt solid #fff;
+	-moz-border-radius:51px;
+	-webkit-border-radius:51px;
+	border-radius:51px;
+	-moz-box-shadow:inset 0 0 5px #06f, inset 0 0 5px #06f, inset 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f;
+	-webkit-box-shadow:inset 0 0 5px #06f, inset 0 0 5px #06f, inset 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f;
+	box-shadow:inset 0 0 5px #06f, inset 0 0 5px #06f, inset 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f, 0 0 5px #06f;
+	height:51px!important;
+	margin:-18px 0 0 -18px;
+	width:51px!important;
 }
 
 /* hide the superfluous marker image since it would expand and shrink with its containing element */
 /*  #map_canvas div[style*="987654"][title] img {*/
 #map-canvas div.gmnoprint[title="My location"] img {
-    display:none;
+	display:none;
 }
 /* compensate for iPhone and Android devices with high DPI, add iPad media query */
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (device-width: 768px) {
-    #map-canvas div.gmnoprint[title="My location"] {
-        margin:-10px 0 0 -10px;
-    }
+	#map-canvas div.gmnoprint[title="My location"] {
+		margin:-10px 0 0 -10px;
+	}
 }
 
 .map-info-window {
-    width: 300px;
-    height: 200px;
+	width: 300px;
+	height: 200px;
 }
 
 /*LOGIN PAGE*/
 @media screen and (orientation:portrait) {
 
-    input {
-        margin-bottom:5px;
-    }
+	input {
+		margin-bottom:5px;
+	}
 
-    #login-section {
-        
-        margin-top:50%;
-    }
+	#login-section {
+		
+		margin-top:50%;
+	}
 }
 @media screen and (orientation:landscape) {
-    input {
-        margin-bottom:5px;
-    }
+	input {
+		margin-bottom:5px;
+	}
 }
 
 .button-container {
-    padding-top:25%;
-    padding-bottom:25%;
+	padding-top:25%;
+	padding-bottom:25%;
 }
 
 .form {
-    font-family: 'Roboto', sans-serif;
-    font-weight:300;
+	font-family: 'Roboto', sans-serif;
+	font-weight:300;
 }
 
 .btn {
 
-    background-color:blue;
-    font-family: 'Roboto', sans-serif;
-    font-weight:300;
+	background-color:blue;
+	font-family: 'Roboto', sans-serif;
+	font-weight:300;
 }
 
 #form-not-filled-warning-anim {
-    color:white;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	color:white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 /*DESTINATIONS PAGE*/
 
 @media screen and (orientation:portrait) {
-    #hki-destinations {
-        height:40px;
-    }
-    .form-control{
-        font-size:2em;
-    }
-    #hk-island-destinations {
-        margin-top:15%;
-    }
-    #destination-submit {
-        margin-top:30%;
-    }
+	#hki-destinations {
+		height:40px;
+	}
+	.form-control{
+		font-size:2em;
+	}
+	#hk-island-destinations {
+		margin-top:15%;
+	}
+	#destination-submit {
+		margin-top:30%;
+	}
 
-    #destination-map {
-        width: 250px;
-        height: 150px;
-        position: relative;
-        margin-right: auto;
-        margin-left: auto;
-        margin-top: 60px;
-    }
+	#destination-map {
+		width: 250px;
+		height: 150px;
+		position: relative;
+		margin-right: auto;
+		margin-left: auto;
+		margin-top: 60px;
+	}
 }
 
 @media screen and (orientation:landscape) {
-    .form-control{
-        font-size:2em;
-    }
-    #hki-destinations {
-        height:40px;
-    }
-    #hk-island-destinations {
-        margin-top:2%;
-    }
-    #destination-submit {
-        margin-top:2%;
-        height:30px;
-        width:200px;
-    }
+	.form-control{
+		font-size:2em;
+	}
+	#hki-destinations {
+		height:40px;
+	}
+	#hk-island-destinations {
+		margin-top:2%;
+	}
+	#destination-submit {
+		margin-top:2%;
+		height:30px;
+		width:200px;
+	}
 
-    #destination-map {
-        width: 450px;
-        height: 100px;
-        position: relative;
-        margin-right: auto;
-        margin-left: auto;
-        margin-top: 20px;
-    }
+	#destination-map {
+		width: 450px;
+		height: 100px;
+		position: relative;
+		margin-right: auto;
+		margin-left: auto;
+		margin-top: 20px;
+	}
+}
+
+.user-list {
+	font-family:Roboto;
 }

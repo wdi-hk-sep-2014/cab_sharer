@@ -13,20 +13,5 @@ Meteor.methods({
     var geocodeResult = geo.geocode(location);
     console.log(geocodeResult);
     return geocodeResult;
-  },
-
-  createNewUser: function(){
-    Accounts.createUser({
-        email: emailVar,
-        password: passwordVar,
-        profile: { 
-          firstName: firstName,
-          lastName: lastName,
-          location: {lat: 22.284584, lng: 114.158212, updatedAt: Date.now - 1000 * 60 * 5},
-          destination: 'Central',
-          about: 'This is a placeholder bio. Make your own!',
-          pictureUrl: '/images/userdefault.png'
-        }
-    })
   }
 });

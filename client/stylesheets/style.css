@@ -18,6 +18,12 @@ html, body {
 
 /*LAYOUT */
 
+.footer-container {
+	-webkit-box-shadow: -6px -4px 3px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    -6px -4px 3px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         -6px -4px 3px 0px rgba(50, 50, 50, 0.75);
+}
+
 @media screen (min-width:1281px) {
 	.footer-container {
 
@@ -27,6 +33,9 @@ html, body {
 		width: 100%;
 		top: 90%;
 		height: 10%;
+		-webkit-box-shadow: -6px -4px 3px 0px rgba(50, 50, 50, 0.75);
+		-moz-box-shadow:    -6px -4px 3px 0px rgba(50, 50, 50, 0.75);
+		box-shadow:         -6px -4px 3px 0px rgba(50, 50, 50, 0.75);
 	}
 
 	.footer-icon {
@@ -58,6 +67,9 @@ html, body {
 		height: 10%;
 		background-color: #706F77;
 		width: 100%;
+		-webkit-box-shadow: -6px -4px 3px 0px rgba(50, 50, 50, 0.75);
+		-moz-box-shadow:    -6px -4px 3px 0px rgba(50, 50, 50, 0.75);
+		box-shadow:         -6px -4px 3px 0px rgba(50, 50, 50, 0.75);
 	}
 }
 
@@ -77,6 +89,9 @@ html, body {
 		background-color: #706F77;
 		width: 100%;
 		overflow:hidden;
+		-webkit-box-shadow: -6px -4px 3px 0px rgba(50, 50, 50, 0.75);
+		-moz-box-shadow:    -6px -4px 3px 0px rgba(50, 50, 50, 0.75);
+		box-shadow:         -6px -4px 3px 0px rgba(50, 50, 50, 0.75);
 	}
 }
 
@@ -386,7 +401,7 @@ html, body {
 .form-horizontal {
 	margin-left:auto;
 	margin-right:auto;
-
+}
 /*DESTINATION*/
 
 #chapp_text {

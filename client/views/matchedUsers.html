@@ -2,18 +2,24 @@
   <div id="matched-users-wrapper" class="container-fluid">
     <div class="row-fluid">
       <div class="col-md-12">
+        {{#if matchingUsers}}
         <h1 class="user-list">
           These users also want to go to {{displayLocation}}
         </h1>
+          {{else}}
+          <h1>We can't find anyone to share with you, please try again soon!</h1>
+        {{/if}}
         
       </div>
     </div>
     <div id="list-of-matching-users" class="row-fluid">
       <div class="col-md-12">
         <ul>
+        {{#if matchingUsers}}
           {{#each matchingUsers}}
-            {{>matchingUser}}
+            <li>{{>matchingUser}}</li>            
           {{/each}}
+        {{/if}}
         </ul>
       </div>
     </div>

@@ -7,17 +7,17 @@ if ( Meteor.users.find().count() === 0 ) {
   Accounts.createUser({
     email: 'victorlin@hotmail.com',
     password: '12345678',
-    profile: {location: {lat: 22.269518, lng: 114.130562, updatedAt: Date.now()}, firstName: "Victor", lastName: "Lin",destination: "Cyberport"}
+    profile: {location: {lat: 22.269518, lng: 114.130562, updatedAt: Date.now()}, firstName: "Victor", lastName: "Lin",destination: "Fortress Hill"}
   });
   Accounts.createUser({
     email: 'harryng@hotmail.com',
     password: '12345678',
-    profile: {location: {lat: 22.285839, lng: 114.145325, updatedAt: Date.now()}, firstName: "Harry", lastName: "Ng",destination: "Cyberport"}
+    profile: {location: {lat: 22.285839, lng: 114.145325, updatedAt: Date.now()}, firstName: "Harry", lastName: "Ng",destination: "Fortress Hill"}
   });
   Accounts.createUser({
     email: 'fermartin@hotmail.com',
     password: '12345678',
-    profile: {location: {lat: 22.281114, lng: 114.147771, updatedAt: Date.now()}, firstName: "Fernando", lastName: "Martin",destination: "Cyberport"}
+    profile: {location: {lat: 22.281114, lng: 114.147771, updatedAt: Date.now()}, firstName: "Fernando", lastName: "Martin",destination: "Fortress Hill"}
   });
   Accounts.createUser({
     email: 'pbateman@hotmail.com',

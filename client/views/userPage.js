@@ -1,7 +1,7 @@
 Template.userPage.helpers({
     displayUser: function() {
       if (Meteor.user().profile) {
-        return Meteor.user().profile.firstName + ' ' + Meteor.user().profile.firstName;
+        return Meteor.user().profile.firstName + ' ' + Meteor.user().profile.lastName;
       } else {
         // Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.firstName": "Please Set a Name!"} });
             var element = document.createElement("h1");

@@ -7,7 +7,7 @@ Template.destinationPage.events({
 
 Template.destinationPage.helpers({
   displayUser: function() {
-    return Meteor.user().profile.name;
+    return Meteor.user().profile.firstName;
   }
 });
 
@@ -107,7 +107,6 @@ Template.hkIslandDestinations.events({
             }]
           }];
           google;
-          debugger
           var mapOptions = {
             zoom: 14,
             streetViewControl: false,

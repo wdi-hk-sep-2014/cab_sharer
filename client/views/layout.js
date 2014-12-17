@@ -16,7 +16,14 @@ Template.layout.events({
   //   }
   // },
 
-  'click #trips-icon': function(){},
+  'click #trips-icon': function(){
+    event.preventDefault();
+    Router.go('destination');
+  },
+  'click #map-icon': function(){
+    event.preventDefault();
+    Router.go('/');
+  }
   //   $('.slide-up').css("display", 'none');
   //   if($('#destination-wrapper').css("display") === "none"){
   //     $('#destination-wrapper').css('display', 'block');
@@ -29,11 +36,4 @@ Template.layout.events({
   //   }
   // },  
 
-  'click #friends-icon': function(){
-    alert('icon clicked');
-  },
-
-  'click #feedback-icon': function(){
-    alert('icon clicked');
-  }
 });

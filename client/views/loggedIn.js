@@ -178,16 +178,6 @@ Template.loggedIn.rendered = function() {
             //   delete markers[markerId];
             // };
 
-            //checks for changes in count of users currently online
-            Meteor.users.find().observeChanges({
-              'added': function(userId, addedUser) {
-                
-                dropSinglePin(userId, addedUser);
-              },
-              // 'removed': function(userId){
-              //   removeSinglePin(markers, userId);
-              // }
-            });
 
             var onlineUsers = Meteor.users.find({}).fetch();
             //draw other users markers on the map
@@ -197,8 +187,20 @@ Template.loggedIn.rendered = function() {
                 //do some custom code for yourself
               };
               dropSinglePin(onlineUsers[index]._id, onlineUsers[index]);
+              debugger
                
             };
+
+            // checks for changes in count of users currently online
+            Meteor.users.find().observeChanges({
+              'added': function(userId, addedUser) {
+                debugger
+                dropSinglePin(userId, addedUser);
+              },
+              // 'removed': function(userId){
+              //   removeSinglePin(markers, userId);
+              // }
+            });
 
           }
         );

@@ -9,7 +9,7 @@ Template.matchedUsers.helpers({
     var usersWithSameDestination = [];
     for (index in onlineUsersExceptMe) {
       if (onlineUsersExceptMe[index].profile.destination === Meteor.user().profile.destination){
-        usersWithSameDestination.push(onlineUsersExceptMe[index].profile.firstName + ' ' + onlineUsersExceptMe[index].profile.lastName);
+        usersWithSameDestination.push(onlineUsersExceptMe[index]);
       };
     }
     console.log(usersWithSameDestination);

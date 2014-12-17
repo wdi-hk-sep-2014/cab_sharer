@@ -11,7 +11,7 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.login.events({
+  Template.landingTemplate.events({
     'submit form': function(event, template){
         event.preventDefault();
         var emailVar = template.find('#login-email').value;
@@ -21,7 +21,7 @@ if (Meteor.isClient) {
             var element = document.createElement("h1");
             element.id = "form-not-filled-warning-anim";
             element.innerHTML = "Please enter a user name and password...";
-            $('#login-form').append(element);
+            $('.button-container').append(element);
             $('#form-not-filled-warning-anim').addClass("animated fadeInUp");
             $('#login-button').prop("disabled", true);
             setTimeout(function(){
@@ -35,6 +35,15 @@ if (Meteor.isClient) {
           console.log('login2');
           Meteor.loginWithPassword(emailVar, passwordVar);
         }
-    }
+    },
+    'click #register-link': function(event, template){
+     Router.go('/register');
+    }    
   });
+
+  Template.landingTemplate.events({
+    'click #register-link': function(event, template){
+     Router.go('/register');
+    }
+  })
 }

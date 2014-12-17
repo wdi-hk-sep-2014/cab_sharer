@@ -1,4 +1,8 @@
+
 /*LOGGED IN PAGE*/
+
+
+
 
 html, body {
 	width:100%;
@@ -12,12 +16,34 @@ html, body {
 	height:100%;
 }
 
+/*LAYOUT */
+
+@media screen (min-width:1281px) {
+	.footer-container {
+
+		position: fixed;
+		line-height:6;
+		background-color: #706F77;
+		width: 100%;
+		top: 90%;
+		height: 10%;
+	}
+
+	.footer-icon {
+		font-size:1.7em;
+		color:white;
+		line-height:2.5;
+		text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	}
+}
+
+
 
 .row-fluid > div {
 	text-align:center;
 }
 
-@media screen and (orientation:portrait) {
+@media screen and (orientation:portrait) and (min-width:320px) {
 	.footer-icon {
 		font-size:1.7em;
 		color:white;
@@ -35,7 +61,7 @@ html, body {
 	}
 }
 
-@media screen and (orientation:landscape) {
+@media screen and (orientation:landscape) and (min-width:480px) {
 	.footer-icon {
 		font-size:1.7em;
 		color:white;
@@ -59,18 +85,18 @@ html, body {
 
 #user-wrapper {
 	height:100%;
-	top:83%;
+	/*top:83%;*/
 	width:100%;
-	display:none;
+	/*display:none;*/
 	background-color:#9E9E9E;
 }
 
 @media screen and (orientation:landscape) {
 	#user-wrapper {
 		height:100%;
-		top:83%;
+		/*top:83%;*/
 		width:100%;
-		display:none;
+		/*display:none;*/
 		background-color:#9E9E9E;
 	}
 }
@@ -78,9 +104,9 @@ html, body {
 @media screen and (orientation:portrait) {
 	#user-wrapper {
 		height:100%;
-		top:83%;
+		/*top:83%;*/
 		width:100%;
-		display:none;
+		/*display:none;*/
 		background-color:#9E9E9E;
 	}
 }
@@ -90,27 +116,27 @@ html, body {
 @media screen and (orientation:landscape) {
 	#destination-wrapper {
 		height:100%;
-		top:83%;
+		/*top:83%;*/
 		width:100%;
-		display:none;
+		/*display:none;*/
 		background-color:#9E9E9E;
 	}
 }
 
 @media screen and (orientation:portrait) {
 	#destination-wrapper {
-		height:100%;
+		/*height:100%;*/
 		top:83%;
 		width:100%;
-		display:none;
+		/*display:none;*/
 		background-color:#9E9E9E;
 	}
 }
 #destination-wrapper {
-	height:100%;
+	/*height:100%;*/
 	top:83%;
 	width:100%;
-	display:none;
+	/*display:none;*/
 	background-color:#9E9E9E;
 }
 
@@ -186,14 +212,14 @@ html, body {
 	height: 200px;
 }
 
-/*LOGIN PAGE*/
+/*LOGIN AND REGISTER PAGE*/
 @media screen and (orientation:portrait) {
 
 	input {
 		margin-bottom:5px;
 	}
 
-	#login-section {
+	#login-section, #register-section {
 		
 		margin-top:50%;
 	}
@@ -226,15 +252,19 @@ html, body {
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+#call-to-action, #call-to-login {
+	font-size:0.9em;
+}
+
 /*DESTINATIONS PAGE*/
 
 @media screen and (orientation:portrait) {
 	#hki-destinations {
 		height:40px;
 	}
-	.form-control{
+/*	.form-control{
 		font-size:2em;
-	}
+	}*/
 	#hk-island-destinations {
 		margin-top:15%;
 	}
@@ -253,9 +283,9 @@ html, body {
 }
 
 @media screen and (orientation:landscape) {
-	.form-control{
+/*	.form-control{
 		font-size:2em;
-	}
+	}*/
 	#hki-destinations {
 		height:40px;
 	}
@@ -278,6 +308,47 @@ html, body {
 	}
 }
 
-.user-list {
-	font-family:Roboto;
+
+/*CONTENT WRAPPER*/
+#content {
+	width:inherit;
+	height:inherit;
 }
+
+/*TRANSITIONS*/
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 0.6s;
+  animation-duration: 0.6s;
+}
+
+/*USER PROFILE PAGE*/

@@ -1,7 +1,19 @@
 <template name="register">
-<!--   <form>
-    <input type="email" id="register-email">
-    <input type="password" id="register-password">
-    <input type="submit" value="Register">
-  </form> -->
+  <div id="register-section" class="container-fluid login-section">
+    <div class="row-fluid">
+      <div class="col-xs-2">
+      </div>
+      <div class="col-xs-8 button-container" style="height:90%">
+        <form id="register-form">
+          <div class="col-xs-12">
+            <input type="email" placeholder="Email" id="register-email">
+            <input type="password" placeholder="Password" id="register-password">
+            <input type="password" placeholder="Confirm password" id="confirm-password">
+          </div>
+          <button id="register-button" type="submit" button class="btn btn-primary-raised" value="Register">REGISTER</button>
+        </form>
+        <h1 id="call-to-login">Have an account? <a id="login-link" href="/"> Click here to login.</a></h1>
+      </div>
+    </div>
+  </div>
 </template>

@@ -1,10 +1,10 @@
 Template.loggedIn.rendered = function() {
 
 
-
   if (Meteor.isClient) {
 
     if (Meteor.userId()) {
+
       
       // snazzymap style
       var styles = [{
@@ -147,7 +147,7 @@ Template.loggedIn.rendered = function() {
                 animation: google.maps.Animation.DROP,
                 icon: gpsIcon,
                 visible: true,
-                title: user.profile.name,
+                title: user.profile.firstName + ' ' + user.profile.lastName,
                 userId: userId
               });
 
@@ -160,7 +160,7 @@ Template.loggedIn.rendered = function() {
                 var markerUser = Meteor.users.findOne({_id: this.userId});
                 infowindow.setContent('\
                   <div class="map-info-window">\
-                  <h1>' + markerUser.profile.name + '</h1>\
+                  <h1>' + markerUser.profile.firstName + ' ' + markerUser.profile.lastName + '</h1>\
                   <p>Destination: ' + markerUser.profile.destination + '</p>\
                   </div>');
                 infowindow.open(map,marker);
@@ -238,7 +238,7 @@ Template.loggedIn.rendered = function() {
 
       // check to see if location data is x minutes old, update if it is
       var time = Date.now();
-      if (Meteor.user().profile.location === undefined) {
+      if (Meteor.user().profile.location === undefined || {}) {
         Meteor.users.update({
           _id: Meteor.userId()
         }, {

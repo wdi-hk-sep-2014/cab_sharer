@@ -230,6 +230,10 @@ html, body {
 	}
 }
 
+#account-info {
+	margin-bottom:15px;
+}
+
 .button-container {
 	padding-top:25%;
 	padding-bottom:25%;
@@ -352,3 +356,8 @@ html, body {
 }
 
 /*USER PROFILE PAGE*/
+
+
+#user-profile {
+	padding-top:5%;
+}

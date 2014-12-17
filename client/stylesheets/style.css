@@ -361,3 +361,21 @@ html, body {
 #user-profile {
 	padding-top:5%;
 }
+
+#chapp_text {
+	width:100%;
+	height:100%;
+	background-color:#FFF;
+	font-family: 'Roboto', sans-serif;
+	font-weight:600;
+}
+
+a.matched-user:link,
+a.matched-user:hover,
+a.matched-user:active,
+a.matched-user:visited {
+	text-decoration: none;
+	font-color:#FFF;
+	font-family: 'Roboto', sans-serif;
+	font-weight:600;
+}

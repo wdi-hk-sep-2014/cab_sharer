@@ -361,3 +361,29 @@ html, body {
 #user-profile {
 	padding-top:5%;
 }
+
+#user-h1 {
+	font-size:1.2em;
+}
+
+#profile-picture {
+	max-height:100%;
+	max-width:100%;
+	border:1px solid black;
+	border-radius:100%;
+	margin-right:auto;
+	margin-left:auto;
+}
+#logout {
+	margin-right:auto;
+	margin-left:auto;
+	max-width:100%;
+}
+
+.profile-form {
+	margin-top:30px;
+}
+.form-horizontal {
+	margin-left:auto;
+	margin-right:auto;
+}

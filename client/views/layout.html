@@ -1,11 +1,14 @@
 <template name="layout">
+  <div id="content">
   {{>yield}}
+  </div>
   <div class="footer-container">
     <footer class="footer">
       <div class="container-fluid">
         <div class="row-fluid">
-          <div class="col-xs-6 icon-holder"><i id="user-icon" class="fa fa-user footer-icon"></i></div>
-          <div class="col-xs-6 icon-holder"><i id="trips-icon" class="fa fa-car footer-icon"></i></div>
+          <div id="user-icon" class="col-xs-4 icon-holder"><i class="fa fa-user footer-icon"></i></div>
+          <div id="map-icon"  class="col-xs-4 icon-holder"><i class="fa fa-map-marker footer-icon"></i></div>
+          <div id="trips-icon"  class="col-xs-4 icon-holder"><i class="fa fa-car footer-icon"></i></div>
         </div>
       </div>
     </footer>

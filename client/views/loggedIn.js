@@ -1,10 +1,10 @@
 Template.loggedIn.rendered = function() {
 
 
-
   if (Meteor.isClient) {
 
     if (Meteor.userId()) {
+
       
       // snazzymap style
       var styles = [{
@@ -86,7 +86,7 @@ Template.loggedIn.rendered = function() {
 
       // call map with long and lat
       var map = function(lat, lng) {
-
+        console.log("latitude: " + lat + "/" + lng)
         var myMarker;
 
         GoogleMaps.init({
@@ -137,7 +137,6 @@ Template.loggedIn.rendered = function() {
             //adds the userID to the pin itself
 
             var dropSinglePin = function(userId, user) {
-
               var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(
                   user.profile.location.lat, 
@@ -147,7 +146,7 @@ Template.loggedIn.rendered = function() {
                 animation: google.maps.Animation.DROP,
                 icon: gpsIcon,
                 visible: true,
-                title: user.profile.name,
+                title: user.profile.firstName + ' ' + user.profile.lastName,
                 userId: userId
               });
 
@@ -160,8 +159,9 @@ Template.loggedIn.rendered = function() {
                 var markerUser = Meteor.users.findOne({_id: this.userId});
                 infowindow.setContent('\
                   <div class="map-info-window">\
-                  <h1>' + markerUser.profile.name + '</h1>\
+                  <h1>' + markerUser.profile.firstName + ' ' + markerUser.profile.lastName + '</h1>\
                   <p>Destination: ' + markerUser.profile.destination + '</p>\
+                  <p>About this user: ' + markerUser.profile.about + '</p>\
                   </div>');
                 infowindow.open(map,marker);
               });
@@ -174,25 +174,15 @@ Template.loggedIn.rendered = function() {
             //   marker = markers[markerId];
             //   marker.setMap(null);
             //   marker = null;
-            //   debugger
+
             //   delete markers[markerId];
             // };
 
-            //checks for changes in count of users currently online
-            Meteor.users.find().observeChanges({
-              'added': function(userId, addedUser) {
-                
-                dropSinglePin(userId, addedUser);
-              },
-              // 'removed': function(userId){
-              //   removeSinglePin(markers, userId);
-              // }
-            });
 
             var onlineUsers = Meteor.users.find({}).fetch();
             //draw other users markers on the map
             for ( index in onlineUsers ) {
-              // debugger
+
               if ( onlineUsers[index]._id === Meteor.userId() ){
                 //do some custom code for yourself
               };
@@ -200,12 +190,24 @@ Template.loggedIn.rendered = function() {
                
             };
 
+            // checks for changes in count of users currently online
+            Meteor.users.find().observeChanges({
+              'added': function(userId, addedUser) {
+
+                dropSinglePin(userId, addedUser);
+              },
+              // 'removed': function(userId){
+              //   removeSinglePin(markers, userId);
+              // }
+            });
+
           }
         );
       };
 
       //executes if geolocation not found
       var error = function(position) {
+        console.log("error");
         var lat = 22.284584,
             lng = 114.158212;
         map(lat, lng);
@@ -239,6 +241,7 @@ Template.loggedIn.rendered = function() {
       // check to see if location data is x minutes old, update if it is
       var time = Date.now();
       if (Meteor.user().profile.location === undefined) {
+        console.log('un');
         Meteor.users.update({
           _id: Meteor.userId()
         }, {
@@ -251,7 +254,7 @@ Template.loggedIn.rendered = function() {
           }
         });
         getPositionByBrowser();
-      } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 60 * 1200) {
+      } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 60 * 5) {
         getPositionByBrowser();
       } else {
         mapWithExistingPosition();

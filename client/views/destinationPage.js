@@ -7,7 +7,7 @@ Template.destinationPage.events({
 
 Template.destinationPage.helpers({
   displayUser: function() {
-    return Meteor.user().profile.name;
+    return Meteor.user().profile.firstName;
   }
 });
 
@@ -16,11 +16,19 @@ Template.hkIslandDestinations.events({
     var geocodedLocation;
     var pickedDestination = template.find('#hki-destinations').value;
     var destinationMap;
+
+    GoogleMaps.init({
+        'sensor': true, //optional
+        'key': 'AIzaSyDk9y8mpkP-vf76aIFil2Kve_3f49WxW_w', //optional
+        'language': 'en' //optional
+      }),    
     Meteor.call('geocode', pickedDestination + ' , Hong Kong', function(error, response){
       if (error){
-        console.log(error);
+        console.log("Error ", error);
       } else {
+        console.log("Success ");
         geocodedLocation = {latitude: response[0].latitude, longitude :response[0].longitude};
+
         function initialize() {
           var styles = [{
             "featureType": "landscape",
@@ -98,6 +106,7 @@ Template.hkIslandDestinations.events({
               "saturation": -97
             }]
           }];
+          google;
           var mapOptions = {
             zoom: 14,
             streetViewControl: false,
@@ -116,7 +125,7 @@ Template.hkIslandDestinations.events({
         };        
             // console.log("this was the response", geocodedLocation);
         initialize();
-          }
+      }
     })
 
     Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.destination": pickedDestination}});

@@ -1,32 +1,58 @@
-<head>
-  <link rel="stylesheet" href="/stylesheets/style.css">
-</head>
 <template name="matchedUsers">
   <div id="matched-users-wrapper" class="container-fluid">
     <div class="row-fluid">
       <div class="col-md-12">
+        {{#if matchingUsers}}
         <h1 class="user-list">
           These users also want to go to {{displayLocation}}
         </h1>
-        
+          {{else}}
+          <h1>We can't find anyone to share with you, please try again soon!</h1>
+        {{/if}}
       </div>
     </div>
     <div id="list-of-matching-users" class="row-fluid">
       <div class="col-md-12">
-        <ul>
+        {{#if matchingUsers}}
           {{#each matchingUsers}}
-            {{>matchingUser}}
+            <h1>{{> matchingUser}}</h1>            
           {{/each}}
-        </ul>
+        {{/if}}
+      </div>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+    <h1>Group Chat</h1>
+      {{>chapp_form}}
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="user-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">Matched User</h4>
+        </div>
+        <div class="modal-body">
+          <h1>{{modalUser.profile.firstName}} {{modalUser.profile.lastName}} wants to share a cab!</h1>
+          <h2>About:</h2>
+          <h3>{{modalUser.profile.about}}</h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-  {{>layout}}
 </template>
 
+
+
+
 <template name="matchingUser">
-  <li>
-    {{name}}
-  </li>
+  <div>
+    <a class="matched-user" href="#">{{name.firstName}} {{name.lastName}}</a>
+  </div>
 </template>
 

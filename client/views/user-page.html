@@ -2,10 +2,49 @@
   <div id="user-wrapper" class="container-fluid slide-up">
     <div class="row-fluid">
       <div class="col-md-12">
-        <h1>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-xs-0">
+      </div>
+      <div class="col-xs-8" style="margin-top:30px">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="col-lg-10">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-lg-2 control-label profile-form">About me</label>
+                  <div class="col-lg-10">
+                    <div class="form-control-wrapper">
+                      <textarea class="form-control empty"  id="bio" rows="3" placeholder="Your bio goes here!"></textarea>
+                      <span class="material-input"></span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <button class="btn btn-flat btn-primary" id="submit">SUBMIT</button>
+          </div>
+        </form>  
+      </div>
+      <div class="col-xs-4">
+        <h1 id="user-h1">
           {{displayUser}}
         </h1>
+        <img id="profile-picture" src="/images/userdefault.png"/>
+        <button class="btn btn-flat btn-primary" id="logout">Log Out</button>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-xs-2">
+      </div>
+      <div class="col-xs-8">
+      </div>
+      <div class="col-xs-2">
       </div>
     </div>
   </div>
 </template>
+
+                
+                

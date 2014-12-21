@@ -13,5 +13,5 @@ Meteor.methods({
     var geocodeResult = geo.geocode(location);
     console.log(geocodeResult);
     return geocodeResult;
-  }  
+  }
 });

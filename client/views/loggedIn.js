@@ -137,7 +137,6 @@ Template.loggedIn.rendered = function() {
             //adds the userID to the pin itself
 
             var dropSinglePin = function(userId, user) {
-              debugger
               var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(
                   user.profile.location.lat, 
@@ -175,7 +174,7 @@ Template.loggedIn.rendered = function() {
             //   marker = markers[markerId];
             //   marker.setMap(null);
             //   marker = null;
-            //   debugger
+
             //   delete markers[markerId];
             // };
 
@@ -183,7 +182,7 @@ Template.loggedIn.rendered = function() {
             var onlineUsers = Meteor.users.find({}).fetch();
             //draw other users markers on the map
             for ( index in onlineUsers ) {
-              // debugger
+
               if ( onlineUsers[index]._id === Meteor.userId() ){
                 //do some custom code for yourself
               };
@@ -194,7 +193,7 @@ Template.loggedIn.rendered = function() {
             // checks for changes in count of users currently online
             Meteor.users.find().observeChanges({
               'added': function(userId, addedUser) {
-                debugger
+
                 dropSinglePin(userId, addedUser);
               },
               // 'removed': function(userId){

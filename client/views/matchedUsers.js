@@ -29,8 +29,7 @@ Template.matchingUser.helpers({
 
   name: function() {
     var user = {
-      firstName: this.profile.firstName, 
-      lastName: this.profile.lastName,
+      name: this.profile.name, 
       _id: this._id
     };
     return user;

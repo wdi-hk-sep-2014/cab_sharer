@@ -146,7 +146,7 @@ Template.loggedIn.rendered = function() {
                 animation: google.maps.Animation.DROP,
                 icon: gpsIcon,
                 visible: true,
-                title: user.profile.firstName + ' ' + user.profile.lastName,
+                title: user.profile.name,
                 userId: userId
               });
 
@@ -159,7 +159,7 @@ Template.loggedIn.rendered = function() {
                 var markerUser = Meteor.users.findOne({_id: this.userId});
                 infowindow.setContent('\
                   <div class="map-info-window">\
-                  <h1>' + markerUser.profile.firstName + ' ' + markerUser.profile.lastName + '</h1>\
+                  <h1>' + markerUser.profile.name + '</h1>\
                   <p>Destination: ' + markerUser.profile.destination + '</p>\
                   <p>About this user: ' + markerUser.profile.about + '</p>\
                   </div>');

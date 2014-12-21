@@ -7,7 +7,7 @@ Template.destinationPage.events({
 
 Template.destinationPage.helpers({
   displayUser: function() {
-    return Meteor.user().profile.firstName;
+    return Meteor.user().profile.name;
   }
 });
 

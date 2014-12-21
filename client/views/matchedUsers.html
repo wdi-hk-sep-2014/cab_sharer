@@ -35,7 +35,7 @@
           <h4 class="modal-title" id="myModalLabel">Matched User</h4>
         </div>
         <div class="modal-body">
-          <h1>{{modalUser.profile.firstName}} {{modalUser.profile.lastName}} wants to share a cab!</h1>
+          <h1>{{modalUser.profile.name}} wants to share a cab!</h1>
           <h2>About:</h2>
           <h3>{{modalUser.profile.about}}</h3>
         </div>
@@ -52,7 +52,7 @@
 
 <template name="matchingUser">
   <div>
-    <a class="matched-user" href="#">{{name.firstName}} {{name.lastName}}</a>
+    <a class="matched-user" href="#">{{name}} {{name}}</a>
   </div>
 </template>
 

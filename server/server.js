@@ -11,6 +11,17 @@
 
 // getGeocode("Cyberport, Hong Kong");
 
+ServiceConfiguration.configurations.remove({
+    service: "facebook"
+});
+
+ServiceConfiguration.configurations.insert({
+    service: "facebook",
+    appId: "854947564544953",
+    secret: "68fa355766aa072af2fa6ee5c014a001"
+});
+
+
 function distance(lat1, lon1, lat2, lon2, unit) {
     var radlat1 = Math.PI * lat1/180
     var radlat2 = Math.PI * lat2/180

@@ -21,6 +21,14 @@ ServiceConfiguration.configurations.insert({
     secret: "68fa355766aa072af2fa6ee5c014a001"
 });
 
+Accounts.onCreateUser(function(options, user) {
+    if (options.profile) {
+        options.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
+        user.profile = options.profile;
+    }
+    return user;
+});
+
 
 function distance(lat1, lon1, lat2, lon2, unit) {
     var radlat1 = Math.PI * lat1/180

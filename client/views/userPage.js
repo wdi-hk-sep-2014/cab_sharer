@@ -1,7 +1,10 @@
 Template.userPage.helpers({
     displayUser: function() {
       return Meteor.user().profile.name;
-      }
+    },
+    profilePicture: function() {
+      return Meteor.user().profile.picture;
+    }
 });
 
 Template.userPage.events({
@@ -17,4 +20,3 @@ Template.userPage.events({
   }
 });
 
-// NEED TO MAKE DRY

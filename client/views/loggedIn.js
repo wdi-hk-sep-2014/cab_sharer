@@ -131,7 +131,7 @@ Template.loggedIn.rendered = function() {
             markers = {};
 
             //initialize an empty info window
-            var infowindow = new google.maps.InfoBubble();
+            var infowindow = new google.maps.InfoWindow();
 
             //drop a single pin and attach info window
             //adds the userID to the pin itself
@@ -157,11 +157,19 @@ Template.loggedIn.rendered = function() {
               // info window is generated on the fly on each click
               google.maps.event.addListener(marker, 'click', function(){
                 var markerUser = Meteor.users.findOne({_id: this.userId});
+                var pictureUrl = markerUser.profile.picture.split('');
+                  debugger;
+                var smallPictureUrl;
+                for (i = 0; i == pictureUrl.length -5; i++) {
+                  smallPictureUrl.push(pictureUrl[i]);
+                  console.log(smallPictureUrl);
+                };
                 infowindow.setContent('\
                   <div class="map-info-window">\
                   <h1>' + markerUser.services.facebook.first_name + '</h1>\
                   <p>Destination: ' + markerUser.profile.destination + '</p>\
                   <p>Last update: ' + markerUser.profile.about + '</p>\
+                  <img src=' + markerUser.profile.picture + '/>\
                   </div>');
                 infowindow.open(map,marker);
               });

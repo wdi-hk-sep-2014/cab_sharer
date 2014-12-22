@@ -157,19 +157,15 @@ Template.loggedIn.rendered = function() {
               // info window is generated on the fly on each click
               google.maps.event.addListener(marker, 'click', function(){
                 var markerUser = Meteor.users.findOne({_id: this.userId});
-                var pictureUrl = markerUser.profile.picture.split('');
-                  debugger;
-                var smallPictureUrl;
-                for (i = 0; i == pictureUrl.length -5; i++) {
-                  smallPictureUrl.push(pictureUrl[i]);
-                  console.log(smallPictureUrl);
-                };
-                infowindow.setContent('\
+                var smallPictureUrl = markerUser.profile.picture.split('').slice(0,-5).join('');
+                // infowindow.setContent('\<img id="small-profile-pic" src=' + smallPictureUrl + 'small>\
+                //   ');
+                  infowindow.setContent('\
                   <div class="map-info-window">\
                   <h1>' + markerUser.services.facebook.first_name + '</h1>\
                   <p>Destination: ' + markerUser.profile.destination + '</p>\
                   <p>Last update: ' + markerUser.profile.about + '</p>\
-                  <img src=' + markerUser.profile.picture + '/>\
+                  <img src=' + smallPictureUrl + 'small>\
                   </div>');
                 infowindow.open(map,marker);
               });

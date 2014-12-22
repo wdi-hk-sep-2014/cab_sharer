@@ -16,7 +16,11 @@ Template.userPage.events({
   'keyup #bio': function(event, template){
     if (event.which === 13) {
       var formContents = template.find('#bio').value;
-      Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.about": formContents}});
+      if (formContents.length != 0) {
+        console.log(formContents.length);
+        Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.about": formContents}});
+
+      }
     }
   }
 });

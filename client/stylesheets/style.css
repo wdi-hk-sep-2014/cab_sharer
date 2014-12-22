@@ -16,6 +16,23 @@ html, body {
 	height:100%;
 }
 
+#small-profile-pic {
+	position:absolute;
+	border-radius:100%;
+	height:100px;
+	width:100px;
+	border:2px solid white;
+}
+
+.map-info-window {
+	background-color:#F3F3D5;
+	color:#C81717;
+	-webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	-moz-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+
+}
+
 /*LAYOUT */
 
 .footer-container {
@@ -222,11 +239,6 @@ html, body {
 	#map-canvas div.gmnoprint[title="My location"] {
 		margin:-10px 0 0 -10px;
 	}
-}
-
-.map-info-window {
-	width: 300px;
-	height: 200px;
 }
 
 /*LOGIN AND REGISTER PAGE*/

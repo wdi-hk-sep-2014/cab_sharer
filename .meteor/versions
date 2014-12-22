@@ -45,6 +45,7 @@ linto:fontawesome@4.2.2
 livedata@1.0.12
 localstorage@1.0.2
 logging@1.0.6
+manuelschoebel:wait-on-lib@0.2.0
 material-design@0.0.1
 mdg:geolocation@1.0.2
 meteor@1.1.4

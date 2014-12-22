@@ -21,3 +21,5 @@ afruth:chapp
 accounts-facebook
 
 service-configuration
+manuelschoebel:wait-on-lib
+coffeescript

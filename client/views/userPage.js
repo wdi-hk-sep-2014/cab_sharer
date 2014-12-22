@@ -1,6 +1,6 @@
 Template.userPage.helpers({
     displayUser: function() {
-      return Meteor.user().profile.name;
+      return Meteor.user().services.facebook.first_name;
     },
     profilePicture: function() {
       return Meteor.user().profile.picture;
@@ -13,10 +13,11 @@ Template.userPage.events({
       Router.go('/');
     });
   },
-  'submit form': function(event, template){
-    event.preventDefault();
-    var formContents = template.find('#bio').value;
-    Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.about": formContents}});
+  'keyup #bio': function(event, template){
+    if (event.which === 13) {
+      var formContents = template.find('#bio').value;
+      Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.about": formContents}});
+    }
   }
 });
 

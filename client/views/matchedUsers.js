@@ -29,7 +29,7 @@ Template.matchingUser.helpers({
 
   name: function() {
     var user = {
-      name: this.profile.name, 
+      name: this.services.facebook.first_name, 
       _id: this._id
     };
     return user;

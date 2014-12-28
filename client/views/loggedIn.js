@@ -5,6 +5,15 @@ Template.loggedIn.rendered = function() {
 
     if (Meteor.userId()) {
 
+      var currentUserDistancePreferences = 0.50;
+      if (Meteor.user().profile.location.lat != undefined) {        
+        var currentUserPosition = 
+        {
+            lat: Meteor.user().profile.location.lat,
+            lng: Meteor.user().profile.location.lng
+        };
+      };
+
       
       // snazzymap style
       var styles = [{
@@ -184,21 +193,39 @@ Template.loggedIn.rendered = function() {
 
 
             var onlineUsers = Meteor.users.find({}).fetch();
+            getDistanceBetweenTwoPoints = function(lat1, lon1, lat2, lon2, unit) {
+              var radlat1 = Math.PI * lat1/180
+              var radlat2 = Math.PI * lat2/180
+              var radlon1 = Math.PI * lon1/180
+              var radlon2 = Math.PI * lon2/180
+              var theta = lon1-lon2
+              var radtheta = Math.PI * theta/180
+              var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+              dist = Math.acos(dist)
+              dist = dist * 180/Math.PI
+              dist = dist * 60 * 1.1515
+              if (unit=="K") { dist = dist * 1.609344 }
+              if (unit=="N") { dist = dist * 0.8684 }
+              return dist          
+            };
             //draw other users markers on the map
-            for ( index in onlineUsers ) {
-
-              if ( onlineUsers[index]._id === Meteor.userId() ){
+            for ( index in onlineUsers ) {     
+              if ( getDistanceBetweenTwoPoints(currentUserPosition.lat, currentUserPosition.lng, onlineUsers[index].profile.location.lat, onlineUsers[index].profile.location.lng, "K") <= currentUserDistancePreferences) {
+                dropSinglePin(onlineUsers[index]._id, onlineUsers[index]);
+                console.log("Marker dropped, position under " + currentUserDistancePreferences);
+              }
+              else {
+                console.log("No user within " + currentUserDistancePreferences);
+                console.log(getDistanceBetweenTwoPoints(currentUserPosition.lat, currentUserPosition.lng, onlineUsers[index].profile.location.lat, onlineUsers[index].profile.location.lng, "K"));
+              }
+              // if ( onlineUsers[index]._id === Meteor.userId() ){
                 //do some custom code for yourself
-              };
-              dropSinglePin(onlineUsers[index]._id, onlineUsers[index]);
-               
             };
 
             // checks for changes in count of users currently online
             Meteor.users.find().observeChanges({
               'added': function(userId, addedUser) {
-
-                dropSinglePin(userId, addedUser);
+                dropSinglePin(userId, addedUser);                  
               },
               // 'removed': function(userId){
               //   removeSinglePin(markers, userId);

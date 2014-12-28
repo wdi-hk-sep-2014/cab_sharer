@@ -46,4 +46,4 @@ function distance(lat1, lon1, lat2, lon2, unit) {
     return dist
 }
 
-console.log(distance(22.261724, 114.128610, 22.257186, 114.132892, "K"));
+console.log("the two points are: " + distance(22.261724, 114.128610, 22.257186, 114.132892, "K").toFixed(2) + "KM apart.");

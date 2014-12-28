@@ -146,38 +146,41 @@ Template.loggedIn.rendered = function() {
             //adds the userID to the pin itself
 
             var dropSinglePin = function(userId, user) {
-              var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(
-                  user.profile.location.lat, 
-                  user.profile.location.lng
-                ),
-                map: map,
-                animation: google.maps.Animation.DROP,
-                icon: gpsIcon,
-                visible: true,
-                title: user.services.facebook.first_name,
-                userId: userId
-              });
+              if (getDistanceBetweenTwoPoints(currentUserPosition.lat, currentUserPosition.lng, user.profile.location.lat, user.profile.location.lng, "K") <= currentUserDistancePreferences) {
 
-              //pushes the marker into the markers object
-              markers[userId] = marker;
+                var marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(
+                    user.profile.location.lat, 
+                    user.profile.location.lng
+                  ),
+                  map: map,
+                  animation: google.maps.Animation.DROP,
+                  icon: gpsIcon,
+                  visible: true,
+                  title: user.services.facebook.first_name,
+                  userId: userId
+                });
 
-              // populate other users markers with infowindows containing their names
-              // info window is generated on the fly on each click
-              google.maps.event.addListener(marker, 'click', function(){
-                var markerUser = Meteor.users.findOne({_id: this.userId});
-                var smallPictureUrl = markerUser.profile.picture.split('').slice(0,-5).join('');
-                // infowindow.setContent('\<img id="small-profile-pic" src=' + smallPictureUrl + 'small>\
-                //   ');
-                  infowindow.setContent('\
-                  <div class="map-info-window">\
-                  <h1>' + markerUser.services.facebook.first_name + '</h1>\
-                  <p>Destination: ' + markerUser.profile.destination + '</p>\
-                  <p>Last update: ' + markerUser.profile.about + '</p>\
-                  <img src=' + smallPictureUrl + 'small>\
-                  </div>');
-                infowindow.open(map,marker);
-              });
+                //pushes the marker into the markers object
+                markers[userId] = marker;
+
+                // populate other users markers with infowindows containing their names
+                // info window is generated on the fly on each click
+                google.maps.event.addListener(marker, 'click', function(){
+                  var markerUser = Meteor.users.findOne({_id: this.userId});
+                  var smallPictureUrl = markerUser.profile.picture.split('').slice(0,-5).join('');
+                  // infowindow.setContent('\<img id="small-profile-pic" src=' + smallPictureUrl + 'small>\
+                  //   ');
+                    infowindow.setContent('\
+                    <div class="map-info-window">\
+                    <h1>' + markerUser.services.facebook.first_name + '</h1>\
+                    <p>Destination: ' + markerUser.profile.destination + '</p>\
+                    <p>Last update: ' + markerUser.profile.about + '</p>\
+                    <img src=' + smallPictureUrl + 'small>\
+                    </div>');
+                  infowindow.open(map,marker);
+                });
+              }
 
             };
 
@@ -210,17 +213,11 @@ Template.loggedIn.rendered = function() {
             };
             //draw other users markers on the map
             for ( index in onlineUsers ) {     
-              if ( getDistanceBetweenTwoPoints(currentUserPosition.lat, currentUserPosition.lng, onlineUsers[index].profile.location.lat, onlineUsers[index].profile.location.lng, "K") <= currentUserDistancePreferences) {
                 dropSinglePin(onlineUsers[index]._id, onlineUsers[index]);
-                console.log("Marker dropped, position under " + currentUserDistancePreferences);
-              }
-              else {
-                console.log("No user within " + currentUserDistancePreferences);
-                console.log(getDistanceBetweenTwoPoints(currentUserPosition.lat, currentUserPosition.lng, onlineUsers[index].profile.location.lat, onlineUsers[index].profile.location.lng, "K"));
               }
               // if ( onlineUsers[index]._id === Meteor.userId() ){
-                //do some custom code for yourself
-            };
+                //do some custom code
+            // };
 
             // checks for changes in count of users currently online
             Meteor.users.find().observeChanges({
@@ -285,7 +282,7 @@ Template.loggedIn.rendered = function() {
           }
         });
         getPositionByBrowser();
-      } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 60 * 5) {
+      } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 20) {
         getPositionByBrowser();
       } else {
         mapWithExistingPosition();

@@ -10,6 +10,10 @@ html, body {
 	background-color:#F3F3D5;
 	font-family: 'Roboto', sans-serif;
 	font-weight:300;
+	overflow:hidden;
+	background-image: url("/images/background.jpg");
+	background-size: 100% 100%;
+
 }
 #map-canvas {
 	width:100%;
@@ -119,9 +123,7 @@ html, body {
 
 #user-wrapper {
 	height:100%;
-	/*top:83%;*/
 	width:100%;
-	/*display:none;*/
 	background-color:#F3F3D5;
 }
 
@@ -138,9 +140,7 @@ html, body {
 @media screen and (orientation:portrait) {
 	#user-wrapper {
 		height:100%;
-		/*top:83%;*/
 		width:100%;
-		/*display:none;*/
 		background-color:#F3F3D5;
 	}
 }
@@ -150,28 +150,31 @@ html, body {
 @media screen and (orientation:landscape) {
 	#destination-wrapper {
 		height:100%;
-		/*top:83%;*/
 		width:100%;
-		/*display:none;*/
 		background-color:#F3F3D5;
 	}
 }
 
 @media screen and (orientation:portrait) {
 	#destination-wrapper {
-		/*height:100%;*/
-		top:83%;
+		height:100%;
 		width:100%;
-		/*display:none;*/
 		background-color:#F3F3D5;
+
 	}
 }
 #destination-wrapper {
-	/*height:100%;*/
-	top:83%;
+	height:100%;
 	width:100%;
-	/*display:none;*/
 	background-color:#F3F3D5;
+
+}
+
+#destination-title {
+	font-weight:300;
+	font-size:30px;
+	margin-top:40%;
+
 }
 
 /*Spinner*/
@@ -242,6 +245,11 @@ html, body {
 }
 
 /*LOGIN AND REGISTER PAGE*/
+
+.btn:not(.btn-flat) {
+	background-color:#F3F3D5;
+	color:red;
+}
 @media screen and (orientation:portrait) {
 
 	input {
@@ -302,7 +310,7 @@ html, body {
 		margin-top:15%;
 	}
 	#destination-submit {
-		margin-top:30%;
+		margin-top:10%;
 	}
 
 	#destination-map {
@@ -386,6 +394,28 @@ html, body {
 
 /*USER PROFILE PAGE*/
 
+#settings {
+	position:absolute;
+	/*left:100%;*/
+	display:none;
+	top:15%;
+	height:75%;
+	width:100%;
+	background-color:#F3F3D5;
+	z-index:10000;
+
+
+}
+
+#settings-icon {
+	position:absolute;
+	left:90%;
+	top:15%;
+	font-size: 1.7em;
+	color: white;
+	line-height: 2.5;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
 
 #user-h1 {
 	color:white;

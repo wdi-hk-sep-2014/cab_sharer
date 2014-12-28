@@ -1,9 +1,13 @@
 <template name="userPage">
   <div class="header">
       <h1 id="user-h1">Hey {{displayUser}}!</h1>
+      <i id="settings-icon" class="fa fa-cog fa-fw pull-right"></i>
   </div>
   <div id="user-wrapper" class="container-fluid slide-up">
     <div class="row-fluid">
+      <div id="settings" class="col-xs-12">
+        <button class="btn btn-flat btn-primary" id="logout">Log Out</button>
+      </div>
 <!--       <div class="col-xs-0">
       </div>
       <div class="col-xs-8">
@@ -30,8 +34,7 @@
         <h1 id="user-h1">
           {{displayUser}}
         </h1>
-        <img id="profile-picture" src={{profilePicture}}>
-        <button class="btn btn-flat btn-primary" id="logout">Log Out</button>
+
       </div> -->
       <div class="col-xs-2">
       </div>

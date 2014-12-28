@@ -19,9 +19,19 @@ Template.userPage.events({
       if (formContents.length != 0) {
         console.log(formContents.length);
         Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.about": formContents}});
-
-      }
-    }
+        $('#bio').val('');
+        $('#status').addClass('animated flipOutY');
+        setTimeout(function(){
+          $('#status').text('Status is updated!');
+          $('#status').removeClass('animated flipOutY');
+          $('#status').addClass('animated flipInY');
+        }, 1000);
+      };
+    };
+  },
+  'click .header': function(event){
+    $('#settings').css("display", "inline");
+    $('#settings').addClass('animated fadeInRight');
   }
 });
 

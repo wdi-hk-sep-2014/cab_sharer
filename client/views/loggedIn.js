@@ -144,10 +144,24 @@ Template.loggedIn.rendered = function() {
 
             //drop a single pin and attach info window
             //adds the userID to the pin itself
-
+            var getDistanceBetweenTwoPoints = function(lat1, lon1, lat2, lon2, unit) {
+              var radlat1 = Math.PI * lat1/180
+              var radlat2 = Math.PI * lat2/180
+              var radlon1 = Math.PI * lon1/180
+              var radlon2 = Math.PI * lon2/180
+              var theta = lon1-lon2
+              var radtheta = Math.PI * theta/180
+              var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+              dist = Math.acos(dist)
+              dist = dist * 180/Math.PI
+              dist = dist * 60 * 1.1515
+              if (unit=="K") { dist = dist * 1.609344 }
+              if (unit=="N") { dist = dist * 0.8684 }
+              return dist          
+            };
             var dropSinglePin = function(userId, user) {
               if (getDistanceBetweenTwoPoints(currentUserPosition.lat, currentUserPosition.lng, user.profile.location.lat, user.profile.location.lng, "K") <= currentUserDistancePreferences) {
-
+                console.log(userId + "'s marker less than 0.5KM from " + Meteor.userId());
                 var marker = new google.maps.Marker({
                   position: new google.maps.LatLng(
                     user.profile.location.lat, 
@@ -169,8 +183,6 @@ Template.loggedIn.rendered = function() {
                 google.maps.event.addListener(marker, 'click', function(){
                   var markerUser = Meteor.users.findOne({_id: this.userId});
                   var smallPictureUrl = markerUser.profile.picture.split('').slice(0,-5).join('');
-                  // infowindow.setContent('\<img id="small-profile-pic" src=' + smallPictureUrl + 'small>\
-                  //   ');
                     infowindow.setContent('\
                     <div class="map-info-window">\
                     <h1>' + markerUser.services.facebook.first_name + '</h1>\
@@ -181,53 +193,60 @@ Template.loggedIn.rendered = function() {
                   infowindow.open(map,marker);
                 });
               }
-
             };
 
 
             // not working
-            // removeSinglePin = function(markers, markerId) {
-            //   marker = markers[markerId];
-            //   marker.setMap(null);
-            //   marker = null;
+            removeSinglePin = function(markers, markerId) {
+              if (markerId != Meteor.userId()) {
+                marker = markers[markerId];
+                marker.setMap(null);
+                marker = null;
 
-            //   delete markers[markerId];
-            // };
-
-
-            var onlineUsers = Meteor.users.find({}).fetch();
-            getDistanceBetweenTwoPoints = function(lat1, lon1, lat2, lon2, unit) {
-              var radlat1 = Math.PI * lat1/180
-              var radlat2 = Math.PI * lat2/180
-              var radlon1 = Math.PI * lon1/180
-              var radlon2 = Math.PI * lon2/180
-              var theta = lon1-lon2
-              var radtheta = Math.PI * theta/180
-              var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-              dist = Math.acos(dist)
-              dist = dist * 180/Math.PI
-              dist = dist * 60 * 1.1515
-              if (unit=="K") { dist = dist * 1.609344 }
-              if (unit=="N") { dist = dist * 0.8684 }
-              return dist          
-            };
-            //draw other users markers on the map
-            for ( index in onlineUsers ) {     
-                dropSinglePin(onlineUsers[index]._id, onlineUsers[index]);
+                delete markers[markerId]; 
               }
-              // if ( onlineUsers[index]._id === Meteor.userId() ){
-                //do some custom code
+            };
+
+
+            // var onlineUsers = Meteor.users.find({}).fetch();
+
+            // //draw other users markers on the map
+            // // for ( index in onlineUsers ) {
+            // //     debugger;     
+            // //     dropSinglePin(onlineUsers[index]._id, onlineUsers[index]);
+            // //   }
+            //   // if ( onlineUsers[index]._id === Meteor.userId() ){
+            //     //do some custom code
             // };
 
             // checks for changes in count of users currently online
-            Meteor.users.find().observeChanges({
-              'added': function(userId, addedUser) {
-                dropSinglePin(userId, addedUser);                  
-              },
-              // 'removed': function(userId){
-              //   removeSinglePin(markers, userId);
-              // }
-            });
+            if (Meteor.userId()) {
+              Meteor.users.find().observeChanges({
+                'added': function(userId, addedUser) {
+                  console.log("observeChanges ('added') fired");
+                  if (addedUser.services === undefined || addedUser.profile.location === undefined) {                  
+                    console.log ("services was not defined for" + addedUser + " of the id: " + userId)
+                  } else {
+                    dropSinglePin(userId, addedUser);                                   
+                  };
+                },
+                // 'changed': function(userId, changedFields) {
+                //   console.log("observeChanges ('changed') fired");
+                //   var user = Meteor.user.findOne(userId);
+                //   if (user.services === undefined || user.profile.location === undefined){
+                //     console.log("users changed, but no services or location");
+                //   } else {
+                //     dropSinglePin(userId, addedUser);
+                //   };
+                // },
+                'removed': function(userId){
+                  console.log("observeChanges ('removed') fired");
+                  if (userId in markers) {
+                    removeSinglePin(markers, userId);
+                  }
+                }
+              });              
+            }
 
           }
         );
@@ -282,7 +301,7 @@ Template.loggedIn.rendered = function() {
           }
         });
         getPositionByBrowser();
-      } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 20) {
+      } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 1) {
         getPositionByBrowser();
       } else {
         mapWithExistingPosition();

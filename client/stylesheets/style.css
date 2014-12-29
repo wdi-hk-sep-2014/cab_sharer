@@ -425,6 +425,11 @@ html, body {
 	padding-bottom:8px;
 }
 
+.settings-h2s {
+	font-weight:300;
+	margin-bottom:10%;
+}
+
 .form-control-wrapper .material-input:before {
 	background-color: #C81717;
 }

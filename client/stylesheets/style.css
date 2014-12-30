@@ -415,7 +415,7 @@ html, body {
 	top:13%;
 }
 
-#user-h1 {
+#user-h1, .header-text {
 	color:white;
 	font-weight:300;
 	padding-left:15px;

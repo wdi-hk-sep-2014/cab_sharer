@@ -125,6 +125,7 @@ html, body {
 	height:100%;
 	width:100%;
 	background-color:#F3F3D5;
+	padding-left:0px;
 }
 
 @media screen and (orientation:landscape) {
@@ -354,6 +355,7 @@ html, body {
 #content {
 	width:inherit;
 	height:inherit;
+
 }
 
 /*TRANSITIONS*/
@@ -407,14 +409,10 @@ html, body {
 
 }
 
-#settings-icon {
+#settings-button {
 	position:absolute;
-	left:90%;
-	top:15%;
-	font-size: 1.7em;
-	color: white;
-	line-height: 2.5;
-	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	left:80%;
+	top:13%;
 }
 
 #user-h1 {
@@ -427,7 +425,10 @@ html, body {
 
 .settings-h2s {
 	font-weight:300;
+	font-size:1em;
+	line-height:2;
 	margin-bottom:10%;
+	margin-top:0px;
 }
 
 .form-control-wrapper .material-input:before {

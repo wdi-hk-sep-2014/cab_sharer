@@ -3,51 +3,28 @@
     {{#if currentUser}}
       <h1 id="user-h1">Hey {{displayUser}}!</h1>
     {{/if}}
-      <i id="settings-icon" class="fa fa-cog fa-fw pull-right"></i>
-    }
-    }
+      <button id="settings-button" class="btn btn-fab pull-right"><i class="fa fa-cog"></i></button>
   </div>
   <div id="user-wrapper" class="container-fluid slide-up">
     <div class="row-fluid">
       <div id="settings" class="col-xs-12">
-        <button class="btn btn-flat btn-primary" id="logout">Log Out</button>
-        <h2 class="settings-h2s">Show me users from...</h2>
-        <select name="options-distance" id="options-distance" class="form-control">
-          <option value="500 Metres">500 Metres</option>
-          <option value="750 Metres">750 Metres</option>
-          <option value="1000 Metres">1000 Metres</option>
-          <option value="1250 Metres">1250 Metres</option>
-          <option value="1500 Metres">1500 Metres</option>
-        </select>
-      </div>
-<!--       <div class="col-xs-0">
-      </div>
-      <div class="col-xs-8">
-        <form class="form-horizontal">
-          <div class="form-group">
-            <div class="col-lg-10">
-              <form class="form-horizontal">
-                <div class="form-group">
-                  <label class="col-lg-2 control-label profile-form">About me</label>
-                  <div class="col-lg-10">
-                    <div class="form-control-wrapper">
-                      <textarea class="form-control empty"  id="bio" rows="3" placeholder="Your bio goes here!"></textarea>
-                      <span class="material-input"></span>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <button class="btn btn-flat btn-primary" id="submit">SUBMIT</button>
+        <div class="row fluid" style="margin-top:20px">
+          <div class="col-xs-6">
+            <h2 class="settings-h2s">Show me users within...</h2>
           </div>
-        </form>  
+          <div class="col-xs-6">
+            <select name="options-distance" id="options-distance" class="form-control">
+              <option value="0.5">500 Metres</option>
+              <option value="0.75">750 Metres</option>
+              <option value="1">1000 Metres</option>
+              <option value="1.25">1250 Metres</option>
+              <option value="1.5">1500 Metres</option>
+            </select>            
+          </div>
+        </div>
+        <button id="logout" type="submit" button class="btn btn-raised" value="Logout">LOGOUT</button>
+        
       </div>
-      <div class="col-xs-4">
-        <h1 id="user-h1">
-          {{displayUser}}
-        </h1>
-
-      </div> -->
       <div class="col-xs-2">
       </div>
       <div class="col-xs-8">

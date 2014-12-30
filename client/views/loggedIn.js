@@ -6,13 +6,13 @@ Template.loggedIn.rendered = function() {
     if (Meteor.userId()) {
 
       var currentUserDistancePreferences = 0.50;
-      if (Meteor.user().profile.location.lat != undefined) {        
-        var currentUserPosition = 
-        {
-            lat: Meteor.user().profile.location.lat,
-            lng: Meteor.user().profile.location.lng
-        };
-      };
+      // if (Meteor.user().profile.location.lat != undefined) {        
+      //   var currentUserPosition = 
+      //   {
+      //       lat: Meteor.user().profile.location.lat,
+      //       lng: Meteor.user().profile.location.lng
+      //   };
+      // };
 
       
       // snazzymap style
@@ -130,13 +130,13 @@ Template.loggedIn.rendered = function() {
             map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
             map.mapTypes.set('map_style', styledMap);
             map.setMapTypeId('map_style');
-            //centre map on latlng in current user profile
+            //centre map on the latlng in current user profile
             map.setCenter(new google.maps.LatLng(lat, lng));
 
 
 
             //initializes a variable to cache all visible markers on the page
-            //used for deleting markers (hopefully)
+            //used for deleting markers
             markers = {};
 
             //initialize an empty info window
@@ -160,7 +160,7 @@ Template.loggedIn.rendered = function() {
               return dist          
             };
             var dropSinglePin = function(userId, user) {
-              if (getDistanceBetweenTwoPoints(currentUserPosition.lat, currentUserPosition.lng, user.profile.location.lat, user.profile.location.lng, "K") <= currentUserDistancePreferences) {
+              if (getDistanceBetweenTwoPoints(Meteor.user().profile.location.lat, Meteor.user().profile.location.lng, user.profile.location.lat, user.profile.location.lng, "K") <= currentUserDistancePreferences) {
                 console.log(userId + "'s marker less than 0.5KM from " + Meteor.userId());
                 var marker = new google.maps.Marker({
                   position: new google.maps.LatLng(
@@ -195,8 +195,6 @@ Template.loggedIn.rendered = function() {
               }
             };
 
-
-            // not working
             removeSinglePin = function(markers, markerId) {
               if (markerId != Meteor.userId()) {
                 marker = markers[markerId];
@@ -221,11 +219,16 @@ Template.loggedIn.rendered = function() {
 
             // checks for changes in count of users currently online
             if (Meteor.userId()) {
+              // Meteor.users.find({ "status.online": true }).observe({ <---- why does 'added' not fire with this bit of code??
               Meteor.users.find().observeChanges({
                 'added': function(userId, addedUser) {
                   console.log("observeChanges ('added') fired");
-                  if (addedUser.services === undefined || addedUser.profile.location === undefined) {                  
-                    console.log ("services was not defined for" + addedUser + " of the id: " + userId)
+                  console.log("userId :" + userId);
+                  console.log("addedUser :" + addedUser);
+                  if (addedUser.services === undefined || addedUser.profile.location === undefined) {
+                    // debugger;
+                    // Meteor.users.upsert({_id: Meteor.userId()}, {$set: {"profile.location": {lat: "xx", lng: "xx", updatedAt: "xx"}} });
+                    console.log ("services or location was not defined for" + addedUser + " of the id: " + userId)
                   } else {
                     dropSinglePin(userId, addedUser);                                   
                   };
@@ -287,25 +290,25 @@ Template.loggedIn.rendered = function() {
 
       // check to see if location data is x minutes old, update if it is
       var time = Date.now();
-      if (Meteor.user().profile.location === undefined) {
-        console.log('un');
-        Meteor.users.update({
-          _id: Meteor.userId()
-        }, {
-          $set: {
-            "profile.location": {
-              lat: 22.284584,
-              lng: 114.158212,
-              updatedAt: time
-            }
-          }
-        });
+      // if (Meteor.user().profile.location === undefined) {
+      //   console.log('Meteor.user(),profile.location === undefined');
+      //   Meteor.users.update({
+      //     _id: Meteor.userId()
+      //   }, {
+      //     $set: {
+      //       "profile.location": {
+      //         lat: 22.284584,
+      //         lng: 114.158212,
+      //         updatedAt: time
+      //       }
+      //     }
+      //   });
+      //   getPositionByBrowser();
+      // } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 1 * 60 * 5) {
         getPositionByBrowser();
-      } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 1) {
-        getPositionByBrowser();
-      } else {
-        mapWithExistingPosition();
-      }
+      // } else {
+      //   mapWithExistingPosition();
+      // }
 
     };
 

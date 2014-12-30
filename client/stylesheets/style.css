@@ -412,7 +412,7 @@ html, body {
 #settings-button {
 	position:absolute;
 	left:80%;
-	top:13%;
+	top:9%;
 }
 
 #user-h1, .header-text {
@@ -449,7 +449,7 @@ html, body {
 }
 
 #profile-picture {
-	margin-top:52%;
+	margin-top:15%;
 	margin-left:auto;
 	margin-right:auto;
 	border:4px solid white;
@@ -461,7 +461,7 @@ html, body {
 
 #status {
 	font-weight:300;
-	margin-top:40%;
+	margin-top:55%;
 }
 
 

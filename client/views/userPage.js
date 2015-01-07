@@ -71,7 +71,6 @@ Template.userPage.events({
       }, 1000)
     }
     clicked = !clicked;
-    console.log(clicked);
   },
   'change': function(event, template){
     var userDistancePrefs = template.find('#options-distance').value;

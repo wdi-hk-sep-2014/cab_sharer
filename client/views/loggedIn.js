@@ -5,7 +5,7 @@ Template.loggedIn.rendered = function() {
 
     if (Meteor.userId()) {
 
-      var currentUserDistancePreferences = 0.50;
+      var currentUserDistancePreferences = Meteor.user().profile.distancePrefs;
       // if (Meteor.user().profile.location.lat != undefined) {        
       //   var currentUserPosition = 
       //   {
@@ -107,7 +107,7 @@ Template.loggedIn.rendered = function() {
           function() {
 
             var mapOptions = {
-              zoom: 16,
+              zoom: 14,
               streetViewControl: false,
               mapTypeControl: false,
               panControl: false,
@@ -161,7 +161,7 @@ Template.loggedIn.rendered = function() {
             };
             var dropSinglePin = function(userId, user) {
               if (getDistanceBetweenTwoPoints(Meteor.user().profile.location.lat, Meteor.user().profile.location.lng, user.profile.location.lat, user.profile.location.lng, "K") <= currentUserDistancePreferences) {
-                console.log(userId + "'s marker less than 0.5KM from " + Meteor.userId());
+                console.log(userId + "'s marker less than " + currentUserDistancePreferences + " from " + Meteor.userId());
                 var marker = new google.maps.Marker({
                   position: new google.maps.LatLng(
                     user.profile.location.lat, 

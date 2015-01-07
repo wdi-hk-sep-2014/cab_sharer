@@ -1,4 +1,13 @@
+setClicked = function(){
+  clicked = true;
+};
+
 var clicked = true;
+
+if (clicked) {
+  $('#user-h1').text('Your Panel');
+  $('#settings').css("display", "inline");
+}
 
 Template.userPage.helpers({
     displayUser: function() {
@@ -45,7 +54,7 @@ Template.userPage.events({
       setTimeout(function(){
         $('#settings').removeClass('animated fadeInRight');
         $('#settings-button').prop("disabled", false);
-      }, 1000)
+      }, 1000);
     } else {
       $('#user-h1').addClass('animated flipOutY');
       setTimeout(function(){
@@ -62,6 +71,7 @@ Template.userPage.events({
       }, 1000)
     }
     clicked = !clicked;
+    console.log(clicked);
   },
   'change': function(event, template){
     var userDistancePrefs = template.find('#options-distance').value;

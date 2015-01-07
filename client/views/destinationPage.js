@@ -113,6 +113,8 @@ Template.hkIslandDestinations.events({
             mapTypeControl: false,
             panControl: false,
             zoomControl: false,
+            draggable: false,
+            scaleControl: false,
             mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style'],
             center: new google.maps.LatLng(geocodedLocation.latitude, geocodedLocation.longitude)
           };
@@ -123,7 +125,6 @@ Template.hkIslandDestinations.events({
           destinationMap.mapTypes.set('map_style', styledMap);
           destinationMap.setMapTypeId('map_style');      
         };        
-            // console.log("this was the response", geocodedLocation);
         initialize();
       }
     })

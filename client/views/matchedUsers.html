@@ -15,14 +15,13 @@
       <div class="col-md-12">
         {{#if matchingUsers}}
           {{#each matchingUsers}}
-            <h1>{{> matchingUser}}</h1>            
+            <h1>{{> matchingUser.profile}}</h1>            
           {{/each}}
         {{/if}}
       </div>
     </div>
     <div class="col-md-8 col-md-offset-2">
     <h1>Group Chat</h1>
-      {{>chapp_form}}
     </div>
   </div>
 

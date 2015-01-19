@@ -1,3 +1,15 @@
+fetchUsers = function(){
+  var onlineUsersExceptMe = Meteor.users.find({_id: {$ne: Meteor.userId()}}).fetch();
+  var onlineUsers = Meteor.users.find().fetch();
+  usersWithSameDestination = [];
+  for (index in onlineUsersExceptMe) {
+    if (onlineUsersExceptMe[index].profile.destination === Meteor.user().profile.destination){
+      usersWithSameDestination.push(onlineUsersExceptMe[index]);
+    };
+  }
+  return usersWithSameDestination;
+};
+
 Template.matchedUsers.helpers({
 
   displayLocation: function() {
@@ -5,16 +17,7 @@ Template.matchedUsers.helpers({
   },
   
   matchingUsers: function() {
-    var onlineUsersExceptMe = Meteor.users.find({_id: {$ne: Meteor.userId()}}).fetch();
-    var usersWithSameDestination = [];
-    for (index in onlineUsersExceptMe) {
-      if (onlineUsersExceptMe[index].profile.destination === Meteor.user().profile.destination){
-        usersWithSameDestination.push(onlineUsersExceptMe[index]);
-      };
-    }
-    console.log(usersWithSameDestination);
     return usersWithSameDestination;
-    // return onlineUsersExceptMe.find({'profile.destination': Meteor.user().profile.destination }).fetch();
   },
 
   modalUser: function() {

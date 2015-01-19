@@ -32,10 +32,18 @@ Template.matchingUser.helpers({
 
   name: function() {
     var user = {
-      name: this.services.facebook.first_name, 
+      name: this.services.facebook.first_name,
       _id: this._id
     };
-    return user;
+    return user.name;
+  },
+  picture: function() {
+    var user = {
+      profilePicture: this.profile.picture,
+      _id: this._id
+    };
+    debugger;
+    return user.profilePicture;
   }
 
 });

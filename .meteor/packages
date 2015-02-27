@@ -4,7 +4,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-aldeed:geocoder
 mdg:geolocation
 accounts-password
 ian:accounts-ui-bootstrap-3
@@ -20,5 +19,5 @@ iron:layout
 accounts-facebook
 
 service-configuration
-manuelschoebel:wait-on-lib
 coffeescript
+aldeed:geocoder

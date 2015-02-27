@@ -5,3 +5,6 @@ Meteor.publish("Users", function(status) {
     return Meteor.users.find({});
   }
 });
+Meteor.publish("sentMessages", function(){
+  return Messages.find({sentUserId: this.userId});
+});

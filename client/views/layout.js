@@ -1,3 +1,8 @@
+if (Meteor.isClient) {
+  Meteor.subscribe('sentMessages');
+  Meteor.subscribe('recievedMessages');
+}
+
 Template.layout.events({
 
   'click #user-icon': function(event, template){

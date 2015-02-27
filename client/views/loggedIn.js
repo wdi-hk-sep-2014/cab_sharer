@@ -4,7 +4,6 @@ Template.loggedIn.rendered = function() {
   if (Meteor.isClient) {
 
     if (Meteor.userId()) {
-
       var currentUserDistancePreferences = Meteor.user().profile.distancePrefs;
       // if (Meteor.user().profile.location.lat != undefined) {        
       //   var currentUserPosition = 

@@ -35,8 +35,14 @@ Template.matchingUser.helpers({
       _id: this._id
     };
     return user.name;
+  },
+  profile: function() {
+    var user = {
+    picture: this.profile.picture,
+    _id: this._id
+    };
+    return user.picture;
   }
-
 });
 
 Template.matchingUser.events({

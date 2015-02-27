@@ -1,0 +1,15 @@
+<template name="messaging">
+  <div style="height:100%; width:100%; background-color:white">
+    <h1>Messaging Test Page</h1>
+    <h2>Current User:{{currentUser}}</h2>
+    <h1>Messages sent by {{currentUser}}:</h1>
+    {{#each sentMessages}}
+      <li>{{>message}}</li>
+    {{/each}}
+    <input id="message-contents" type="text">
+  </div>
+</template>
+
+<template name="message">
+  <p>{{messageContent}}</p>
+</template>

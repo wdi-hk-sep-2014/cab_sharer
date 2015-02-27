@@ -25,7 +25,6 @@ Template.matchedUsers.helpers({
     var user = Meteor.users.findOne({_id: userId});
     return user;
   }
-
 });
 
 Template.matchingUser.helpers({
@@ -36,14 +35,6 @@ Template.matchingUser.helpers({
       _id: this._id
     };
     return user.name;
-  },
-  picture: function() {
-    var user = {
-      profilePicture: this.profile.picture,
-      _id: this._id
-    };
-    debugger;
-    return user.profilePicture;
   }
 
 });

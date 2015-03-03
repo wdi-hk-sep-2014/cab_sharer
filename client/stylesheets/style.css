@@ -415,7 +415,7 @@ html, body {
 
 /*USER PROFILE PAGE*/
 
-#settings {
+#settings, #messaging {
 	position:absolute;
 	/*left:100%;*/
 	display:none;
@@ -478,7 +478,7 @@ html, body {
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
-#status {
+.sub-header, #status {
 	font-weight:300;
 	margin-top:55%;
 }
@@ -520,11 +520,33 @@ a.matched-user:visited {
 #matching-user-wrapper {
 	height:100%;
 	width:100%;
+	padding-left:0px;
 	background-color:#F3F3D5;
 
 }
 .matched-user-headers {
 	font-weight:300;
-	margin-top:21%;
+	margin-top:12%;
 	font-size:30px;
+}
+
+.no-left-padding {
+	padding-left:0;
+}
+.following-people {
+	font-weight:300;
+	margin-top:26%;
+	font-size:30px;
+}
+/*MESSAGING*/
+#messaging-wrapper {
+	height:100%;
+	width:100%;
+	background-color:#F3F3D5;
+	padding-left:0px;
+}
+
+#messaging {
+	top:13%;
+	height:76%;
 }

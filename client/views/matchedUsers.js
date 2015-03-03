@@ -1,3 +1,11 @@
+var matchedClicked = true;
+setMatchClicked = function(){
+  console.log(matchedClicked);
+  console.log("setClicked fired");
+  matchedClicked = true;
+};
+
+
 fetchUsers = function(){
   var onlineUsersExceptMe = Meteor.users.find({_id: {$ne: Meteor.userId()}}).fetch();
   var onlineUsers = Meteor.users.find().fetch();
@@ -18,12 +26,21 @@ Template.matchedUsers.helpers({
   
   matchingUsers: function() {
     return usersWithSameDestination;
-  },
+  }
+});
 
-  modalUser: function() {
-    var userId = Session.get('user-id-for-modal');
-    var user = Meteor.users.findOne({_id: userId});
-    return user;
+Template.matchedUsers.events({
+    'keyup #message-field': function(event, template){
+    if (event.which === 13){
+      event.preventDefault();
+      var currentMessage = template.find('#message-field').value;
+      if (currentMessage.length != 0) {
+        Meteor.call('createMessage', {sentUserId: Meteor.user()._id, messageContent: currentMessage, targetUserId: Session.get('userIdForMessage')});
+        $('#message-field').val('');
+      }
+      console.log(currentMessage);
+      console.log("submitted");
+    }
   }
 });
 
@@ -42,16 +59,55 @@ Template.matchingUser.helpers({
     _id: this._id
     };
     return user.picture;
+  },
+  targetId: function() {
+    var user = {
+      _id: this._id
+    };
+    return user._id
   }
 });
 
 Template.matchingUser.events({
 
-  'click .matched-user': function(){
-    console.log("clicked");
-    var userId = this._id;
-    Session.set('user-id-for-modal', userId);
-    $('#user-modal').modal();
-  },
+  'click #message-button': function(){
+    console.log(matchedClicked);
+    if (matchedClicked) {
+      $('#matched-users-header').addClass('animated flipOutY');
+      setTimeout(function(){
+        $('#matched-users-header').text('Send a Message');
+        $('#matched-users-header').removeClass('animated flipOutY');
+        $('#matched-users-header').addClass('animated flipInY');
+      }, 1000);
+      $('#messaging').css("display", "inline");
+      $('#options-distance').val(Meteor.user().profile.distancePrefs);
+      $('#messaging').addClass('animated fadeInRight');
+      $('#settings-button').prop("disabled", true);
+      setTimeout(function(){
+        $('#messaging').removeClass('animated fadeInRight');
+        $('#settings-button').prop("disabled", false);
+      }, 1000);
+    } else {
+      console.log("in else");
+      $('#matched-users-header').addClass('animated flipOutY');
+      setTimeout(function(){
+        $('#matched-users-header').text('Matching Users');
+        $('#matched-users-header').removeClass('animated flipOutY');
+        $('#matched-users-header').addClass('animated flipInY');
+      }, 1000);      
+      $('#messaging').addClass('animated fadeOutRight');
+      $('#settings-button').prop("disabled", true);
+      setTimeout(function(){
+        $('#messaging').removeClass('animated fadeOutRight');
+        $('#messaging').css("display", "none");
+        $('#settings-button').prop("disabled", false);
+      }, 1000)
+    }
+    matchedClicked = !matchedClicked;
+    Session.set('userIdForMessage', $('#message-button').first().val());
+  }
+
 
 });
+
+setMatchClicked();

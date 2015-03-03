@@ -1,13 +1,9 @@
+var clicked = true;
 setClicked = function(){
+  console.log("setclicked Fired");
   clicked = true;
 };
 
-var clicked = true;
-
-if (clicked) {
-  $('#user-h1').text('Your Panel');
-  $('#settings').css("display", "inline");
-}
 
 Template.userPage.helpers({
     displayUser: function() {
@@ -77,3 +73,5 @@ Template.userPage.events({
     Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.distancePrefs": userDistancePrefs}});
   }
 });
+
+setClicked();

@@ -1,15 +1,32 @@
 <template name="messaging">
-  <div style="height:100%; width:100%; background-color:white">
-    <h1>Messaging Test Page</h1>
-    <h2>Current User:{{currentUser}}</h2>
-    <h1>Messages sent by {{currentUser}}:</h1>
-    {{#each sentMessages}}
-      <li>{{>message}}</li>
-    {{/each}}
+
+  <div class="header">
+    <h1 class="header-text">Messages</h1>
+    <button id="settings-button" class="btn btn-fab pull-right"><i class="fa fa-envelope"></i></button>
+  </div>
+  <div id="messaging-wrapper" class="container-fluid slide-up">
+    <div class="row-fluid">
+      <div class="col-xs-6">
+        <h2 class="sub-header">Sent:</h2>
+        {{#each sentMessages}}
+          <li>{{>sentMessage}}</li>
+        {{/each}}
+      </div>
+      <div class="col-xs-6">
+        <h2 class="sub-header">Received:</h2>
+        {{#each receivedMessages}}
+          <li>{{>receivedMessage}}</li>
+        {{/each}}
+      </div>
+    </div>
     <input id="message-contents" type="text">
   </div>
 </template>
 
-<template name="message">
+<template name="sentMessage">
+  <p>{{messageContent}}</p>
+</template>
+
+<template name="receivedMessage">
   <p>{{messageContent}}</p>
 </template>

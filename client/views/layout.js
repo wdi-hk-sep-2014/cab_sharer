@@ -17,5 +17,9 @@ Template.layout.events({
   'click #map-icon': function(){
     event.preventDefault();
     Router.go('/');
+  },
+  'click #messaging-icon': function(){
+    event.preventDefault();
+    Router.go('messaging');
   }
 });

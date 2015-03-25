@@ -106,12 +106,12 @@ Template.loggedIn.rendered = function() {
           function() {
 
             var mapOptions = {
+              mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style'],
               zoom: 14,
               streetViewControl: false,
               mapTypeControl: false,
               panControl: false,
-              zoomControl: false,
-              mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+              zoomControl: false
             };
 
             var styledMap = new google.maps.StyledMapType(styles, {

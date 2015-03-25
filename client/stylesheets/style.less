@@ -1,0 +1,23 @@
+// Import Vendors
+@import "vendor/custom.bootstrap.mixins.import.less";
+@import "vendor/custom.bootstrap.import.less";
+
+// Components
+@import "components/a_component.import.less";
+
+// Globals
+@import "typo.import.less";
+
+// Sites
+@import "sites/home.import.less";
+
+@main-background-colour: #F3F3D5; /*cream*/
+@header-footer-colours: #C81717; /*red*/
+
+.header, .footer-container {
+  background-color:@header-footer-colours;
+}
+
+html,body,.map-info-window,#user-wrapper,#destination-wrapper,.btn:not(.btn-flat),#settings,#messaging,.standard-button,#matching-user-wrapper,#messaging-wrapper {
+  background-color:@main-background-colour;
+}

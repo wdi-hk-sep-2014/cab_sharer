@@ -22,5 +22,5 @@ service-configuration
 coffeescript
 aldeed:geocoder
 meteorhacks:kadira
-less
 nemo64:bootstrap
+less

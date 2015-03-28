@@ -19,5 +19,6 @@ Meteor.methods({
 
   createMessage: function(message){
     Messages.insert(message);
+    console.log(message);
   }
 });

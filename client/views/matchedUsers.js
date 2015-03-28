@@ -35,7 +35,9 @@ Template.matchedUsers.events({
       event.preventDefault();
       var currentMessage = template.find('#message-field').value;
       if (currentMessage.length != 0) {
-        Meteor.call('createMessage', {sentUserId: Meteor.user()._id, messageContent: currentMessage, targetUserId: Session.get('userIdForMessage')});
+        var targetUserName = Meteor.users.findOne({_id:Session.get('userIdForMessage')}).services.facebook.first_name
+        console.log(targetUserName);
+        Meteor.call('createMessage', {sentUserId: Meteor.user()._id, messageContent: currentMessage, targetUserId: Session.get('userIdForMessage'), sentTo:targetUserName})
         $('#message-field').val('');
       }
       console.log(currentMessage);

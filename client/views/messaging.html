@@ -6,18 +6,18 @@
   </div>
   <div id="messaging-wrapper" class="container-fluid slide-up">
     <div class="row-fluid">
-      <div class="col-xs-6">
-        <h2 class="sub-header">Sent:</h2>
+      <div class="col-xs-12">
+        <h2 class="sub-header pull-left">Conversations</h2>
         {{#each sentMessages}}
           <li>{{>sentMessage}}</li>
         {{/each}}
       </div>
-      <div class="col-xs-6">
+<!--       <div class="col-xs-6">
         <h2 class="sub-header">Received:</h2>
         {{#each receivedMessages}}
           <li>{{>receivedMessage}}</li>
         {{/each}}
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

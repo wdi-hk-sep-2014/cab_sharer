@@ -6,10 +6,11 @@ Meteor.publish("Users", function(status) {
   }
 });
 
+
 Meteor.publish("sentMessages", function(){
-  return Messages.find({sentUserId: this.userId});
+  return Conversations.find({sentUserId: this.userId});
 });
 
 Meteor.publish("receivedMessages", function(){
-  return Messages.find({targetUserId: this.userId});
+  return Conversations.find({targetUserId: this.userId});
 })

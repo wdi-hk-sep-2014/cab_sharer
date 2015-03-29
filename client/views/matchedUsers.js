@@ -37,7 +37,10 @@ Template.matchedUsers.events({
       if (currentMessage.length != 0) {
         var targetUserName = Meteor.users.findOne({_id:Session.get('userIdForMessage')}).services.facebook.first_name
         console.log(targetUserName);
-        Meteor.call('createMessage', {sentUserId: Meteor.user()._id, messageContent: currentMessage, targetUserId: Session.get('userIdForMessage'), sentTo:targetUserName})
+        var concatIds = Session.get('userIdForMessage').toString() + Meteor.userId();
+        console.log(concatIds);
+        Meteor.call('createMessage', concatIds, {conversationId: concatIds, sentUserId: Meteor.user()._id, targetUserId: Session.get('userIdForMessage'), activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: targetUserName}}, {messageContent: currentMessage});
+        // Meteor.call('createMessage', concatIds, {conversationId: concatIds, sentUserId: Meteor.user()._id, messageContent: [currentMessage], targetUserId: Session.get('userIdForMessage'), activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: targetUserName}});
         $('#message-field').val('');
       }
       console.log(currentMessage);

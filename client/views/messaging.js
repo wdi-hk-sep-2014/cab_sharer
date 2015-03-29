@@ -12,25 +12,39 @@ Template.messaging.helpers({
   receivedMessages: function(){
     return Conversations.find({targetUserId: Meteor.user()._id}, {sentUserId: Meteor.userId()}).fetch(); 
   },
-  activeConversations: function(){
-    var conversationUsers = Conversations.find({$or: [{targetUserId: Meteor.user()._id},{sentUserId: Meteor.userId()}]}).fetch();
-    var userResults = [];
-    for (i = 0; i < conversationUsers.length; i++){
-      if (conversationUsers[i].activeUsers.sender != Meteor.user().services.facebook.first_name) {
-        userResults.push(conversationUsers[i].activeUsers.sender);
-      } else { 
-        userResults.push(conversationUsers[i].activeUsers.receiver);
+  activeConversations: function() {
+    var currentConversations = Conversations.find({conversationId: new RegExp(Meteor.userId())}).fetch();
+    var conversationArray = [];
+    for (i = 0; i < currentConversations.length; i++){
+      if (currentConversations[i].sentUserId != Meteor.userId()) {
+        conversationArray.push(currentConversations[i].activeUsers.sender);
+      } else {
+        conversationArray.push(currentConversations[i].activeUsers.receiver);
       };
-      console.log(userResults);
-    return userResults;
     };
+    console.log(conversationArray)
+    return conversationArray;
   }
+  // }
+  // activeConversations: function() {
+  //   var currentConversations = Conversations.find({conversationId: new RegExp(Meteor.userId())}).fetch();
+  //   var conversationArray = [];
+  //   for (i = 0; i < currentConversations.length; i++){
+  //     conversationArray.push(currentConversations[i]);
+  //   };
+  //   console.log(conversationArray);
+  //   return conversationArray;
+  // }
 });
- 
-// Template.messaging.events({
-//   'change': function(event, template){
-//     var messageContent = template.find('#message-contents').value;
-//     console.log(messageContent);
-//     Meteor.call('createMessage', {sentUserId: Meteor.user()._id, messageContent: messageContent, targetUserId: Session.get('userIdForMessage')});
-//   }
-// })
+
+Template.conversations.helpers({
+  conversationContent: function(){
+    var currentConversations = Conversations.find({conversationId: new RegExp(Meteor.userId())}).fetch();
+    var lastActiveMessages = [];
+    for (i = 0; i < currentConversations.length; i++){
+      lastActiveMessages.push(currentConversations[i].messageContent.slice(-1)[0]);
+    };
+    console.log(lastActiveMessages);
+    return lastActiveMessages;    
+  }
+})

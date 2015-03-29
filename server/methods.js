@@ -18,9 +18,6 @@ Meteor.methods({
   },
 
   createMessage: function(conversationId, message, messageText){
-  // createMessage: function(conversationId, message, messageText){
-    Conversations.upsert(conversationId, {$set:message, $push: messageText});
-    // Conversations.upsert(conversationId, {$set:message, $push: messageText});
-    console.log(message);
+    Conversations.upsert(new RegExp(conversationId), {$set:message, $push: messageText});
   }
 });

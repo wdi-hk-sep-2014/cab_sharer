@@ -1,4 +1,29 @@
 <template name="showConversation">
-<h1>{{activeUsers.sender}} says...</h1>
-<h1>{{messageContent}}</h1>
+
+  <div class="header">
+    <h1 class="header-text pull-left flipInY animated" id="messaging-h1">Messaging {{otherParty}}</h1>
+    <button id="messaging-button" class="top-right-button btn btn-fab pull-right"><i class="fa fa-envelope"></i></button>
+  </div>
+  <div id="messaging-wrapper" class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 conversation-area">
+        <h2 class="sub-header pull-left"></h2>
+      </div>
+    </div>
+    <div class="row">
+          {{#each messageContent}}
+            <li class="conversation-list {{this.writtenBy}}">{{this.text}}</li>
+          {{/each}}   
+    </div>
+  </div>
+  <div class="container">
+    <div class="row keyboard-hack">
+          <div class="col-xs-12">
+              <div class="form-control-wrapper message-area">
+                  <input name="a-normal-input" id="messaging-form" class="form-control empty message-content" placeholder="Send message to {{otherParty}}">
+                  <span class="material-input"></span>
+              </div>
+          </div>
+      </div>
+  </div>
 </template>

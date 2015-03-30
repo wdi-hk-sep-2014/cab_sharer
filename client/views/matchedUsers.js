@@ -1,7 +1,5 @@
 var matchedClicked = true;
 setMatchClicked = function(){
-  console.log(matchedClicked);
-  console.log("setClicked fired");
   matchedClicked = true;
 };
 
@@ -36,15 +34,11 @@ Template.matchedUsers.events({
       var currentMessage = template.find('#message-field').value;
       if (currentMessage.length != 0) {
         var targetUserName = Meteor.users.findOne({_id:Session.get('userIdForMessage')}).services.facebook.first_name
-        console.log(targetUserName);
         var concatIds = Session.get('userIdForMessage').toString() + Meteor.userId();
-        console.log(concatIds);
-        Meteor.call('createMessage', concatIds, {conversationId: concatIds, sentUserId: Meteor.user()._id, targetUserId: Session.get('userIdForMessage'), activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: targetUserName}}, {messageContent: currentMessage});
-        // Meteor.call('createMessage', concatIds, {conversationId: concatIds, sentUserId: Meteor.user()._id, messageContent: [currentMessage], targetUserId: Session.get('userIdForMessage'), activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: targetUserName}});
+        // Meteor.call('createMessage', concatIds, {conversationId: concatIds, sentUserId: Meteor.user()._id, targetUserId: Session.get('userIdForMessage'), activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: targetUserName}}, {messageContent: currentMessage});
+        Meteor.call('createMessage', concatIds, {conversationId: concatIds, sentUserId: Meteor.user()._id, targetUserId: Session.get('userIdForMessage'), activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: targetUserName}}, {messageContent: {text:currentMessage, writtenBy:Meteor.userId()}});
         $('#message-field').val('');
       }
-      console.log(currentMessage);
-      console.log("submitted");
     }
   }
 });
@@ -76,7 +70,6 @@ Template.matchingUser.helpers({
 Template.matchingUser.events({
 
   'click #message-button': function(){
-    console.log(matchedClicked);
     if (matchedClicked) {
       $('#matched-users-header').addClass('animated flipOutY');
       setTimeout(function(){
@@ -93,7 +86,6 @@ Template.matchingUser.events({
         $('#settings-button').prop("disabled", false);
       }, 1000);
     } else {
-      console.log("in else");
       $('#matched-users-header').addClass('animated flipOutY');
       setTimeout(function(){
         $('#matched-users-header').text('Matching Users');

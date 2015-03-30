@@ -17,7 +17,12 @@ Meteor.methods({
     return geocodeResult;
   },
 
-  createMessage: function(conversationId, message, messageText){
-    Conversations.upsert(new RegExp(conversationId), {$set:message, $push: messageText});
+  createMessage: function(query, message, messageText){
+    var id = new RegExp(query);
+    if (Conversations.findOne(id)){
+      Conversations.update(id, {$push: messageText}, {upsert: true});
+    } else {
+      Conversations.upsert(id, {$set:message, $push: messageText});
+    }
   }
 });

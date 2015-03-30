@@ -5,6 +5,7 @@
 
 
 html, body {
+	position:static;
 	width:100%;
 	height:100%;
 	font-family: 'Roboto', sans-serif;
@@ -18,17 +19,16 @@ html, body {
 	width:100%;
 	height:100%;
 }
-
+/*
 #small-profile-pic {
 	position:absolute;
 	border-radius:100%;
 	height:100px;
 	width:100px;
 	border:2px solid white;
-}
+}*/
 
 .small-profile-pic {
-	margin-top:-27%;
 	margin-left:auto;
 	margin-right:auto;
 	border:4px solid white;
@@ -51,6 +51,12 @@ html, body {
 	position:fixed;
 	z-index: 110;
 }
+.footer-container-messaging {
+
+	position:static;
+	z-index: 110;
+}
+
 
 @media screen (min-width:1281px) {
 	.footer-container {
@@ -166,7 +172,6 @@ html, body {
 #destination-title {
 	font-weight:300;
 	font-size:30px;
-	margin-top:79px;
 
 }
 
@@ -295,9 +300,6 @@ html, body {
 	#hki-destinations {
 		height:40px;
 	}
-/*	.form-control{
-		font-size:2em;
-	}*/
 	#hk-island-destinations {
 		margin-top:15%;
 	}
@@ -318,9 +320,6 @@ html, body {
 }
 
 @media screen and (orientation:landscape) {
-/*	.form-control{
-		font-size:2em;
-	}*/
 	#hki-destinations {
 		height:40px;
 	}
@@ -397,7 +396,7 @@ html, body {
 	height:100%;
 	width:100%;
 	z-index:100;
-
+	-webkit-transform: translate3d(0px,0px,0px);
 
 }
 
@@ -447,6 +446,7 @@ html, body {
 
 .sub-header, #status {
 	font-weight:300;
+	text-align:center;
 }
 
 
@@ -479,7 +479,8 @@ a.matched-user:visited {
 /*MATCHING USER WRAPPER*/
 
 .standard-button {
-	color:red;	
+	color:red;
+	border:1px solid rgb(195, 195, 102);
 }
 
 #matching-user-wrapper {
@@ -490,7 +491,6 @@ a.matched-user:visited {
 }
 .matched-user-headers {
 	font-weight:300;
-	margin-top:25%;
 	font-size:30px;
 }
 
@@ -499,9 +499,13 @@ a.matched-user:visited {
 }
 .following-people {
 	font-weight:300;
-	margin-top:26%;
 	font-size:30px;
 }
+
+.user-name {
+	font-weight:200;
+}
+
 /*MESSAGING*/
 #messaging-wrapper {
 	height:100%;
@@ -523,8 +527,8 @@ a.matched-user:visited {
 	background:#C81717;
 	color:white;
 	list-style-type: none;
-	margin:2% 2% 2% 4%;
-	font-size:2em;
+	margin:0% 2% 2% 6%;
+	font-size:1.2em;
 	border-radius: 1%;
 	box-shadow: 
 	  0 1px 2px #fff, /*bottom external highlight*/
@@ -544,4 +548,34 @@ a.matched-user:visited {
 	right:4px;
 	font-size:0.5em;
 	vertical-align: bottom;
+}
+
+a, a:visited, a:hover {
+	color:white;
+	text-decoration: none;
+}
+
+/*conversations*/
+
+.message-area {
+	background-color: rgb(243, 243, 213);
+	margin-top: 2%;
+}
+
+.message-content {
+	padding-top: 5px;
+	padding-left: 5px;
+
+}
+
+.keyboard-hack {
+	margin-top:-35%;
+}
+
+.sent {
+	background-color:rgb(176, 47, 130);
+}
+
+.received {
+	background-color:rgb(242, 47, 77);
 }

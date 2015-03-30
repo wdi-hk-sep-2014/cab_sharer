@@ -42,9 +42,18 @@ Template.conversations.helpers({
     var currentConversations = Conversations.find({conversationId: new RegExp(Meteor.userId())}).fetch();
     var lastActiveMessages = [];
     for (i = 0; i < currentConversations.length; i++){
-      lastActiveMessages.push(currentConversations[i].messageContent.slice(-1)[0]);
+      lastActiveMessages.push(currentConversations[i].messageContent.slice(-1)[0].text);
     };
     console.log(lastActiveMessages);
     return lastActiveMessages;    
+  },
+  linkById: function(){
+    var currentConversations = Conversations.find({conversationId: new RegExp(Meteor.userId())}).fetch();
+    var messageLinks = [];
+    for (i = 0; i < currentConversations.length; i++){
+      messageLinks.push(currentConversations[i].conversationId)
+    };
+    console.log(messageLinks);
+    return messageLinks;
   }
 })

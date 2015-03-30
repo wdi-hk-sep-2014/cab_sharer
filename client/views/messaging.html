@@ -7,33 +7,29 @@
   <div id="messaging-wrapper" class="container-fluid">
     <div class="row">
       <div class="col-xs-12 conversation-area">
-        <h2 class="sub-header pull-left">Conversations</h2>
+        <h2 class="sub-header">Conversations</h2>
       </div>
-<!--       <div class="col-xs-6">
-        <h2 class="sub-header">Received:</h2>
-        {{#each receivedMessages}}
-          <li>{{>receivedMessage}}</li>
-        {{/each}}
-      </div> -->
     </div>
     <div class="row">
-        {{#each activeConversations}}
-          <li class="conversation-list">{{>conversations}}</li>
-        {{/each}}     
+      {{#each activeConversations}}
+        <li class="conversation-list">{{>conversations}}</li>
+      {{else}}
+        <li class="conversation-list">You haven't had any messages yet!</li>
+      {{/each}}
     </div>
   </div>
 </template>
 
 <template name="conversations">
-  <p class="user-name">{{this}}
+  <a href="messaging/{{linkById}}"><p class="user-name">{{this}}
 
-  <span class="last-message pull-right">{{conversationContent}}</span></p>
+  <span class="last-message pull-right">{{conversationContent}}</span></p></a>
 </template>
 
-<template name="sentMessage">
+<!-- <template name="sentMessage">
   <p>{{messageContent}}</p>
 </template>
 
 <template name="receivedMessage">
   <p>{{messageContent}}</p>
-</template>
+</template> -->

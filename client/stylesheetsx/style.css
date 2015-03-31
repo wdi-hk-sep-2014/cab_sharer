@@ -10,14 +10,15 @@ html, body {
 	height:100%;
 	font-family: 'Roboto', sans-serif;
 	font-weight:300;
-	overflow:hidden;
+	overflow-x:hidden;
+	overflow-y:auto;
 	background-image: url("/images/background.jpg");
 	background-size: 100% 100%;
 
 }
 #map-canvas {
 	width:100%;
-	height:100%;
+	height:80%;
 }
 /*
 #small-profile-pic {
@@ -43,11 +44,11 @@ html, body {
 /*LAYOUT */
 
 .footer {
-	min-height:70px;
+	min-height:10%;
 }
 
 .footer-container {
-
+	cursor:pointer;
 	position:fixed;
 	z-index: 110;
 }
@@ -122,14 +123,14 @@ html, body {
 /*USER TEMPLATE*/
 
 #user-wrapper {
-	height:100%;
+	height:80%;
 	width:100%;
 	padding-left:0px;
 }
 
 @media screen and (orientation:landscape) {
 	#user-wrapper {
-		height:100%;
+		height:80%;
 		/*top:83%;*/
 		width:100%;
 		/*display:none;*/
@@ -139,7 +140,7 @@ html, body {
 
 @media screen and (orientation:portrait) {
 	#user-wrapper {
-		height:100%;
+		height:80%;
 		width:100%;
 
 	}
@@ -149,7 +150,7 @@ html, body {
 
 @media screen and (orientation:landscape) {
 	#destination-wrapper {
-		height:100%;
+		height:80%;
 		width:100%;
 
 	}
@@ -157,14 +158,14 @@ html, body {
 
 @media screen and (orientation:portrait) {
 	#destination-wrapper {
-		height:100%;
+		height:80%;
 		width:100%;
 
 
 	}
 }
 #destination-wrapper {
-	height:100%;
+	height:80%;
 	width:100%;
 
 }
@@ -255,7 +256,6 @@ html, body {
 
 	#login-section, #register-section {
 		
-		margin-top:50%;
 	}
 }
 @media screen and (orientation:landscape) {
@@ -308,14 +308,11 @@ html, body {
 	}
 
 	#destination-map {
-		width: 250px;
+		width: 100%;
 		height: 150px;
 		position: relative;
 		margin-right: auto;
 		margin-left: auto;
-		margin-top: 60px;
-		background-color:white;
-		border: 4px solid white;
 	}
 }
 
@@ -429,11 +426,21 @@ html, body {
 	color:#000;
 }
 
+
+@media screen and (orientation:portrait) and (min-height:410px) {
+	.header {
+		min-height:10%;
+	}
+}
+
 .header {
 	position:relative;
-	min-height:70px;
-	height: 8%;
 	width: 100%;
+}
+@media screen and (orientation:portrait) and (max-height: 409px) {
+	.header {
+		min-height:16%;
+	}
 }
 
 #profile-picture {
@@ -484,7 +491,7 @@ a.matched-user:visited {
 }
 
 #matching-user-wrapper {
-	height:100%;
+	height:80%;
 	width:100%;
 	padding-left:0px;
 
@@ -508,7 +515,7 @@ a.matched-user:visited {
 
 /*MESSAGING*/
 #messaging-wrapper {
-	height:100%;
+	height:90%;
 	width:100%;
 	padding-left:0px;
 }
@@ -523,18 +530,26 @@ a.matched-user:visited {
 }
 
 .conversation-list {
-	position:relative;
-	background:#C81717;
-	color:white;
+	position: relative;
+	color: white;
 	list-style-type: none;
-	margin:0% 2% 2% 6%;
-	font-size:1.2em;
-	border-radius: 1%;
+	margin: 0% 2% 2% 6%;
+	padding: 1% 1% 1% 1%;
+	font-size: 1.7em;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
 	box-shadow: 
 	  0 1px 2px #fff, /*bottom external highlight*/
 	  0 -1px 1px #666, /*top external shadow*/ 
 	  inset 0 -1px 1px rgba(0,0,0,0.5), /*bottom internal shadow*/ 
 	  inset 0 1px 1px rgba(255,255,255,0.8); /*top internal highlight*/
+}
+
+.conversation-list > p {
+	font-size:0.7em;
+	padding: 3% 1% 1% 1%;
+	overflow-wrap: break-word;
 }
 
 .user-name {
@@ -569,13 +584,14 @@ a, a:visited, a:hover {
 }
 
 .keyboard-hack {
-	margin-top:-35%;
+	margin-top:-12%;
 }
 
-.sent {
-	background-color:rgb(176, 47, 130);
+.scrollable {
+	overflow: auto;
+	max-height: 83%;
 }
 
-.received {
-	background-color:rgb(242, 47, 77);
+::-webkit-scrollbar { 
+    display: none; 
 }

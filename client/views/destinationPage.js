@@ -11,6 +11,9 @@ Template.destinationPage.helpers({
   }
 });
 
+Template.hkIslandDestinations.rendered({
+})
+
 Template.hkIslandDestinations.events({
   'change': function(event, template){
     var geocodedLocation;

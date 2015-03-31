@@ -43,6 +43,7 @@ Template.userPage.events({
         $('#user-h1').removeClass('animated flipOutY');
         $('#user-h1').addClass('animated flipInY');
       }, 1000);
+      $('#user-page-toggle-div').css("display", "none");
       $('#settings').css("display", "inline");
       $('#options-distance').val(Meteor.user().profile.distancePrefs);
       $('#settings').addClass('animated fadeInRight');
@@ -62,6 +63,7 @@ Template.userPage.events({
       $('#settings-button').prop("disabled", true);
       setTimeout(function(){
         $('#settings').removeClass('animated fadeOutRight');
+        $('#user-page-toggle-div').css("display", "block");
         $('#settings').css("display", "none");
         $('#settings-button').prop("disabled", false);
       }, 1000)

@@ -21,16 +21,36 @@ Template.showConversation.events({
   }
 });
 
-
-
-Template.showConversation.rendered = function(){
-    var myMessageClass = "." + Meteor.userId()
-    var otherPersonsMessageClass = "." + Session.get('conversationId').sentUserId;
-    Session.set('amountOfSentMessages', $(myMessageClass).size());
-    Session.set('amountOfReceivedMessages', $(otherPersonsMessageClass).size());
-    Session.set('totalMessages', Session.get('amountOfReceivedMessages') + Session.get('amountOfSentMessages'));
-    console.log(Session.get('totalMessages'));
+Template.showConversation.rendered = function() {
+  var myMessageClass = "." + Meteor.userId();
+  var setCss = function(){
     $(myMessageClass).addClass('sent');
-    $(otherPersonsMessageClass).addClass('received');
-
-};
+  }();
+  // Conversations.find().observe({
+    // 'changed': function(){
+    //   var lastMessageClass = "." + Session.get('conversationId').messageContent.slice(-1)[0].writtenBy
+    //   console.log(lastMessageClass);
+    //   if (lastMessageClass == Meteor.userId()){
+    //     $(lastMessageClass).last().addClass('received')
+    //     } else { $(lastMessageClass).last().addClass('sent')
+    //   }
+    // }
+  // });
+  Conversations.find().observe({
+    'changed': function(){
+    var convoList    = $('.scrollable');
+    var height = convoList[0].scrollHeight;
+    setTimeout(function(){
+      convoList.scrollTop(height);
+    }, 50);
+    var lastMessageClass = "." + Session.get('conversationId').messageContent.slice(-1)[0].writtenBy
+    console.log(lastMessageClass);
+    setTimeout(function(){
+      if (lastMessageClass == Meteor.userId()){
+        $(lastMessageClass).last().addClass('received')
+        } else { $(lastMessageClass).last().addClass('sent')
+      }
+    }, 50);
+    }
+  })
+}

@@ -11,8 +11,12 @@
 // Sites
 @import "sites/home.import.less";
 
-@main-background-colour: #F3F3D5; /*cream*/
-@header-footer-colours: #C81717; /*red*/
+/*COLOUR SCHEME: CAPTAIN AMERICA*/
+@main-background-colour: #ECF0F1; /*off-white*/
+@header-footer-colours: #2C3E50; /*dark blue*/
+@header-icon-colours: #E74C3C; /*orangey*/
+@sent-message-colour: #275F84; /*pastel blue*/
+@received-message-colour: #3498DB; /*light pastel blue*/
 
 .material-shadow {
     -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -31,4 +35,16 @@ html,body,.map-info-window,#user-wrapper,#destination-wrapper,.btn:not(.btn-flat
 
 .small-profile-pic, .map-info-window, #destination-map, .header {
   .material-shadow
+}
+
+.fa {
+  color:@header-icon-colours;
+}
+
+.sent {
+  background:@sent-message-colour !important;
+}
+
+.conversation-list {
+  background:@received-message-colour;
 }

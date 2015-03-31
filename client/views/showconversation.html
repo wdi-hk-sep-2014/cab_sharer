@@ -10,9 +10,9 @@
         <h2 class="sub-header pull-left"></h2>
       </div>
     </div>
-    <div class="row">
+    <div class="row scrollable">
           {{#each messageContent}}
-            <li class="conversation-list {{this.writtenBy}}">{{this.text}}</li>
+            <li class="conversation-list {{this.writtenBy}}"><p>{{this.text}}</p></li>
           {{/each}}   
     </div>
   </div>

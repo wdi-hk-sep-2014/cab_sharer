@@ -1,4 +1,4 @@
-Template.loggedIn.rendered = function() {
+Template.loggedIn.created = function() {
 
 
   if (Meteor.isClient) {
@@ -204,43 +204,20 @@ Template.loggedIn.rendered = function() {
               }
             };
 
-
-            // var onlineUsers = Meteor.users.find({}).fetch();
-
-            // //draw other users markers on the map
-            // // for ( index in onlineUsers ) {
-            // //     debugger;     
-            // //     dropSinglePin(onlineUsers[index]._id, onlineUsers[index]);
-            // //   }
-            //   // if ( onlineUsers[index]._id === Meteor.userId() ){
-            //     //do some custom code
-            // };
-
             // checks for changes in count of users currently online
             if (Meteor.userId()) {
-              // Meteor.users.find({ "status.online": true }).observe({ <---- why does 'added' not fire with this bit of code??
               Meteor.users.find().observeChanges({
                 'added': function(userId, addedUser) {
                   console.log("observeChanges ('added') fired");
                   console.log("userId :" + userId);
                   console.log("addedUser :" + addedUser);
                   if (addedUser.services === undefined || addedUser.profile.location === undefined) {
-                    // debugger;
-                    // Meteor.users.upsert({_id: Meteor.userId()}, {$set: {"profile.location": {lat: "xx", lng: "xx", updatedAt: "xx"}} });
                     console.log ("services or location was not defined for" + addedUser + " of the id: " + userId)
                   } else {
                     dropSinglePin(userId, addedUser);                                   
                   };
                 },
-                // 'changed': function(userId, changedFields) {
-                //   console.log("observeChanges ('changed') fired");
-                //   var user = Meteor.user.findOne(userId);
-                //   if (user.services === undefined || user.profile.location === undefined){
-                //     console.log("users changed, but no services or location");
-                //   } else {
-                //     dropSinglePin(userId, addedUser);
-                //   };
-                // },
+
                 'removed': function(userId){
                   console.log("observeChanges ('removed') fired");
                   if (userId in markers) {

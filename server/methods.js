@@ -24,5 +24,13 @@ Meteor.methods({
     } else {
       Conversations.upsert(id, {$set:message, $push: messageText});
     }
+  },
+  createConversation: function(query, message){
+    var id = new RegExp(query);
+    if (Conversations.findOne(id)){
+      return
+    } else {
+      Conversations.upsert(query, {$set:message});
+    }
   }
 });

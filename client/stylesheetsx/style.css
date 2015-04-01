@@ -504,6 +504,9 @@ a.matched-user:visited {
 .no-left-padding {
 	padding-left:0;
 }
+.no-right-padding {
+	padding-right:0;
+}
 .following-people {
 	font-weight:300;
 	font-size:30px;

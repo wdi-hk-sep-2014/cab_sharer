@@ -5,13 +5,6 @@ Template.loggedIn.created = function() {
 
     if (Meteor.userId()) {
       var currentUserDistancePreferences = Meteor.user().profile.distancePrefs;
-      // if (Meteor.user().profile.location.lat != undefined) {        
-      //   var currentUserPosition = 
-      //   {
-      //       lat: Meteor.user().profile.location.lat,
-      //       lng: Meteor.user().profile.location.lng
-      //   };
-      // };
 
       
       // snazzymap style

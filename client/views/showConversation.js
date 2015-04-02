@@ -6,11 +6,21 @@ Template.showConversation.helpers({
     }
   },
   profilePicture: function() {
-    return Meteor.user().profile.picture;
+    var userPictures = [];
+    var allMessages = Conversations.findOne({id: Session.get('conversationId.conversationId')}).messageContent.sort({sentAt: -1});
+    for (i=0; i<allMessages.length; i++){
+      if (allMessages[i].writtenBy == Meteor.userId()){
+        userPictures.push(Meteor.user().profile.picture);
+      } else {
+        userPictures.push(Meteor.users.findOne({_id: allMessages[i].writtenBy}).profile.picture);
+      }
+    }
+    console.log(userPictures);
+    return userPictures;
   },
   sentMessages: function() {
     var htmlMessages = [];
-    var allMessages = Conversations.findOne({id: Session.get('conversationId.conversationId')}).messageContent.sort({sentAt: -1})
+    var allMessages = Conversations.findOne({id: Session.get('conversationId.conversationId')}).messageContent.sort({sentAt: -1});
     for (i=0; i<allMessages.length; i++){
       if (allMessages[i].writtenBy == Meteor.userId()){
         htmlMessages.push("<li class=\"conversation-list received\">" + Session.get('conversationId').messageContent[i].text + "</li>");        
@@ -18,8 +28,21 @@ Template.showConversation.helpers({
         htmlMessages.push("<li class=\"conversation-list sent\">" + Session.get('conversationId').messageContent[i].text + "</li>"); 
       }
     }
-    console.log(htmlMessages);
     return htmlMessages;
+  },
+  conversationContent: function() {
+    var htmlMessagesAndPictures = { messageHTML: [], profilePictureOne: "http://graph.facebook.com/", profilePictureTwo: "http://graph.facebook.com/"};
+    var allMessages = Conversations.findOne({id: Session.get('conversationId.conversationId')}).messageContent.sort({sentAt: -1});
+    for (i=0; i<allMessages.length; i++){
+      if (allMessages[i].writtenBy == Meteor.userId()){
+        htmlMessagesAndPictures.messageHTML.push("<li class=\"conversation-list received\">" + Session.get('conversationId').messageContent[i].text + "</li>"); 
+        htmlMessagesAndPictures.profilePictureOne = Meteor.user().profile.picture;
+      } else {
+        htmlMessagesAndPictures.messageHTML.push("<li class=\"conversation-list sent\">" + Session.get('conversationId').messageContent[i].text + "</li>"); 
+        htmlMessagesAndPictures.profilePictureTwo = Meteor.users.findOne({_id: allMessages[i].writtenBy}).profile.picture;
+      };
+    };
+    return htmlMessagesAndPictures;
   }
 });
 

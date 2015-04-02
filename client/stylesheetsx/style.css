@@ -537,8 +537,8 @@ a.matched-user:visited {
 	color: white;
 	list-style-type: none;
 	margin: 0% 2% 2% 6%;
-	padding: 1% 1% 1% 1%;
-	font-size: 1.7em;
+	padding: 5% 1% 1% 1%;
+	font-size: 0.9em;
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	border-radius:5px;
@@ -547,6 +547,11 @@ a.matched-user:visited {
 	  0 -1px 1px #666, /*top external shadow*/ 
 	  inset 0 -1px 1px rgba(0,0,0,0.5), /*bottom internal shadow*/ 
 	  inset 0 1px 1px rgba(255,255,255,0.8); /*top internal highlight*/
+}
+
+.messagePictures {
+	max-height:10%;
+	max-width:10%;
 }
 
 .conversation-list > p {

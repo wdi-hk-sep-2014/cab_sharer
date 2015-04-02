@@ -11,17 +11,25 @@
       </div>
     </div>
     <div class="row scrollable">
-      <div class="col-xs-10 no-right-padding">
-<!--           {{#each messageContent}}
-            <li class="conversation-list {{this.writtenBy}}"><p>{{this.text}}</p></li>
-          {{/each}}    -->
-
-          {{#each sentMessages}}
-            {{{this}}}
-          {{/each}}
-      </div>
-      <div class="col-xs-2 no-left-padding">
-        <img src="http://graph.facebook.com/1374794899508138/picture/?width=80" />
+      <div class="row">
+          
+        <div class="col-xs-12">
+          <div class="row">
+            
+            {{#each conversationContent.messageHTML}}
+            <div class="row">
+              <div class="col-xs-10 no-right-padding">              
+              {{{this}}}           
+              </div>
+              <div class="col-xs-2 no-left-padding">
+                <img style="max-height:50%; max-width:50%; vertical-align:middle;" src=""/>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+        <div class="col-xs-2 no-left-padding">
+        </div>
       </div>
     </div>
   </div>

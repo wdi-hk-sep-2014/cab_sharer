@@ -19,7 +19,7 @@ Meteor.methods({
 
   createMessage: function(query, message, messageText){
     var id = new RegExp(query);
-    if (Conversations.findOne(id)){
+    if (Conversations.findOne({_id:id})){
       Conversations.update(id, {$push: messageText}, {upsert: true});
     } else {
       Conversations.upsert(id, {$set:message, $push: messageText});
@@ -27,10 +27,13 @@ Meteor.methods({
   },
   createConversation: function(query, message){
     var id = new RegExp(query);
-    if (Conversations.findOne(id)){
+    if (Conversations.findOne({_id:id})){
+      console.log(id);
+      console.log("in if statement, done")
       return
     } else {
       Conversations.upsert(query, {$set:message});
+      console.log("upserted, done")
     }
   }
 });

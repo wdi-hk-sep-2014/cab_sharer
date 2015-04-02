@@ -104,7 +104,7 @@ Template.matchingUser.events({
     Session.set('userIdForMessage', $('#message-button').first().val());
     var targetUserName = Meteor.users.findOne({_id:Session.get('userIdForMessage')}).services.facebook.first_name;
     var concatIds = Session.get('userIdForMessage').toString() + Meteor.userId();
-    Router.go('/messaging/'+concatIds)
+    Router.go('/messaging/'+concatIds);
     Meteor.call('createConversation', concatIds, {conversationId: concatIds, sentUserId: Meteor.user()._id, targetUserId: Session.get('userIdForMessage'), activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: targetUserName}});
   }
 

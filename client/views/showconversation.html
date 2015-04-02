@@ -15,16 +15,8 @@
           
         <div class="col-xs-12">
           <div class="row">
-            
-            {{#each conversationContent.messageHTML}}
-            <div class="row">
-              <div class="col-xs-10 no-right-padding">              
-              {{{this}}}           
-              </div>
-              <div class="col-xs-2 no-left-padding">
-                <img style="max-height:50%; max-width:50%; vertical-align:middle;" src=""/>
-              </div>
-            </div>
+            {{#each sentMessages}}               
+              {{{this}}}                         
             {{/each}}
           </div>
         </div>

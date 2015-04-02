@@ -549,9 +549,9 @@ a.matched-user:visited {
 	  inset 0 1px 1px rgba(255,255,255,0.8); /*top internal highlight*/
 }
 
-.messagePictures {
-	max-height:10%;
-	max-width:10%;
+.message-pictures {
+	max-height:50%;
+	max-width:50%;
 }
 
 .conversation-list > p {

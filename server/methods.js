@@ -1,9 +1,5 @@
 Meteor.methods({
 
-  addPositionToLoggedInUser: function(location, userid){
-    OnlineUsers.update({ userId: userid}, {$set: location});
-  },
-
   'geocode':function(location) {
     var geo = new GeoCoder({
       // geocoderProvider: "mapquest",
@@ -13,7 +9,6 @@ Meteor.methods({
       // apiKey: 'Fmjtd%7Cluu8210t2g%2Ca5%3Do5-94rx50'
     });
     var geocodeResult = geo.geocode(location);
-    console.log(geocodeResult);
     return geocodeResult;
   },
 
@@ -25,15 +20,10 @@ Meteor.methods({
       Conversations.upsert(id, {$set:message, $push: messageText});
     }
   },
-  createConversation: function(query, message){
-    var id = new RegExp(query);
-    if (Conversations.findOne({_id:id})){
-      console.log(id);
-      console.log("in if statement, done")
-      return
-    } else {
-      Conversations.upsert(query, {$set:message});
-      console.log("upserted, done")
-    }
+  // createConversation: function(query, message){
+  //   Conversations.upsert(query, {$set:message});  
+  // }
+  createConversation: function(conversation){
+    Conversations.insert(conversation);
   }
 });

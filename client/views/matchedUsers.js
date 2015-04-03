@@ -27,22 +27,6 @@ Template.matchedUsers.helpers({
   }
 });
 
-Template.matchedUsers.events({
-    'keyup #message-field': function(event, template){
-    if (event.which === 13){
-      event.preventDefault();
-      var currentMessage = template.find('#message-field').value;
-      if (currentMessage.length != 0) {
-        var targetUserName = Meteor.users.findOne({_id:Session.get('userIdForMessage')}).services.facebook.first_name
-        var concatIds = Session.get('userIdForMessage').toString() + Meteor.userId();
-        // Meteor.call('createMessage', concatIds, {conversationId: concatIds, sentUserId: Meteor.user()._id, targetUserId: Session.get('userIdForMessage'), activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: targetUserName}}, {messageContent: currentMessage});
-        Meteor.call('createMessage', concatIds, {conversationId: concatIds, sentUserId: Meteor.user()._id, targetUserId: Session.get('userIdForMessage'), activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: targetUserName}}, {messageContent: {text:currentMessage, writtenBy:Meteor.userId()}});
-        $('#message-field').val('');
-      }
-    }
-  }
-});
-
 Template.matchingUser.helpers({
 
   name: function() {
@@ -101,11 +85,40 @@ Template.matchingUser.events({
     //   }, 1000)
     // }
     // matchedClicked = !matchedClicked;
+
+
+
+
+    // This is buggered! The RegEx is always finding something because it matches ANY conversation which has this user - need better way to give conversations Id's.
+
+    // Session.set('userIdForMessage', $('#message-button').first().val());
+    // var targetUserName = Meteor.users.findOne({_id:Session.get('userIdForMessage')}).services.facebook.first_name;
+    // var concatIds = Session.get('userIdForMessage').toString() + Meteor.userId();
+    // var conversationRegEx = new RegExp(concatIds)
+    // if (!Conversations.findOne({_id:conversationRegEx})){
+    //   console.log("inside if statement");
+    //   Meteor.call('createConversation', concatIds, {conversationId: concatIds, sentUserId: Meteor.user()._id, targetUserId: Session.get('userIdForMessage'), activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: targetUserName}});
+    //   Router.go('/messaging/'+concatIds);      
+    // }
+    // debugger;
+    // var existingConversationId = Conversations.findOne({_id:conversationRegEx});
+    // Router.go('/messaging/'+existingConversationId.conversationId);
+    var idCallback = function(){
+      setTimeout(function(){
+        var conversationId = Conversations.find({$and: [{userIds: Meteor.userId()},{userIds: Session.get('userIdForMessage')}]}).fetch()[0]._id;
+        Router.go('/messaging/'+conversationId);
+      },500);
+    }
+
+
     Session.set('userIdForMessage', $('#message-button').first().val());
     var targetUserName = Meteor.users.findOne({_id:Session.get('userIdForMessage')}).services.facebook.first_name;
-    var concatIds = Session.get('userIdForMessage').toString() + Meteor.userId();
-    Router.go('/messaging/'+concatIds);
-    Meteor.call('createConversation', concatIds, {conversationId: concatIds, sentUserId: Meteor.user()._id, targetUserId: Session.get('userIdForMessage'), activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: targetUserName}});
+    if (Conversations.find({$and: [{userIds: Meteor.userId()},{userIds: Session.get('userIdForMessage')}]}).fetch()[0] == undefined){
+      Meteor.call('createConversation', {userIds: [Meteor.user()._id, Session.get('userIdForMessage')], activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: targetUserName}});
+      idCallback();      
+    } else {
+      Router.go('/messaging/'+Conversations.find({$and: [{userIds: Meteor.userId()},{userIds: Session.get('userIdForMessage')}]}).fetch()[0]._id);
+    }
   }
 
 

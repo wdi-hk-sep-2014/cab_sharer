@@ -13,4 +13,8 @@ Meteor.publish("sentMessages", function(){
 
 Meteor.publish("receivedMessages", function(){
   return Conversations.find({targetUserId: this.userId});
-})
+});
+
+Meteor.publish("usersConversations", function(){
+  return Conversations.find({userIds: {"$in" : [this.userId]}});
+});

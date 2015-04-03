@@ -1,3 +1,5 @@
+//NEED TO ACCOUNT FOR WHEN OTHER USER IS OFFLINE - CHANGE USER RELATED PUBLICATIONS SOMEHOW
+
 Template.showConversation.helpers({
   otherParty: function(){
     if (Session.get('conversationId').activeUsers.receiver === Meteor.user().services.facebook.first_name){
@@ -5,20 +7,8 @@ Template.showConversation.helpers({
     } else { return Session.get('conversationId').activeUsers.receiver
     }
   },
-  profilePicture: function() {
-    var userPictures = [];
-    var allMessages = Conversations.findOne({id: Session.get('conversationId.conversationId')}).messageContent.sort({sentAt: -1});
-    for (i=0; i<allMessages.length; i++){
-      if (allMessages[i].writtenBy == Meteor.userId()){
-        userPictures.push(Meteor.user().profile.picture);
-      } else {
-        userPictures.push(Meteor.users.findOne({_id: allMessages[i].writtenBy}).profile.picture);
-      }
-    }
-    console.log(userPictures);
-    return userPictures;
-  },
   sentMessages: function() {
+    // IF BRAND NEW CONVERSATION NEED TO CHECK FOR EMPTY MESSAGECONTENT
     var htmlMessages = [];
     var allMessages = Conversations.findOne({id: Session.get('conversationId.conversationId')}).messageContent.sort({sentAt: -1});
     for (i=0; i<allMessages.length; i++){
@@ -40,7 +30,7 @@ Template.showConversation.events({
       var date = new Date();
       var isoDate = date.toISOString()
       if (currentMessage.length != 0) {
-        Meteor.call('createMessage', Session.get('conversationId').conversationId, {conversationId: Session.get('conversationId').conversationId, sentUserId: Meteor.user()._id, targetUserId: Session.get('conversationId').targetUserId, activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: Session.get('conversationId').activeUsers.receiver}}, {messageContent: {text:currentMessage, writtenBy:Meteor.userId(), sentAt: isoDate}});
+        Meteor.call('createMessage', Session.get('conversationId'), {activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: Session.get('conversationId').activeUsers.receiver}}, {messageContent: {text:currentMessage, writtenBy:Meteor.userId(), sentAt: isoDate}});
         $('#messaging-form').val('');
       }
     }

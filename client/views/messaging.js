@@ -11,13 +11,17 @@ Template.messaging.helpers({
   },
   activeConversations: function() {
     var currentConversations = Conversations.find({userIds: {"$in" : [Meteor.userId()]}}).fetch();
-    var conversationArray = [];
+    var conversationIdArray = [];
     for (i = 0; i < currentConversations.length; i++){
-      if (currentConversations[i].userIds[1] != Meteor.userId()) {
-        conversationArray.push(Meteor.users.findOne(currentConversations[i].userIds[1]).services.facebook.first_name);
+      conversationIdArray.push(currentConversations[i]._id)
+    }
+    var conversationArray = [];
+    for (i = 0; i < conversationIdArray.length; i++){
+      if (ConversationReferences.findOne({conversationReference: conversationIdArray[i]}).partyTwo == Meteor.userId()){
+        conversationArray.push(ConversationReferences.findOne({conversationReference: conversationIdArray[i]}).partyOne);        
       } else {
-        conversationArray.push(Meteor.users.findOne(currentConversations[i].userIds[0]).services.facebook.first_name);
-      };
+        conversationArray.push(ConversationReferences.findOne({conversationReference: conversationIdArray[i]}).partyTwo);
+      }
     };
     console.log(conversationArray)
     return conversationArray;

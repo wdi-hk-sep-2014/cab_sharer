@@ -25,5 +25,8 @@ Meteor.methods({
   // }
   createConversation: function(conversation){
     Conversations.insert(conversation);
+  },
+  createConversationReference: function(conversationRef){
+    ConversationReferences.insert(conversationRef)
   }
 });

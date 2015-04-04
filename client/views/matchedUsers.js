@@ -105,7 +105,11 @@ Template.matchingUser.events({
     // Router.go('/messaging/'+existingConversationId.conversationId);
     var idCallback = function(){
       setTimeout(function(){
-        var conversationId = Conversations.find({$and: [{userIds: Meteor.userId()},{userIds: Session.get('userIdForMessage')}]}).fetch()[0]._id;
+        var activeConversation = Conversations.find({$and: [{userIds: Meteor.userId()},{userIds: Session.get('userIdForMessage')}]}).fetch()[0]
+        var conversationId = activeConversation._id;
+        var partyOne = Meteor.users.findOne({_id: activeConversation.userIds[1]}).services.facebook.first_name;
+        var partyTwo = Meteor.users.findOne({_id: activeConversation.userIds[0]}).services.facebook.first_name;
+        Meteor.call('createConversationReference', {conversationReference: conversationId, partyOne: partyOne, partyTwo: partyTwo})
         Router.go('/messaging/'+conversationId);
       },500);
     }

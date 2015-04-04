@@ -8,7 +8,6 @@ Template.showConversation.helpers({
     }
   },
   sentMessages: function() {
-    // IF BRAND NEW CONVERSATION NEED TO CHECK FOR EMPTY MESSAGECONTENT
     var htmlMessages = [];
     if (Conversations.findOne({_id: Session.get('conversationId')._id}).messageContent === undefined){
       return;

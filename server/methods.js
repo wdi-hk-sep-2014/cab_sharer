@@ -20,9 +20,6 @@ Meteor.methods({
       Conversations.upsert(id, {$set:message, $push: messageText});
     }
   },
-  // createConversation: function(query, message){
-  //   Conversations.upsert(query, {$set:message});  
-  // }
   createConversation: function(conversation){
     Conversations.insert(conversation);
   },

@@ -10,21 +10,16 @@ Template.messaging.helpers({
     return Conversations.find({targetUserId: Meteor.user()._id}, {sentUserId: Meteor.userId()}).fetch(); 
   },
   activeConversations: function() {
-    var currentConversations = Conversations.find({userIds: {"$in" : [Meteor.userId()]}}).fetch();
-    var conversationIdArray = [];
+    var currentConversations = ConversationReferences.find({$or: [{idOne: Meteor.userId()}, {idTwo: Meteor.userId()}]}).fetch();
+    var activeConversations = [];
     for (i = 0; i < currentConversations.length; i++){
-      conversationIdArray.push(currentConversations[i]._id)
-    }
-    var conversationArray = [];
-    for (i = 0; i < conversationIdArray.length; i++){
-      if (ConversationReferences.findOne({conversationReference: conversationIdArray[i]}).partyTwo == Meteor.userId()){
-        conversationArray.push(ConversationReferences.findOne({conversationReference: conversationIdArray[i]}).partyOne);        
+      if(currentConversations[i].idOne === Meteor.userId()){
+        activeConversations.push(currentConversations[i].partyTwo)
       } else {
-        conversationArray.push(ConversationReferences.findOne({conversationReference: conversationIdArray[i]}).partyTwo);
-      }
+        activeConversations.push(currentConversations[i].partyOne)
+      };
     };
-    console.log(conversationArray)
-    return conversationArray;
+    return activeConversations;
   }
 });
 
@@ -47,4 +42,4 @@ Template.conversations.helpers({
     console.log(messageLinks);
     return messageLinks;
   }
-})
+});

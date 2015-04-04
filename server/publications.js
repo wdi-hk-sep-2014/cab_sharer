@@ -16,15 +16,6 @@ Meteor.publish("receivedMessages", function(){
 });
 
 Meteor.publish("usersConversations", function(){
-  var list = Conversations.find({userIds: {"$in" : [this.userId]}}).fetch();
-  var referencesToSearchFor = [];
-  for (i = 0; i < list.length; i++){
-    referencesToSearchFor.push(list[i]._id)
-  };
-  var returnedArray = [Conversations.find({userIds: {"$in" : [this.userId]}})];
-  for (i = 0; i<referencesToSearchFor.length; i++){
-    returnedArray.push(ConversationReferences.find({conversationReference: referencesToSearchFor[i]}));
-  }
-  return returnedArray;
+  return [Conversations.find({userIds: {"$in" : [this.userId]}}),
+          ConversationReferences.find()]
 });
-

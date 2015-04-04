@@ -85,13 +85,14 @@ Template.matchingUser.events({
     //   }, 1000)
     // }
     // matchedClicked = !matchedClicked;
+
     var idCallback = function(){
       setTimeout(function(){
         var activeConversation = Conversations.find({$and: [{userIds: Meteor.userId()},{userIds: Session.get('userIdForMessage')}]}).fetch()[0]
         var conversationId = activeConversation._id;
-        var partyOne = Meteor.users.findOne({_id: activeConversation.userIds[1]}).services.facebook.first_name;
-        var partyTwo = Meteor.users.findOne({_id: activeConversation.userIds[0]}).services.facebook.first_name;
-        Meteor.call('createConversationReference', {conversationReference: conversationId, partyOne: partyOne, partyTwo: partyTwo})
+        var partyOne = Meteor.users.findOne({_id: activeConversation.userIds[1]})
+        var partyTwo = Meteor.users.findOne({_id: activeConversation.userIds[0]})
+        Meteor.call('createConversationReference', {conversationReference: conversationId, partyOne: partyOne.services.facebook.first_name, partyTwo: partyTwo.services.facebook.first_name, idOne: activeConversation.userIds[1], idTwo: activeConversation.userIds[0]})
         Router.go('/messaging/'+conversationId);
       },500);
     }

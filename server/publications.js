@@ -19,3 +19,8 @@ Meteor.publish("usersConversations", function(){
   return [Conversations.find({userIds: {"$in" : [this.userId]}}),
           ConversationReferences.find()]
 });
+
+Meteor.publish("returnAllConversationsUserIsCurrentlyInvolvedIn", function(){
+  return Conversations.find({userIds: this.userId})
+
+})

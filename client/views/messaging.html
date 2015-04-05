@@ -1,5 +1,4 @@
 <template name="messaging">
-
   <div class="header">
     <h1 class="header-text pull-left flipInY animated" id="messaging-h1">Messages</h1>
     <button id="messaging-button" class="top-right-button btn btn-fab pull-right"><i class="fa fa-envelope"></i></button>
@@ -11,17 +10,19 @@
       </div>
     </div>
     <div class="row">
-      {{#each activeConversations}}
-        <li class="conversation-list">{{>conversations}}</li>
+      {{#each arrayify currentConversations.conversationInformation}}
+        <a href="/messaging/{{value._id}}">
+          <li class="conversation-list">
+            <p class="user-name">{{value.otherParty}}
+            </p>
+            <span class="last-message pull-right">
+              <p>{{value.lastMessage}}</p>
+            </span>
+          </li>
+        </a>
       {{else}}
         <li class="conversation-list">You haven't had any messages yet!</li>
       {{/each}}
     </div>
   </div>
-</template>
-
-<template name="conversations">
-  <a href="/messaging/{{linkById}}"><p class="user-name">{{this}}
-
-  <span class="last-message pull-right"><p>{{conversationContent}}</p></span></p></a>
 </template>

@@ -37,7 +37,7 @@ Template.showConversation.events({
       var date = new Date();
       var isoDate = date.toISOString()
       if (currentMessage.length != 0) {
-        Meteor.call('createMessage', Session.get('conversationId'), {activeUsers:{sender: Meteor.user().services.facebook.first_name, receiver: Session.get('conversationId').activeUsers.receiver}}, {messageContent: {text:currentMessage, writtenBy:Meteor.userId(), sentAt: isoDate}});
+        Meteor.call('createMessage', Session.get('conversationId')._id, {activeUsers:{sender: Session.get('conversationId').activeUsers.sender, receiver: Session.get('conversationId').activeUsers.receiver}}, {messageContent: {text:currentMessage, writtenBy:Meteor.userId(), sentAt: isoDate}});
         $('#messaging-form').val('');
       }
     }

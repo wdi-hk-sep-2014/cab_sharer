@@ -554,7 +554,7 @@ a.matched-user:visited {
 }
 
 .conversation-list > p {
-	font-size:0.7em;
+	font-size:1em;
 	padding: 3% 1% 1% 1%;
 	overflow-wrap: break-word;
 }
@@ -568,7 +568,7 @@ a.matched-user:visited {
 	position:absolute;
 	bottom:0px;
 	right:4px;
-	font-size:0.5em;
+	font-size:1em;
 	vertical-align: bottom;
 }
 

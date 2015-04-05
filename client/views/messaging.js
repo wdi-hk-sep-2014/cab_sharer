@@ -1,45 +1,27 @@
 Template.messaging.helpers({
+  currentConversations: function(){
+    //need to return: user name of other party, id of conversation for link, last message exchanged between the two.
+    allInfoRequired = {} ;
 
-  currentUser: function(){
-    return Meteor.user().profile.name;
-  },
-  sentMessages: function(){
-    return Conversations.find({sentUserId: Meteor.userId()}).fetch();
-  },
-  receivedMessages: function(){
-    return Conversations.find({targetUserId: Meteor.user()._id}, {sentUserId: Meteor.userId()}).fetch(); 
-  },
-  activeConversations: function() {
-    var currentConversations = ConversationReferences.find({$or: [{idOne: Meteor.userId()}, {idTwo: Meteor.userId()}]}).fetch();
-    var activeConversations = [];
-    for (i = 0; i < currentConversations.length; i++){
-      if(currentConversations[i].idOne === Meteor.userId()){
-        activeConversations.push(currentConversations[i].partyTwo)
+    entireConversationInfo = Conversations.find().fetch();
+
+
+
+    allInfoRequired.conversationInformation = [];
+    for (i = 0; i<entireConversationInfo.length ; i++){
+      if(entireConversationInfo[i].activeUsers.sender == Meteor.user().services.facebook.first_name){
+        allInfoRequired.conversationInformation.push({"_id" : entireConversationInfo[i]._id, "otherParty": entireConversationInfo[i].activeUsers.receiver, "lastMessage": ""});        
       } else {
-        activeConversations.push(currentConversations[i].partyOne)
-      };
-    };
-    return activeConversations;
+        allInfoRequired.conversationInformation.push({"_id" : entireConversationInfo[i]._id, "otherParty": entireConversationInfo[i].activeUsers.sender, "lastMessage": ""});        
+      }      
+    }
+    for (i = 0; i<entireConversationInfo.length ; i++){
+      if(entireConversationInfo[i].messageContent != undefined){
+        allInfoRequired.conversationInformation[i].lastMessage = entireConversationInfo[i].messageContent.slice(-1)[0].text
+        console.log(allInfoRequired);
+      }
+    }
+    return allInfoRequired;
   }
-});
+})
 
-Template.conversations.helpers({
-  conversationContent: function(){
-    var currentConversations = Conversations.find({userIds: {"$in" : [Meteor.userId()]}}).fetch();
-    var lastActiveMessages = [];
-    for (i = 0; i < currentConversations.length; i++){
-      lastActiveMessages.push(currentConversations[i].messageContent.slice(-1)[0].text);
-    };
-    console.log(lastActiveMessages);
-    return lastActiveMessages;    
-  },
-  linkById: function(){
-    var currentConversations = Conversations.find({userIds: {"$in" : [Meteor.userId()]}}).fetch();
-    var messageLinks = [];
-    for (i = 0; i < currentConversations.length; i++){
-      messageLinks.push(currentConversations[i]._id)
-    };
-    console.log(messageLinks);
-    return messageLinks;
-  }
-});

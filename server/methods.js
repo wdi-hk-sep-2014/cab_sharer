@@ -13,9 +13,10 @@ Meteor.methods({
   },
 
   createMessage: function(query, message, messageText){
-    var id = new RegExp(query);
+    // var id = new RegExp(query);
+    var id = query;
     if (Conversations.findOne({_id:id})){
-      Conversations.update(id, {$push: messageText}, {upsert: true});
+      Conversations.update({_id:id}, {$push: messageText}, {upsert: true});
     } else {
       Conversations.upsert(id, {$set:message, $push: messageText});
     }
@@ -27,3 +28,5 @@ Meteor.methods({
     ConversationReferences.insert(conversationRef)
   }
 });
+
+// { messageContent: { text: 'to stephen from mark', writtenBy: 'TfpqjhpK9vrcnPsnz',sentAt: '2015-04-05T13:16:48.780Z' } }

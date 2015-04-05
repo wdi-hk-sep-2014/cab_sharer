@@ -6,56 +6,33 @@
   </div>
   <div id="matching-user-wrapper" class="container-fluid">
     <div class="row-fluid">
-      <div id="messaging" class="col-xs-12">
-        <div class="row fluid">
-          <div class="col-xs-12">
-            <h2 class="settings-h2s">Send a Message</h2>
-          </div>
-        </div>
-        <div class="row fluid" style="margin-top:20px">
-          <div class="col-xs-12">
-            <div class="form-control-wrapper">
-                <input name="a-normal-input" class="form-control empty" id="message-field">
-                <span class="material-input"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12">
-        {{#if matchingUsers}}
+      <div class="col-xs-12">
+        {{#if usersWithSameDestinationAsMe}}
           <h1 class="following-people">
             The following people are also going to {{displayLocation}}!
           </h1>
           {{else}}
-          <h1 class="matched-user-headers">
-            We can't find anyone to share, please try again soon.
-          </h1>
-          {{/if}}
-        
+            <h1 class="matched-user-headers">
+              We can't find anyone to share, please try again soon.
+            </h1>
+        {{/if}}        
       </div>
     </div>
     <div id="list-of-matching-users" class="row-fluid">
-      <div class="col-md-12">
-        {{#if matchingUsers}}
-          {{#each matchingUsers}}
-            <h1 class="matched-user-headers">
-              {{>matchingUser}}
-            </h1>            
-          {{/each}}
-        {{/if}}
-      </div>
-    </div>
-  </div>
-</template>
+      <div class="col-xs-12">
+        {{#each arrayify usersWithSameDestinationAsMe.eachUser}}
+            <div class="row">
+              <div class="col-xs-12">
+                <img class="small-profile-pic" src="{{value.picture}}">      
+                <h1 class="user-name">{{value.name}}</h1>
+                <div class="row">
+                  <div class="col-xs-6"><button id="message-button" type="submit" button class="standard-button btn btn-primary-raised" value="{{value._id}}">MESSAGE</button></div>
+                  <div class="col-xs-6"><button id="next-button" type="submit" button class="standard-button btn btn-primary-raised" value="{{targetId}}">NEXT</button></div>
+                </div>
+              </div>
+            </div>
+        {{/each}}
 
-<template name="matchingUser">
-  <div class="row">
-    <div class="col-md-12">
-      <img class="small-profile-pic" src="{{profile}}">      
-      <h1 class="user-name">{{name}}</h1>
-      <div class="row">
-        <div class="col-xs-6"><button id="message-button" type="submit" button class="standard-button btn btn-primary-raised" value="{{targetId}}">MESSAGE</button></div>
-        <div class="col-xs-6"><button id="next-button" type="submit" button class="standard-button btn btn-primary-raised" value="{{targetId}}">NEXT</button></div>
       </div>
     </div>
   </div>

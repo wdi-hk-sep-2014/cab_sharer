@@ -6,6 +6,8 @@ UI.registerHelper("arrayify", function(obj){
     return result;
 });
 
+//HTML WHITESPACE IS VERY TEMPERAMENTAL WITH THIS HELPER
+
 UI.registerHelper("debug", function(optionalValue) {
   console.log("Current Context");
   console.log("====================");

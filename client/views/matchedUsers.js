@@ -1,57 +1,20 @@
-// var matchedClicked = true;
-// setMatchClicked = function(){
-//   matchedClicked = true;
-// };
-
-
-fetchUsers = function(){
-  var onlineUsersExceptMe = Meteor.users.find({_id: {$ne: Meteor.userId()}}).fetch();
-  var onlineUsers = Meteor.users.find().fetch();
-  usersWithSameDestination = [];
-  for (index in onlineUsersExceptMe) {
-    if (onlineUsersExceptMe[index].profile.destination === Meteor.user().profile.destination){
-      usersWithSameDestination.push(onlineUsersExceptMe[index]);
-    };
-  }
-  return usersWithSameDestination;
-};
-
 Template.matchedUsers.helpers({
-
+  usersWithSameDestinationAsMe: function(){
+    var usersInformation = {};
+    var onlineUsersExceptMe = Meteor.users.find({_id: {$ne: Meteor.userId()}}).fetch();
+    usersInformation.eachUser = [];
+    for (i=0; i<onlineUsersExceptMe.length; i++){
+      usersInformation.eachUser.push({"_id":onlineUsersExceptMe[i]._id,"name": onlineUsersExceptMe[i].services.facebook.first_name, "picture": onlineUsersExceptMe[i].profile.picture})
+    }
+    console.log(usersInformation);
+    return usersInformation;
+  },
   displayLocation: function() {
     return Meteor.user().profile.destination;
-  },
-  
-  matchingUsers: function() {
-    return usersWithSameDestination;
   }
 });
 
-Template.matchingUser.helpers({
-
-  name: function() {
-    var user = {
-      name: this.services.facebook.first_name,
-      _id: this._id
-    };
-    return user.name;
-  },
-  profile: function() {
-    var user = {
-    picture: this.profile.picture,
-    _id: this._id
-    };
-    return user.picture;
-  },
-  targetId: function() {
-    var user = {
-      _id: this._id
-    };
-    return user._id
-  }
-});
-
-Template.matchingUser.events({
+Template.matchedUsers.events({
 
   'click #message-button': function(){
     // if (matchedClicked) {
@@ -110,5 +73,6 @@ Template.matchingUser.events({
 
 
 });
+
 
 // setMatchClicked();

@@ -4,7 +4,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-aldeed:geocoder
 mdg:geolocation
 accounts-password
 ian:accounts-ui-bootstrap-3
@@ -17,5 +16,11 @@ linto:fontawesome
 material-design
 fastclick
 iron:layout
-afruth:chapp
+accounts-facebook
 
+service-configuration
+coffeescript
+aldeed:geocoder
+meteorhacks:kadira
+nemo64:bootstrap
+less

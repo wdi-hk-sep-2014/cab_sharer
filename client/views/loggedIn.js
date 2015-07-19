@@ -1,9 +1,10 @@
-Template.loggedIn.rendered = function() {
+Template.loggedIn.created = function() {
 
 
   if (Meteor.isClient) {
 
     if (Meteor.userId()) {
+      var currentUserDistancePreferences = Meteor.user().profile.distancePrefs;
 
       
       // snazzymap style
@@ -98,12 +99,12 @@ Template.loggedIn.rendered = function() {
           function() {
 
             var mapOptions = {
+              mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style'],
               zoom: 16,
               streetViewControl: false,
               mapTypeControl: false,
               panControl: false,
-              zoomControl: false,
-              mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+              zoomControl: false
             };
 
             var styledMap = new google.maps.StyledMapType(styles, {
@@ -121,13 +122,13 @@ Template.loggedIn.rendered = function() {
             map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
             map.mapTypes.set('map_style', styledMap);
             map.setMapTypeId('map_style');
-            //centre map on latlng in current user profile
+            //centre map on the latlng in current user profile
             map.setCenter(new google.maps.LatLng(lat, lng));
 
 
 
             //initializes a variable to cache all visible markers on the page
-            //used for deleting markers (hopefully)
+            //used for deleting markers
             markers = {};
 
             //initialize an empty info window
@@ -135,71 +136,89 @@ Template.loggedIn.rendered = function() {
 
             //drop a single pin and attach info window
             //adds the userID to the pin itself
-
+            var getDistanceBetweenTwoPoints = function(lat1, lon1, lat2, lon2, unit) {
+              var radlat1 = Math.PI * lat1/180
+              var radlat2 = Math.PI * lat2/180
+              var radlon1 = Math.PI * lon1/180
+              var radlon2 = Math.PI * lon2/180
+              var theta = lon1-lon2
+              var radtheta = Math.PI * theta/180
+              var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+              dist = Math.acos(dist)
+              dist = dist * 180/Math.PI
+              dist = dist * 60 * 1.1515
+              if (unit=="K") { dist = dist * 1.609344 }
+              if (unit=="N") { dist = dist * 0.8684 }
+              return dist          
+            };
             var dropSinglePin = function(userId, user) {
-              var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(
-                  user.profile.location.lat, 
-                  user.profile.location.lng
-                ),
-                map: map,
-                animation: google.maps.Animation.DROP,
-                icon: gpsIcon,
-                visible: true,
-                title: user.profile.firstName + ' ' + user.profile.lastName,
-                userId: userId
-              });
+              if (getDistanceBetweenTwoPoints(Meteor.user().profile.location.lat, Meteor.user().profile.location.lng, user.profile.location.lat, user.profile.location.lng, "K") <= currentUserDistancePreferences) {
+                console.log(userId + "'s marker less than " + currentUserDistancePreferences + " from " + Meteor.userId());
+                var marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(
+                    user.profile.location.lat, 
+                    user.profile.location.lng
+                  ),
+                  map: map,
+                  animation: google.maps.Animation.DROP,
+                  icon: gpsIcon,
+                  visible: true,
+                  title: user.services.facebook.first_name,
+                  userId: userId
+                });
 
-              //pushes the marker into the markers object
-              markers[userId] = marker;
+                //pushes the marker into the markers object
+                markers[userId] = marker;
 
-              // populate other users markers with infowindows containing their names
-              // info window is generated on the fly on each click
-              google.maps.event.addListener(marker, 'click', function(){
-                var markerUser = Meteor.users.findOne({_id: this.userId});
-                infowindow.setContent('\
-                  <div class="map-info-window">\
-                  <h1>' + markerUser.profile.firstName + ' ' + markerUser.profile.lastName + '</h1>\
-                  <p>Destination: ' + markerUser.profile.destination + '</p>\
-                  <p>About this user: ' + markerUser.profile.about + '</p>\
-                  </div>');
-                infowindow.open(map,marker);
-              });
-
+                // populate other users markers with infowindows containing their names
+                // info window is generated on the fly on each click
+                google.maps.event.addListener(marker, 'click', function(){
+                  var markerUser = Meteor.users.findOne({_id: this.userId});
+                  var smallPictureUrl = markerUser.profile.picture.split('').slice(0,-5).join('');
+                    infowindow.setContent('\
+                    <div class="map-info-window">\
+                    <h1>' + markerUser.services.facebook.first_name + '</h1>\
+                    <p>Destination: ' + markerUser.profile.destination + '</p>\
+                    <p>Last update: ' + markerUser.profile.about + '</p>\
+                    <img src=' + smallPictureUrl + 'small>\
+                    </div>');
+                  infowindow.open(map,marker);
+                });
+              }
             };
 
+            removeSinglePin = function(markers, markerId) {
+              if (markerId != Meteor.userId()) {
+                marker = markers[markerId];
+                marker.setMap(null);
+                marker = null;
 
-            // not working
-            // removeSinglePin = function(markers, markerId) {
-            //   marker = markers[markerId];
-            //   marker.setMap(null);
-            //   marker = null;
-
-            //   delete markers[markerId];
-            // };
-
-
-            var onlineUsers = Meteor.users.find({}).fetch();
-            //draw other users markers on the map
-            for ( index in onlineUsers ) {
-
-              if ( onlineUsers[index]._id === Meteor.userId() ){
-                //do some custom code for yourself
-              };
-              dropSinglePin(onlineUsers[index]._id, onlineUsers[index]);
-               
+                delete markers[markerId]; 
+              }
             };
 
             // checks for changes in count of users currently online
-            Meteor.users.find().observeChanges({
-              'added': function(userId, addedUser) {
+            if (Meteor.userId()) {
+              Meteor.users.find().observeChanges({
+                'added': function(userId, addedUser) {
+                  console.log("observeChanges ('added') fired");
+                  console.log("userId :" + userId);
+                  console.log("addedUser :" + addedUser);
+                  if (addedUser.services === undefined || addedUser.profile.location === undefined) {
+                    console.log ("services or location was not defined for" + addedUser + " of the id: " + userId)
+                  } else {
+                    dropSinglePin(userId, addedUser);                                   
+                  };
+                },
 
-                dropSinglePin(userId, addedUser);
-              },
-              // 'removed': function(userId){
-              //   removeSinglePin(markers, userId);
-              // }
-            });
+                'removed': function(userId){
+                  console.log("observeChanges ('removed') fired");
+                  if (userId in markers) {
+                    removeSinglePin(markers, userId);
+                  }
+                }
+              });              
+            }
 
           }
         );
@@ -240,25 +259,25 @@ Template.loggedIn.rendered = function() {
 
       // check to see if location data is x minutes old, update if it is
       var time = Date.now();
-      if (Meteor.user().profile.location === undefined) {
-        console.log('un');
-        Meteor.users.update({
-          _id: Meteor.userId()
-        }, {
-          $set: {
-            "profile.location": {
-              lat: 22.284584,
-              lng: 114.158212,
-              updatedAt: time
-            }
-          }
-        });
+      // if (Meteor.user().profile.location === undefined) {
+      //   console.log('Meteor.user(),profile.location === undefined');
+      //   Meteor.users.update({
+      //     _id: Meteor.userId()
+      //   }, {
+      //     $set: {
+      //       "profile.location": {
+      //         lat: 22.284584,
+      //         lng: 114.158212,
+      //         updatedAt: time
+      //       }
+      //     }
+      //   });
+      //   getPositionByBrowser();
+      // } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 1 * 60 * 5) {
         getPositionByBrowser();
-      } else if (time >= Meteor.user().profile.location.updatedAt + 1000 * 60 * 5) {
-        getPositionByBrowser();
-      } else {
-        mapWithExistingPosition();
-      }
+      // } else {
+      //   mapWithExistingPosition();
+      // }
 
     };
 

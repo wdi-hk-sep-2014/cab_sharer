@@ -6,7 +6,7 @@ Meteor.Spinner.options = {
 //   corners: 0.7, // Corner roundness (0..1)
 //   rotate: 0, // The rotation offset
 //   direction: 1, // 1: clockwise, -1: counterclockwise
-  color: '#009688', // #rgb or #rrggbb
+  color: '#C81717', // #rgb or #rrggbb
   speed: 0.75, // Rounds per second
 //   trail: 70, // Afterglow percentage
   // shadow: true, // Whether to render a shadow

@@ -1,0 +1,15 @@
+<template name="messagingLayout">
+  <div id="content">
+  {{>yield}}
+  </div>
+  <div class="container">
+    <div class="row keyboard-hack">
+          <div class="col-xs-12">
+              <div class="form-control-wrapper message-area">
+                  <input name="a-normal-input" id="messaging-form" class="form-control empty message-content" placeholder="Send message to {{activeUsers.sender}}">
+                  <span class="material-input"></span>
+              </div>
+          </div>
+      </div>
+  </div>
+</template>

@@ -1,0 +1,50 @@
+// Import Vendors
+@import "vendor/custom.bootstrap.mixins.import.less";
+@import "vendor/custom.bootstrap.import.less";
+
+// Components
+@import "components/a_component.import.less";
+
+// Globals
+@import "typo.import.less";
+
+// Sites
+@import "sites/home.import.less";
+
+/*COLOUR SCHEME: CAPTAIN AMERICA*/
+@main-background-colour: #ECF0F1; /*off-white*/
+@header-footer-colours: #2C3E50; /*dark blue*/
+@header-icon-colours: #E74C3C; /*orangey*/
+@sent-message-colour: #275F84; /*pastel blue*/
+@received-message-colour: #3498DB; /*light pastel blue*/
+
+.material-shadow {
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.header, .footer-container {
+  background-color:@header-footer-colours;
+}
+
+html,body,.map-info-window,#user-wrapper,#destination-wrapper,.btn:not(.btn-flat),#settings,#messaging,.standard-button,#matching-user-wrapper,#messaging-wrapper {
+  background-color:@main-background-colour;
+}
+
+
+.small-profile-pic, .map-info-window, #destination-map, .header {
+  .material-shadow
+}
+
+.fa {
+  color:@header-icon-colours;
+}
+
+.sent {
+  background:@sent-message-colour !important;
+}
+
+.conversation-list {
+  background:@received-message-colour;
+}

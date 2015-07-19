@@ -1,4 +1,9 @@
 <template name="loggedIn">
+  <div class="header">
+    <h1 class="header-text pull-left flipInY animated" id="messaging-h1">Your Area</h1>
+    <button id="messaging-button" class="top-right-button btn btn-fab pull-right"><i class="fa fa-compass"></i></button>
+  </div>
   <div id="map-canvas">
+    {{>spinner}}
   </div>
 </template>
